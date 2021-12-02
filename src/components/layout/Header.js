@@ -4,7 +4,7 @@ import {Button, Dropdown, Form, IconButton, Modal, Notification, toaster} from "
 import {Link} from "react-router-dom";
 import {AiOutlineUser} from "react-icons/all";
 import Player from "../Player";
-import { PROFILE_ROUTE, PUSH_MONEY_ROUTE, USERS_ROUTE} from "../../utils/routes";
+import {HOME_ROUTE, PROFILE_ROUTE, PUSH_MONEY_ROUTE, USERS_ROUTE} from "../../utils/routes";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 // import {useHistory} from 'react-router';
@@ -70,9 +70,11 @@ const Header = () => {
     return (
         <div className="header">
                 <div className="header-left">
-                    <img alt="Casino"
-                         // onClick={history.push(HOME_ROUTE)}
-                         src={Logo}/>
+                    <Link to={HOME_ROUTE}>
+                        <img alt="Casino"
+                            // onClick={history.push(HOME_ROUTE)}
+                             src={Logo}/>
+                    </Link>
                 </div>
                 <div className="header-center">
                     <div className="header-menu">
@@ -139,7 +141,7 @@ const Header = () => {
                                             </Form>
                                         </Modal.Body>
                                         <Modal.Footer>
-                                            <Button className="calipso-btn pink-btn" onClick={handleLogin}>Войти</Button>
+                                            <Button className="calipso-btn pink-btn" onClick={handleLogin}>Зарегистрироваться</Button>
                                             <Button className="calipso-btn pink-btn" onClick={handleLoginClose}>Отмена</Button>
                                         </Modal.Footer>
                                     </Modal>

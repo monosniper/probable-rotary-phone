@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Logo from '../../assets/images/logo.png';
-import {Button, Dropdown, Form, IconButton, Modal, Notification, toaster} from "rsuite";
+import {Button, Dropdown, FlexboxGrid, Form, IconButton, Modal, Notification, toaster} from "rsuite";
 import {Link} from "react-router-dom";
 import {AiOutlineUser} from "react-icons/all";
 import Player from "../Player";
 import {HOME_ROUTE, PROFILE_ROUTE, PUSH_MONEY_ROUTE, USERS_ROUTE} from "../../utils/routes";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
+import {Container} from "reactstrap";
 // import {useHistory} from 'react-router';
 
 const Header = () => {
@@ -141,7 +142,7 @@ const Header = () => {
                                             </Form>
                                         </Modal.Body>
                                         <Modal.Footer>
-                                            <Button className="calipso-btn pink-btn" onClick={handleLogin}>Зарегистрироваться</Button>
+                                            <Button className="calipso-btn pink-btn" onClick={handleLogin}>Войти</Button>
                                             <Button className="calipso-btn pink-btn" onClick={handleLoginClose}>Отмена</Button>
                                         </Modal.Footer>
                                     </Modal>
@@ -170,7 +171,7 @@ const Header = () => {
                                             </Form>
                                         </Modal.Body>
                                         <Modal.Footer>
-                                            <Button className="calipso-btn pink-btn" onClick={handleRegister}>Войти</Button>
+                                            <Button className="calipso-btn pink-btn" onClick={handleRegister}>Регистрация</Button>
                                             <Button className="calipso-btn pink-btn" onClick={handleRegisterClose}>Отмена</Button>
                                         </Modal.Footer>
                                     </Modal>

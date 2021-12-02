@@ -15,14 +15,46 @@ const Header = () => {
 
     // const history = useHistory()
     console.log(store.user)
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [registerUsername, setRegisterUsername] = useState('');
+    const [registerPassword, setRegisterPassword] = useState('');
+    const [registerPasswordConfirmation, setRegisterPasswordConfirmation] = useState('');
+
+    const [loginUsername, setLoginUsername] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
+
+    const [registerOpen, setRegisterOpen] = useState(false);
+    const handleRegisterOpen = () => setRegisterOpen(true);
+    const handleRegisterClose = () => setRegisterOpen(false);
+
     const [loginOpen, setLoginOpen] = useState(false);
     const handleLoginOpen = () => setLoginOpen(true);
     const handleLoginClose = () => setLoginOpen(false);
 
+    const handleRegister = () => {
+        if(registerPassword === registerPasswordConfirmation) {
+            store.register(registerUsername, email, registerPassword, (rs) => {
+                toaster.push(
+                    <Notification type="success" header="Вход выполнен успешно" />, {placement: 'topEnd'}
+                )
+            }, (e) => {
+                toaster.push(
+                    <Notification type="error" header="Ошибка!" >
+                        <p>{e.response.data.message}</p>
+                    </Notification>, {placement: 'topEnd'}
+                )
+            })
+        } else {
+            toaster.push(
+                <Notification type="error" header="Ошибка!" >
+                    <p>Пароли не совпадают</p>
+                </Notification>, {placement: 'topEnd'}
+            )
+        }
+    }
+
     const handleLogin = () => {
-        store.login(username, password, (rs) => {
+        store.login(loginUsername, loginPassword, (rs) => {
             toaster.push(
                 <Notification type="success" header="Вход выполнен успешно" />, {placement: 'topEnd'}
             )
@@ -87,26 +119,57 @@ const Header = () => {
                                 <IconButton icon={<AiOutlineUser/>} className="casino-btn" circle />
                             </Link> : (
                                 <>
+                                    <Button className="casino-btn" style={{marginRight: '.5rem'}} onClick={handleRegisterOpen}>Регистрация</Button>
                                     <Button className="casino-btn" onClick={handleLoginOpen}>Вход</Button>
+
                                     <Modal className="sign-modal" size="xs" open={loginOpen} onClose={handleLoginClose}>
                                         <Modal.Header>
                                             <Modal.Title>Вход</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>
                                             <Form fluid>
-                                                <Form.Group controlId="username">
+                                                <Form.Group controlId="login-username">
                                                     <Form.ControlLabel>Логин</Form.ControlLabel>
-                                                    <Form.Control name="username" value={username} onChange={setUsername} />
+                                                    <Form.Control name="username" value={loginUsername} onChange={setLoginUsername} />
                                                 </Form.Group>
-                                                <Form.Group controlId="password">
+                                                <Form.Group controlId="login-password">
                                                     <Form.ControlLabel>Пароль</Form.ControlLabel>
-                                                    <Form.Control name="password" type="password" value={password} onChange={setPassword} />
+                                                    <Form.Control name="password" type="password" value={loginPassword} onChange={setLoginPassword} />
                                                 </Form.Group>
                                             </Form>
                                         </Modal.Body>
                                         <Modal.Footer>
                                             <Button className="calipso-btn pink-btn" onClick={handleLogin}>Войти</Button>
                                             <Button className="calipso-btn pink-btn" onClick={handleLoginClose}>Отмена</Button>
+                                        </Modal.Footer>
+                                    </Modal>
+                                    <Modal className="sign-modal" size="xs" open={registerOpen} onClose={handleRegisterClose}>
+                                        <Modal.Header>
+                                            <Modal.Title>Регистрация</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <Form fluid>
+                                                <Form.Group controlId="email">
+                                                    <Form.ControlLabel>E-mail</Form.ControlLabel>
+                                                    <Form.Control name="email" value={email} onChange={setEmail} />
+                                                </Form.Group>
+                                                <Form.Group controlId="register-username">
+                                                    <Form.ControlLabel>Логин</Form.ControlLabel>
+                                                    <Form.Control name="username" value={registerUsername} onChange={setRegisterUsername} />
+                                                </Form.Group>
+                                                <Form.Group controlId="register-password">
+                                                    <Form.ControlLabel>Пароль</Form.ControlLabel>
+                                                    <Form.Control name="password" type="password" value={registerPassword} onChange={setRegisterPassword} />
+                                                </Form.Group>
+                                                <Form.Group controlId="register-password">
+                                                    <Form.ControlLabel>Пароль еще раз</Form.ControlLabel>
+                                                    <Form.Control name="password" type="password" value={registerPasswordConfirmation} onChange={setRegisterPasswordConfirmation} />
+                                                </Form.Group>
+                                            </Form>
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button className="calipso-btn pink-btn" onClick={handleRegister}>Войти</Button>
+                                            <Button className="calipso-btn pink-btn" onClick={handleRegisterClose}>Отмена</Button>
                                         </Modal.Footer>
                                     </Modal>
                                 </>

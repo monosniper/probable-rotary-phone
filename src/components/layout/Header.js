@@ -15,7 +15,6 @@ const Header = () => {
     const {store} = useContext(Context);
 
     // const history = useHistory()
-    console.log(store.user)
     const [email, setEmail] = useState('');
     const [registerUsername, setRegisterUsername] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');

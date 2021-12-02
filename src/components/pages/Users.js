@@ -1,7 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Table} from "rsuite";
+import {Context} from "../../index";
 
 const Users = () => {
+
+    const {store} = useContext(Context);
+    console.log(store.getAllUsers());
 
     const data = [];
 

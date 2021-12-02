@@ -88,13 +88,23 @@ export default class Store {
 
     async updateUser(data, onSuccess, onError) {
         try {
-            const response = await UserService.updateUser(data, this.user.id);
+            const response = await UserService.updateUser({data}, this.user.id);
 
-            this.setUser(response.data.user);
+            this.setUser(response.data);
 
             onSuccess && onSuccess(response);
         } catch (e) {
             onError && onError(e);
+            console.log(e)
+        }
+    }
+
+    async getAllUsers() {
+        try {
+            const response = await UserService.fetchUsers();
+
+            return response.data;
+        } catch (e) {
             console.log(e)
         }
     }

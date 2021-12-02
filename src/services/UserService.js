@@ -2,10 +2,10 @@ import $api from "../http";
 
 export default class UserService {
     static async fetchUsers() {
-        return await $api.get('users');
+        return $api.get('users');
     }
 
     static async updateUser(data, id) {
-        return await $api.post(`users/${id}/update`, data);
+        return $api.post(`users/${id}/update`, data);
     }
 }

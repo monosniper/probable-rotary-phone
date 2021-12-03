@@ -75,16 +75,42 @@ const Profile = () => {
     }
 
     const handlePasswordUpdate = () => {
-        if(newPassword === newPasswordConfirmation) {
-            store.updatePassword(oldPassword, newPassword, (rs) => {
-                toaster.push(<Notification type="success" header="Данные сохранены" />)
-            }, (e) => {
+        if(newPassword !== '' && oldPassword !== '' && newPasswordConfirmation !== '') {
+            if(newPassword === newPasswordConfirmation) {
+                if(newPassword !== oldPassword) {
+                    store.updatePassword(oldPassword, newPassword, (rs) => {
+                        toaster.push(<Notification type="success" header="Данные сохранены" />)
+
+                        setOldPassword('');
+                        setNewPassword('');
+                        setNewPasswordConfirmation('');
+                    }, (e) => {
+                        toaster.push(
+                            <Notification type="error" header="Ошибка">
+                                <p>{e.response.data.message}</p>
+                            </Notification>
+                        )
+                    });
+                } else {
+                    toaster.push(
+                        <Notification type="error" header="Ошибка">
+                            <p>Новый пароль не может быть таким же как старый</p>
+                        </Notification>
+                    )
+                }
+            } else {
                 toaster.push(
                     <Notification type="error" header="Ошибка">
-                        <p>{e.response.data.message}</p>
+                        <p>Пароли не совпадают</p>
                     </Notification>
                 )
-            });
+            }
+        } else {
+            toaster.push(
+                <Notification type="error" header="Ошибка">
+                    <p>Все поля должны быть заполнены</p>
+                </Notification>
+            )
         }
     }
 

@@ -8,4 +8,8 @@ export default class UserService {
     static async updateUser(data, id) {
         return $api.post(`users/${id}/update`, data);
     }
+
+    static async updatePassword(data, id) {
+        return $api.post(`users/${id}/changePassword`, data);
+    }
 }

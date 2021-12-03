@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import "./responsive.scss";
 
 $violet: rgba(57,4,104,1);
 $dark-violet: #240044;
@@ -38,15 +39,22 @@ body {
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
   align-items: center;
 
+  &-left {
+    height: 70px;
+    padding: 10px 0;
+
+  }
+
   &-logo img {
+    max-height: 100%;
     left: auto !important;
     position: unset !important;
   }
 
   &-right {
+    padding: 20px 0;
     display: flex;
     gap: 20px;
     align-items: center;
@@ -494,6 +502,7 @@ body {
 
 .requirements {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 40px;
   padding: 20px 0;

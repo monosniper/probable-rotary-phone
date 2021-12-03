@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from "rsuite";
 import {Link} from "react-router-dom";
+import {GAME_ROUTE} from "../utils/routes";
 
 const GameItem = (props) => {
     return (
@@ -8,8 +9,8 @@ const GameItem = (props) => {
             <div className="game-list-item-bg" style={{backgroundImage: `url(${props.src})`}} />
             <div className="game-list-item-overflow">
                 <span className="game-list-item-title">{props.title}</span>
-                <Button className="pink-btn rounded" size='sm'>Играть</Button>
-                <Link to="#" className="game-list-item-demo">Демо</Link>
+                <Link to={GAME_ROUTE} className="pink-btn rounded" size='sm'>Играть</Link>
+                <Link to={GAME_ROUTE} className="game-list-item-demo">Демо</Link>
             </div>
         </div>
     );

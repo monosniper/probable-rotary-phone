@@ -1,7 +1,7 @@
 import {
     ADMIN_ROUTE,
     CABINET_ROUTE,
-    CASSA_ROUTE,
+    CASSA_ROUTE, FAQ_ROUTE, GAME_ROUTE,
     HOME_ROUTE, PAYHISTORY_ROUTE,
     PROFILE_ROUTE, PULL_MONEY_ROUTE, PULLS_MONEY_ROUTE,
     PUSH_MONEY_ROUTE, USERS_ROUTE,
@@ -18,11 +18,17 @@ import PayHistory from "./components/pages/PayHistory";
 import Admin from "./components/pages/Admin";
 import PullsMoney from "./components/pages/PullsMoney";
 import Users from "./components/pages/Users";
+import Faq from "./components/pages/Faq";
+import Game from "./components/pages/Game";
 
 export const publicRoutes = [
     {
         path: HOME_ROUTE,
         element: <Home/>,
+    },
+    {
+        path: FAQ_ROUTE,
+        element: <Faq/>,
     },
 ];
 
@@ -76,6 +82,11 @@ export const privateRoutes = [
                 element: <PullsMoney/>,
             },
         ]
+    },
+
+    {
+        path: GAME_ROUTE,
+        element: <Game/>,
     },
 
 ];

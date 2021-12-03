@@ -1,26 +1,33 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Table} from "rsuite";
 import {Context} from "../../index";
 
 const Users = () => {
 
     const {store} = useContext(Context);
-    console.log(store.getAllUsers());
 
-    const data = [];
+    const [users, setUsers] = useState([]);
+    const [data, setData] = useState([]);
 
     const [sortColumn, setSortColumn] = React.useState();
     const [sortType, setSortType] = React.useState();
     const [loading, setLoading] = React.useState(false);
 
+    useEffect(async () => {
+        setUsers(store.getAllUsers());
+        console.log(users)
+        const data = await getData();
+        setData(data);
+    }, []);
+
     const getData = () => {
         if (sortColumn && sortType) {
-            data.map(user => {
+            users.map(user => {
                 user.fio = `${user.last_name} ${user.first_name} ${user.middle_name}`;
                 return user;
             })
 
-            return data.sort((a, b) => {
+            return users.sort((a, b) => {
                 let x = a[sortColumn];
                 let y = b[sortColumn];
                 if (typeof x === 'string') {
@@ -36,7 +43,7 @@ const Users = () => {
                 }
             });
         }
-        return data;
+        return users;
     };
 
     const handleSortColumn = (sortColumn, sortType) => {
@@ -54,7 +61,7 @@ const Users = () => {
             <Table
                 style={{fontSize: 12}}
                 height={600}
-                data={getData()}
+                data={data}
                 affixHeader
                 affixHorizontalScrollbar
                 sortColumn={sortColumn}

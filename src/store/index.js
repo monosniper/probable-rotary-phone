@@ -74,7 +74,7 @@ export default class Store {
     async checkAuth() {
         this.setLoading(true);
         try {
-            const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true});
+            const response = await axios.get(`${API_URL}refresh`, {withCredentials: true});
             localStorage.setItem('token', response.data.accessToken);
 
             this.setAuth(true);
@@ -92,6 +92,19 @@ export default class Store {
 
             this.setUser(response.data);
 
+            onSuccess && onSuccess(response);
+        } catch (e) {
+            onError && onError(e);
+            console.log(e)
+        }
+    }
+
+    async updatePassword(oldPassword, newPassword, onSuccess, onError) {
+        try {
+            const response = await UserService.updatePassword({oldPassword, newPassword}, this.user.id);
+
+            this.setUser(response.data);
+            this.logout();
             onSuccess && onSuccess(response);
         } catch (e) {
             onError && onError(e);

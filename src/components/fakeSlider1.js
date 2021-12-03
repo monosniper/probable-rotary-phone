@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Carousel from 'react-elastic-carousel'
 import {Col, Row} from "reactstrap";
 import Game1 from '../assets/images/games/1.jpg';
@@ -56,6 +56,26 @@ const FakeSlider1 = () => {
         return <Winner key={key} src={src} id={id + '****'} amount={amount} />
     }
 
+    function getWidth() {
+        return Math.max(
+            document.body.scrollWidth,
+            document.documentElement.scrollWidth,
+            document.body.offsetWidth,
+            document.documentElement.offsetWidth,
+            document.documentElement.clientWidth
+        );
+    }
+
+    function getItemsToShowCount() {
+        const width = getWidth();
+
+        return width < 500 ? 2 : 3;
+    }
+
+    useEffect(() => {
+        console.log(getWidth())
+    }, []);
+
     return (
         <Row className='fake'>
             <Col sm={12} md={2}>Сейчас выигравают:</Col>
@@ -63,7 +83,7 @@ const FakeSlider1 = () => {
                 <Carousel
                     children={items}
                     enableTilt={true}
-                    itemsToShow={3}
+                    itemsToShow={getItemsToShowCount()}
                     isRTL={false}
                     pagination={false}
                     showArrows={false}

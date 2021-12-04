@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <Container className='footer-container'>
             <div className='footer'>
-                @ {new Date().getFullYear()} tipa-cosmolot.ua Все права защищены.
+                @ {new Date().getFullYear()} {process.env.REACT_APP_URL} Все права защищены.
                 <img src="https://www.fkwallet.ru/assets/2017/images/btns/iconsmall_wallet7.png" title="Криптовалютный кошелек" />
             </div>
         </Container>

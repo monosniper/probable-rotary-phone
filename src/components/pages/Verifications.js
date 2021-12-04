@@ -2,11 +2,40 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Button, Notification, Table, toaster} from "rsuite";
 import {Context} from "../../index";
 import {Helmet} from "react-helmet";
+import SimpleImageSlider from "react-simple-image-slider";
 
 const PhotoCell = ({ rowData, dataKey, ...props }) => {
+
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        props.getImages(rowData.id).then(images => {
+            const imagesForSlider = [...images[props.type]].map(image => {url: getPath(image)});
+            console.log(imagesForSlider);
+            // props.type === 'passport' ? setImages(images[props.type].map(image => {url: getPath(image)})) : setImages(images[props.type]);
+        });
+    }, []);
+
+    const getPath = (image) => `http://127.0.0.1:5000/${rowData['id']}/verification/${props.type}/${image}`;
+
     return <Table.Cell style={{padding: '7px 10px'}} {...props} className="link-group">
         <>
-            <img src={`http://127.0.0.1:5000/uploads/${rowData['id']}/verification/selphie/bg2.jpg`}/>
+            {props.type === 'passport' ? images.length &&
+                (
+                    <SimpleImageSlider
+                        width={200}
+                        height={150}
+                        images={images}
+                        showBullets={false}
+                        showNavs={false}
+                    />
+                )
+                :
+                (
+                    images.map((image, index) => (
+                        <img style={{width: 150}} key={`${rowData['id']}-${props.type}-${image}-${index}`} src={getPath(image)}/>
+                    ))
+                )}
         </>
     </Table.Cell>;
 }
@@ -64,7 +93,12 @@ const Verifications = () => {
     }, []);
 
     const getData = (users) => {
-        users = users.filter(user => !user.isVerified);
+        console.log(users);
+        users = users.filter(user => !user.isVerified && user.waitingForVerify);
+
+        users.map(user => {
+            store.getVerificationImages(user.id).then(images => user.images = images);
+        });
 
         if (sortColumn && sortType) {
             return users.sort((a, b) => {
@@ -98,9 +132,9 @@ const Verifications = () => {
     return (
         <div>
             <Helmet>
-                <title>Пользователи - Админка | Makao777</title>
+                <title>Верификация - Админка | Makao777</title>
             </Helmet>
-            <h6 className='cabinet-title'>Все пользователи</h6>
+            <h6 className='cabinet-title'>Запросы на верификацию</h6>
             <Table
                 style={{fontSize: 12}}
                 height={600}
@@ -111,23 +145,24 @@ const Verifications = () => {
                 sortType={sortType}
                 onSortColumn={handleSortColumn}
                 loading={loading}
+                rowHeight={150}
                 onRowClick={data => {
                     console.log(data);
                 }}
             >
                 <Table.Column width={300} fixed sortable>
                     <Table.HeaderCell>Подтверждение личности</Table.HeaderCell>
-                    <PhotoCell/>
+                    <PhotoCell type="passport" getImages={store.getVerificationImages}/>
                 </Table.Column>
-                <Table.Column width={250} fixed sortable>
+                <Table.Column width={300} fixed sortable>
                     <Table.HeaderCell>Селфи с документом</Table.HeaderCell>
-                    <PhotoCell/>
+                    <PhotoCell type="selphie" getImages={store.getVerificationImages}/>
                 </Table.Column>
-                <Table.Column width={150} fixed sortable>
+                <Table.Column width={300} fixed sortable>
                     <Table.HeaderCell>ИНН</Table.HeaderCell>
-                    <PhotoCell/>
+                    <PhotoCell type="inn" getImages={store.getVerificationImages}/>
                 </Table.Column>
-                <Table.Column width={150} fixed sortable>
+                <Table.Column width={300} fixed sortable>
                     <Table.HeaderCell />
                     <ActionCell/>
                 </Table.Column>

@@ -10,6 +10,14 @@ export default class UserService {
     }
 
     static async updatePassword(data, id) {
-        return $api.post(`users/${id}/changePassword`, data);
+        return $api.post(`users/${id}/change-password`, data);
+    }
+
+    static async setUserToPendingForVerification(user_id) {
+        return $api.get(`users/${user_id}/set-pending-for-verification`);
+    }
+
+    static async getVerificationImages(user_id) {
+        return $api.get(`users/${user_id}/verification-images`);
     }
 }

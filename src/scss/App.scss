@@ -679,3 +679,48 @@ body {
     flex-basis: 25%;
   }
 }
+
+.verification {
+  position: relative;
+  padding-top: 20px;
+}
+
+.verification-status-wrapper {
+  position: absolute;
+  top: -60px;
+  text-align: center;
+  width: 100%;
+}
+
+.verification-status {
+  border-radius: 20px;
+  display: inline-block;
+  background: white;
+  padding: 20px 30px;
+  font-size: 18px;
+  box-shadow: 0 6px 9px #00000017;
+
+  svg {
+    box-shadow: 0 4px 9px #00000017;
+    padding: 5px;
+    border-radius: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 2px;
+
+    &.success {
+      color: #7aff2c;
+    }
+
+    &.rejected {
+      color: #cb0000;
+    }
+
+    &.pending {
+      color: orange;
+    }
+  }
+}

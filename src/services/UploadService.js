@@ -6,6 +6,8 @@ export default class UploadService {
         formData.append("file", file);
         formData.append("dir", `${user_id}/${dir}`);
 
-        return $api.post('upload', formData);
+        return $api.post('upload', formData, {headers: {
+                ContentType: 'multipart/form-data'
+        }});
     }
 }

@@ -210,4 +210,24 @@ export default class Store {
             console.log(e)
         }
     }
+
+    async pendingUserVerification() {
+        try {
+            const response = await UserService.setUserToPendingForVerification(this.user.id);
+
+            this.setUser(response.data);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async getVerificationImages(user_id) {
+        try {
+            const response = await UserService.getVerificationImages(user_id);
+
+            return response.data[0];
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }

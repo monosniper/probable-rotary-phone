@@ -27,7 +27,7 @@ const AppRouter = () => {
 
     if(store.isLoading) return <h1>Loading...</h1>
 
-    return true ?
+    return store.isAuth ?
         (
             <Routes>
                 {iterateRoutes(privateRoutes)}

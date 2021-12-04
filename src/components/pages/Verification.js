@@ -3,12 +3,20 @@ import Requirement1 from '../../assets/images/verification/1.png';
 import Requirement2 from '../../assets/images/verification/2.png';
 import Requirement3 from '../../assets/images/verification/3.png';
 import Requirement4 from '../../assets/images/verification/4.png';
-import {AiFillQuestionCircle, AiOutlineCheck, AiOutlineClose, BsFillImageFill, MdDeleteOutline} from "react-icons/all";
+import {
+    AiFillQuestionCircle,
+    AiOutlineCheck,
+    AiOutlineClose,
+    BsCheckLg,
+    BsFillImageFill, IoCloseSharp,
+    MdDeleteOutline, MdOutlinePendingActions
+} from "react-icons/all";
 import {Col, Row} from "reactstrap";
 import {Button, IconButton, Notification, Popover, SelectPicker, toaster, Whisper} from "rsuite";
 import ImageUploading from "react-images-uploading";
 import {Helmet} from "react-helmet";
 import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
 const Verification = () => {
 
@@ -24,6 +32,8 @@ const Verification = () => {
 
     const [selphieImages, setSelphieImages] = useState([]);
     const [innImages, setInnImages] = useState([]);
+
+    const [uploadLoading, setUploadLoading] = useState(false);
 
     const handleTypeChange = (val) => {
 
@@ -91,7 +101,7 @@ const Verification = () => {
         if(verificationImages.length === verificationImagesLimit && selphieImages.length === 1 && innImages.length === 1) {
             const images = [
                 ...verificationImages.map(image => {
-                    image.dir = 'verification/pasport'
+                    image.dir = 'verification/passport'
                     return image;
                 }),
                 ...selphieImages.map(image => {
@@ -102,9 +112,11 @@ const Verification = () => {
                     image.dir = 'verification/inn'
                     return image;
                 }),
-            ]
-            console.log(images);
-            store.uploadFiles(images);
+            ];
+
+            setUploadLoading(true)
+            store.uploadFiles(images).then(() => setUploadLoading(false));
+            store.pendingUserVerification();
         } else {
             toaster.push(
                 <Notification type="error" header="Ошибка">
@@ -114,192 +126,207 @@ const Verification = () => {
         }
     }
 
+    const status = {
+        success: <p><BsCheckLg className="success" /> Верифицирован</p>,
+        rejected: <p><IoCloseSharp className="rejected" /> Не верифицирован</p>,
+        pending: <p><MdOutlinePendingActions className="pending" /> В ожидании верификации</p>,
+    };
+
     return (
-        <div>
+        <div className="verification">
             <Helmet>
                 <title>Верификация - Профиль | Makao777</title>
             </Helmet>
-            <h6 className="cabinet-title">Верификация</h6>
-            <p>Для прохождения верификации Вы можете загрузить Ваши фото в этом разделе.</p>
 
-            <h6 style={{marginTop: '2rem'}}><b>Общие требования к фото</b></h6>
-            <p style={{marginTop: '.5rem'}}>- Формат изображения gif,jpg,png,jpeg, и pdf</p>
-
-            <div className="requirements">
-                <div className="requirements-item-wrapper">
-                    <div className="requirements-item">
-                        <span className="requirements-item-success"><AiOutlineCheck /></span>
-                        <img alt="requirement-1" className="requirements-item-photo" src={Requirement1}/>
-                    </div>
-                    <div className="requirements-item-title">
-                        Документ хорошо виден включая все 4 угла
-                    </div>
-                </div>
-                <div className="requirements-item-wrapper">
-                    <div className="requirements-item">
-                        <span className="requirements-item-success"><AiOutlineCheck /></span>
-                        <img alt="requirement-2" className="requirements-item-photo" src={Requirement2}/>
-                    </div>
-                    <div className="requirements-item-title">
-                        Селфи с паспортом или ID картой
-                    </div>
-                </div>
-                <div className="requirements-item-wrapper">
-                    <div className="requirements-item">
-                        <span className="requirements-item-error"><AiOutlineClose /></span>
-                        <img alt="requirement-3" className="requirements-item-photo" src={Requirement3}/>
-                    </div>
-                    <div className="requirements-item-title">
-                        Не все 4 угла видны
-                    </div>
-                </div>
-                <div className="requirements-item-wrapper">
-                    <div className="requirements-item">
-                        <span className="requirements-item-error"><AiOutlineClose /></span>
-                        <img alt="requirement-4" className="requirements-item-photo" src={Requirement4}/>
-                    </div>
-                    <div className="requirements-item-title">
-                        Размытое изображение
-                    </div>
-                </div>
+            <div className="verification-status-wrapper">
+                <div className="verification-status">{status[store.user.waitingForVerify ? 'pending' : store.user.isVerified ? 'success' : 'rejected']}</div>
             </div>
 
-            <h6 className="cabinet-title">Загрузка документов</h6>
-            <Row style={{textAlign: 'center'}}>
-                <Col sm={12} md={4}>
-                    <h6>1. Подтверждение личности</h6>
-                    <div>
-                        <SelectPicker cleanable={false} onChange={(val) => handleTypeChange(val)} style={{margin: '1rem .5rem'}} searchable={false} defaultValue={type} data={[
-                            {
-                                label: 'Паспорт',
-                                value: 'passport',
-                            },
-                            {
-                                label: 'ID карта',
-                                value: 'id',
-                            },
-                            {
-                                label: 'Загранпаспорт',
-                                value: 'zagran',
-                            },
-                        ]} />
+            {!store.user.waitingForVerify ?
+                <>
+                    <h6 className="cabinet-title">Верификация</h6>
+                    <p>Для прохождения верификации Вы можете загрузить Ваши фото в этом разделе.</p>
 
-                        <Whisper
-                            placement="top"
-                            trigger="hover"
-                            controlId="control-id-hover-enterable"
-                            speaker={(<Popover className='popover' title="Важно">{verificationInfo}</Popover>)}
-                            enterable
-                        >
-                            <span><AiFillQuestionCircle fontSize={20} /></span>
-                        </Whisper>
+                    <h6 style={{marginTop: '2rem'}}><b>Общие требования к фото</b></h6>
+                    <p style={{marginTop: '.5rem'}}>- Формат изображения gif,jpg,png,jpeg, и pdf</p>
+
+                    <div className="requirements">
+                        <div className="requirements-item-wrapper">
+                            <div className="requirements-item">
+                                <span className="requirements-item-success"><AiOutlineCheck /></span>
+                                <img alt="requirement-1" className="requirements-item-photo" src={Requirement1}/>
+                            </div>
+                            <div className="requirements-item-title">
+                                Документ хорошо виден включая все 4 угла
+                            </div>
+                        </div>
+                        <div className="requirements-item-wrapper">
+                            <div className="requirements-item">
+                                <span className="requirements-item-success"><AiOutlineCheck /></span>
+                                <img alt="requirement-2" className="requirements-item-photo" src={Requirement2}/>
+                            </div>
+                            <div className="requirements-item-title">
+                                Селфи с паспортом или ID картой
+                            </div>
+                        </div>
+                        <div className="requirements-item-wrapper">
+                            <div className="requirements-item">
+                                <span className="requirements-item-error"><AiOutlineClose /></span>
+                                <img alt="requirement-3" className="requirements-item-photo" src={Requirement3}/>
+                            </div>
+                            <div className="requirements-item-title">
+                                Не все 4 угла видны
+                            </div>
+                        </div>
+                        <div className="requirements-item-wrapper">
+                            <div className="requirements-item">
+                                <span className="requirements-item-error"><AiOutlineClose /></span>
+                                <img alt="requirement-4" className="requirements-item-photo" src={Requirement4}/>
+                            </div>
+                            <div className="requirements-item-title">
+                                Размытое изображение
+                            </div>
+                        </div>
                     </div>
-                    <ImageUploading
-                        acceptType={['png', 'jpg', 'jpeg', 'pdf', 'gif']}
-                        value={verificationImages}
-                        onChange={onVerificationImageUpload}
-                        dataURLKey="data_url"
-                    >
-                        {({
-                              onImageUpload,
-                          }) => (
-                            <Button disabled={verificationImages.length === verificationImagesLimit} onClick={onImageUpload} className='choose-photo-btn'>
-                                <BsFillImageFill /> Выбрать фото
-                            </Button>
-                        )}
-                    </ImageUploading>
-                    {verificationImages.map(({file}, index) => (
-                        <div className="image" key={index}>
-                            <span className="image-name">{file.name}</span>
-                            <span className="image-status">
-                                <AiOutlineCheck /> Готово к отправке
-                            </span>
-                            <IconButton onClick={() => removeVerificationImage(index)} icon={<MdDeleteOutline />} />
-                        </div>
-                    ))}
-                </Col>
-                <Col sm={12} md={4}>
-                    <h6>2. Селфи с документом</h6>
-                    <ImageUploading
-                        acceptType={['png', 'jpg', 'jpeg', 'pdf', 'gif']}
-                        value={verificationImages}
-                        onChange={onSelphieImageUpload}
-                        dataURLKey="data_url"
-                    >
-                        {({
-                              onImageUpload,
-                          }) => (
-                            <Button disabled={selphieImages.length === 1} onClick={onImageUpload} className='choose-photo-btn'>
-                                <BsFillImageFill /> Выбрать фото
-                            </Button>
-                        )}
-                    </ImageUploading>
-                    <Whisper
-                        placement="top"
-                        trigger="hover"
-                        controlId="control-id-hover-enterable"
-                        speaker={(<Popover className='popover' title="Важно">
-                            Фотография с развернутым документом в руке возле лица
-                        </Popover>)}
-                        enterable
-                    >
-                        <span><AiFillQuestionCircle fontSize={20} /></span>
-                    </Whisper>
-                    {selphieImages.map(({file}, index) => (
-                        <div className="image" key={index}>
-                            <span className="image-name">{file.name}</span>
-                            <span className="image-status">
-                                <AiOutlineCheck /> Готово к отправке
-                            </span>
-                            <IconButton onClick={() => removeSelphieImage(index)} icon={<MdDeleteOutline />} />
-                        </div>
-                    ))}
-                </Col>
-                <Col sm={12} md={4}>
-                    <h6>3. ИНН</h6>
-                    <ImageUploading
-                        acceptType={['png', 'jpg', 'jpeg', 'pdf', 'gif']}
-                        value={verificationImages}
-                        onChange={onInnImageUpload}
-                        dataURLKey="data_url"
-                    >
-                        {({
-                              onImageUpload,
-                          }) => (
-                            <Button disabled={innImages.length === 1} onClick={onImageUpload} className='choose-photo-btn'>
-                                <BsFillImageFill /> Выбрать фото
-                            </Button>
-                        )}
-                    </ImageUploading>
-                    <Whisper
-                        placement="top"
-                        trigger="hover"
-                        controlId="control-id-hover-enterable"
-                        speaker={(<Popover className='popover' title="Важно">
-                            Сканированное изображение или фото Идентификационного номера налогоплательщика.
-                        </Popover>)}
-                        enterable
-                    >
-                        <span><AiFillQuestionCircle fontSize={20} /></span>
-                    </Whisper>
 
-                    {innImages.map(({file}, index) => (
-                        <div className="image" key={index}>
-                            <span className="image-name">{file.name}</span>
-                            <span className="image-status">
+                    <h6 className="cabinet-title">Загрузка документов</h6>
+                    <Row style={{textAlign: 'center'}}>
+                        <Col sm={12} md={4}>
+                            <h6>1. Подтверждение личности</h6>
+                            <div>
+                                <SelectPicker cleanable={false} onChange={(val) => handleTypeChange(val)} style={{margin: '1rem .5rem'}} searchable={false} defaultValue={type} data={[
+                                    {
+                                        label: 'Паспорт',
+                                        value: 'passport',
+                                    },
+                                    {
+                                        label: 'ID карта',
+                                        value: 'id',
+                                    },
+                                    {
+                                        label: 'Загранпаспорт',
+                                        value: 'zagran',
+                                    },
+                                ]} />
+
+                                <Whisper
+                                    placement="top"
+                                    trigger="hover"
+                                    controlId="control-id-hover-enterable"
+                                    speaker={(<Popover className='popover' title="Важно">{verificationInfo}</Popover>)}
+                                    enterable
+                                >
+                                    <span><AiFillQuestionCircle fontSize={20} /></span>
+                                </Whisper>
+                            </div>
+                            <ImageUploading
+                                acceptType={['png', 'jpg', 'jpeg', 'pdf', 'gif']}
+                                value={verificationImages}
+                                onChange={onVerificationImageUpload}
+                                dataURLKey="data_url"
+                            >
+                                {({
+                                      onImageUpload,
+                                  }) => (
+                                    <Button disabled={verificationImages.length === verificationImagesLimit} onClick={onImageUpload} className='choose-photo-btn'>
+                                        <BsFillImageFill /> Выбрать фото
+                                    </Button>
+                                )}
+                            </ImageUploading>
+                            {verificationImages.map(({file}, index) => (
+                                <div className="image" key={index}>
+                                    <span className="image-name">{file.name}</span>
+                                    <span className="image-status">
                                 <AiOutlineCheck /> Готово к отправке
                             </span>
-                            <IconButton onClick={() => removeInnImage(index)} icon={<MdDeleteOutline />} />
-                        </div>
-                    ))}
-                </Col>
-            </Row>
+                                    <IconButton onClick={() => removeVerificationImage(index)} icon={<MdDeleteOutline />} />
+                                </div>
+                            ))}
+                        </Col>
+                        <Col sm={12} md={4}>
+                            <h6>2. Селфи с документом</h6>
+                            <ImageUploading
+                                acceptType={['png', 'jpg', 'jpeg', 'pdf', 'gif']}
+                                value={verificationImages}
+                                onChange={onSelphieImageUpload}
+                                dataURLKey="data_url"
+                            >
+                                {({
+                                      onImageUpload,
+                                  }) => (
+                                    <Button disabled={selphieImages.length === 1} onClick={onImageUpload} className='choose-photo-btn'>
+                                        <BsFillImageFill /> Выбрать фото
+                                    </Button>
+                                )}
+                            </ImageUploading>
+                            <Whisper
+                                placement="top"
+                                trigger="hover"
+                                controlId="control-id-hover-enterable"
+                                speaker={(<Popover className='popover' title="Важно">
+                                    Фотография с развернутым документом в руке возле лица
+                                </Popover>)}
+                                enterable
+                            >
+                                <span><AiFillQuestionCircle fontSize={20} /></span>
+                            </Whisper>
+                            {selphieImages.map(({file}, index) => (
+                                <div className="image" key={index}>
+                                    <span className="image-name">{file.name}</span>
+                                    <span className="image-status">
+                                <AiOutlineCheck /> Готово к отправке
+                            </span>
+                                    <IconButton onClick={() => removeSelphieImage(index)} icon={<MdDeleteOutline />} />
+                                </div>
+                            ))}
+                        </Col>
+                        <Col sm={12} md={4}>
+                            <h6>3. ИНН</h6>
+                            <ImageUploading
+                                acceptType={['png', 'jpg', 'jpeg', 'pdf', 'gif']}
+                                value={verificationImages}
+                                onChange={onInnImageUpload}
+                                dataURLKey="data_url"
+                            >
+                                {({
+                                      onImageUpload,
+                                  }) => (
+                                    <Button disabled={innImages.length === 1} onClick={onImageUpload} className='choose-photo-btn'>
+                                        <BsFillImageFill /> Выбрать фото
+                                    </Button>
+                                )}
+                            </ImageUploading>
+                            <Whisper
+                                placement="top"
+                                trigger="hover"
+                                controlId="control-id-hover-enterable"
+                                speaker={(<Popover className='popover' title="Важно">
+                                    Сканированное изображение или фото Идентификационного номера налогоплательщика.
+                                </Popover>)}
+                                enterable
+                            >
+                                <span><AiFillQuestionCircle fontSize={20} /></span>
+                            </Whisper>
 
-            <div style={{textAlign: 'center', marginTop: '2rem'}}>
-                <Button onClick={submit} className='pink-btn btn-lg rounded'>Отправить</Button>
-            </div>
+                            {innImages.map(({file}, index) => (
+                                <div className="image" key={index}>
+                                    <span className="image-name">{file.name}</span>
+                                    <span className="image-status">
+                                <AiOutlineCheck /> Готово к отправке
+                            </span>
+                                    <IconButton onClick={() => removeInnImage(index)} icon={<MdDeleteOutline />} />
+                                </div>
+                            ))}
+                        </Col>
+                    </Row>
+
+                    <div style={{textAlign: 'center', marginTop: '2rem'}}>
+                        <Button onClick={submit} className='pink-btn btn-lg rounded'>{uploadLoading ? 'Загрузка...' : 'Отправить'}</Button>
+                    </div>
+                </>
+                : <p>Ваша заявка на верификацию сейчас обрабатывается модераторами {process.env.REACT_APP_NAME}.</p>}
         </div>
     );
 };
 
-export default Verification;
+export default observer(Verification);

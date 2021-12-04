@@ -4,8 +4,8 @@ import {
     CASSA_ROUTE, FAQ_ROUTE, GAME_ROUTE,
     HOME_ROUTE, PAYHISTORY_ROUTE,
     PROFILE_ROUTE, PULL_MONEY_ROUTE, PULLS_MONEY_ROUTE,
-    PUSH_MONEY_ROUTE, USERS_ROUTE,
-    VERIFICATION_ROUTE
+    PUSH_MONEY_ROUTE, SETTINGS_ROUTE, USERS_ROUTE,
+    VERIFICATION_ROUTE, VERIFICATIONS_ROUTE
 } from "./utils/routes";
 import Home from "./components/pages/Home";
 import Profile from "./components/pages/Profile";
@@ -20,6 +20,8 @@ import PullsMoney from "./components/pages/PullsMoney";
 import Users from "./components/pages/Users";
 import Faq from "./components/pages/Faq";
 import Game from "./components/pages/Game";
+import Settings from "./components/pages/Settings";
+import Verifications from "./components/pages/Verifications";
 
 export const publicRoutes = [
     {
@@ -80,6 +82,14 @@ export const privateRoutes = [
             {
                 path: PULLS_MONEY_ROUTE,
                 element: <PullsMoney/>,
+            },
+            {
+                path: SETTINGS_ROUTE,
+                element: <Settings/>,
+            },
+            {
+                path: VERIFICATIONS_ROUTE,
+                element: <Verifications/>,
             },
         ]
     },

@@ -9,5 +9,7 @@ export const PAYHISTORY_ROUTE = '/cassa/history';
 export const ADMIN_ROUTE = '/admin';
 export const USERS_ROUTE = '/admin/users';
 export const PULLS_MONEY_ROUTE = '/admin/pulls';
+export const SETTINGS_ROUTE = '/admin/settings';
+export const VERIFICATIONS_ROUTE = '/admin/verifications';
 export const FAQ_ROUTE = '/faq';
 export const GAME_ROUTE = '/game';

@@ -1,11 +1,15 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {PROFILE_ROUTE} from "../../utils/routes";
 import {Link} from "react-router-dom";
 import {Button, IconButton, Input, MaskedInput, Notification, toaster} from "rsuite";
 import Minus from "@rsuite/icons/Minus";
 import Plus from "@rsuite/icons/Plus";
+import {Helmet} from "react-helmet";
+import {Context} from "../../index";
 
 const PullMoney = () => {
+
+    const {store} = useContext(Context);
 
     const verified = true;
     const [amount, setAmount] = useState(200);
@@ -35,7 +39,20 @@ const PullMoney = () => {
     const submit = () => {
         if(amount > 0 && amount < 50000) {
             if(cardNumber !== '') {
-                // request
+                store.createPull(cardNumber, amount, (rs) => {
+                    toaster.push(
+                        <Notification type="success" header="Запрос на вывод добавлен успешно" />, {placement: 'topEnd'}
+                    )
+
+                    setAmount(200);
+                    setCardNumber('');
+                }, (e) => {
+                    toaster.push(
+                        <Notification type="error" header="Ошибка!" >
+                            <p>{e.response.data.message}</p>
+                        </Notification>, {placement: 'topEnd'}
+                    )
+                });
             } else {
                 toaster.push(
                     <Notification type="error" header="Ошибка">
@@ -54,6 +71,9 @@ const PullMoney = () => {
 
     return verified ? (
         <div>
+            <Helmet>
+                <title>Вывод денег - Касса | Makao777</title>
+            </Helmet>
             <h6><b>Доступно для вывода: 0.00 ₴</b></h6>
             <div className="pushmoney-btn-toolbar">
                 <Button onClick={() => setAmount(100)} className="pushmoney-btn">100</Button>
@@ -85,10 +105,12 @@ const PullMoney = () => {
             </div>
 
             <div style={{textAlign: 'center', marginTop: '2rem'}}>
-                <Button onClick={submit} className="pink-btn btn-lg rounded">Оплатить</Button>
+                <Button onClick={submit} className="pink-btn btn-lg rounded">Вывод</Button>
             </div>
         </div>
-    ) : <p style={{margin: '2rem 0', textAlign: 'center'}}>Для возможности оформления вывода подтвердите свой номер телефона и почту в <Link to={PROFILE_ROUTE}>Профиле</Link></p>;
+    ) : <p style={{margin: '2rem 0', textAlign: 'center'}}><Helmet>
+        <title>Вывод денег - Касса | Makao777</title>
+    </Helmet>Для возможности оформления вывода подтвердите свой номер телефона и почту в <Link to={PROFILE_ROUTE}>Профиле</Link></p>;
 };
 
 export default PullMoney;

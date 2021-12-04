@@ -5,6 +5,7 @@ import {BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/all";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../index";
 import moment from "moment";
+import {Helmet} from "react-helmet";
 
 const Profile = () => {
 
@@ -116,6 +117,9 @@ const Profile = () => {
 
     return (
         <div className="cabinet">
+            <Helmet>
+                <title>Профиль | Makao777</title>
+            </Helmet>
             <Row>
                 <Col sm={12} md={6}>
                     <Form fluid className='cabinet-form'>

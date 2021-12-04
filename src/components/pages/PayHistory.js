@@ -1,5 +1,6 @@
 import React from 'react';
 import {BsCheckLg, IoCloseSharp, MdOutlinePendingActions} from "react-icons/all";
+import {Helmet} from "react-helmet";
 
 const PayHistory = () => {
 
@@ -18,7 +19,7 @@ const PayHistory = () => {
         },
         {
             description: 'Пополнение',
-            status: 'error',
+            status: 'rejected',
             amount: 300,
             date: '22:10 24 ноября 2021',
         },
@@ -30,7 +31,7 @@ const PayHistory = () => {
         },
         {
             description: 'Вывод',
-            status: 'error',
+            status: 'rejected',
             amount: -200,
             date: '22:10 24 ноября 2021',
         },
@@ -38,18 +39,21 @@ const PayHistory = () => {
 
     const icons = {
         success: <BsCheckLg/>,
-        error: <IoCloseSharp/>,
+        rejected: <IoCloseSharp/>,
         pending: <MdOutlinePendingActions/>,
     };
 
     const lang = {
         success: 'Успешно',
-        error: 'Ошибка',
+        rejected: 'Отклонено',
         pending: 'Ожидание',
     };
 
     return (
         <div>
+            <Helmet>
+                <title>История платежей - Касса | Makao777</title>
+            </Helmet>
             <h6 className="cabinet-title">История транзакций</h6>
             {transactions.map((transaction, index) => (
                 <div className="transaction" key={index}>

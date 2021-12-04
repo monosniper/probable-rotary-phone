@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Requirement1 from '../../assets/images/verification/1.png';
 import Requirement2 from '../../assets/images/verification/2.png';
 import Requirement3 from '../../assets/images/verification/3.png';
@@ -7,11 +7,18 @@ import {AiFillQuestionCircle, AiOutlineCheck, AiOutlineClose, BsFillImageFill, M
 import {Col, Row} from "reactstrap";
 import {Button, IconButton, Notification, Popover, SelectPicker, toaster, Whisper} from "rsuite";
 import ImageUploading from "react-images-uploading";
+import {Helmet} from "react-helmet";
+import {Context} from "../../index";
 
 const Verification = () => {
 
+    const {store} = useContext(Context);
     const [type, setType] = useState('passport');
 
+    const [verificationInfo, setVerificationInfo] = useState("Серия и номер паспорта должны быть видны полностью\n" +
+        "Фото 1: Первый разворот или первая страница паспорта \n" +
+        "Фото 2: Второй разворот паспорта \n" +
+        "Фото 3: Если вам исполнилось 45 лет: четвертая страница паспорта \n");
     const [verificationImages, setVerificationImages] = useState([]);
     const [verificationImagesLimit, setVerificationImagesLimit] = useState(3);
 
@@ -26,14 +33,23 @@ const Verification = () => {
         switch (val) {
             case 'passport':
                 setVerificationImagesLimit(3);
+                setVerificationInfo("Серия и номер паспорта должны быть видны полностью\n" +
+                    "Фото 1: Первый разворот или первая страница паспорта \n" +
+                    "Фото 2: Второй разворот паспорта \n" +
+                    "Фото 3: Если вам исполнилось 45 лет: четвертая страница паспорта \n");
 
                 break;
             case 'id':
                 setVerificationImagesLimit(2);
+                setVerificationInfo("Серия и номер паспорта должны быть видны полностью\n" +
+                    "Фото 1: Фото лицевой стороны ID карты \n"+
+                    "Фото 2: Фото оборотной стороны ID карты \n")
 
                 break;
             case 'zagran':
                 setVerificationImagesLimit(1);
+                setVerificationInfo("Серия и номер паспорта должны быть видны полностью\n" +
+                    "Фото 1: Первый разворот или первая страница паспорта \n")
 
                 break;
             default:
@@ -73,7 +89,22 @@ const Verification = () => {
 
     const submit = () => {
         if(verificationImages.length === verificationImagesLimit && selphieImages.length === 1 && innImages.length === 1) {
-            // Request to server
+            const images = [
+                ...verificationImages.map(image => {
+                    image.dir = 'verification/pasport'
+                    return image;
+                }),
+                ...selphieImages.map(image => {
+                    image.dir = 'verification/selphie'
+                    return image;
+                }),
+                ...innImages.map(image => {
+                    image.dir = 'verification/inn'
+                    return image;
+                }),
+            ]
+            console.log(images);
+            store.uploadFiles(images);
         } else {
             toaster.push(
                 <Notification type="error" header="Ошибка">
@@ -85,6 +116,9 @@ const Verification = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Верификация - Профиль | Makao777</title>
+            </Helmet>
             <h6 className="cabinet-title">Верификация</h6>
             <p>Для прохождения верификации Вы можете загрузить Ваши фото в этом разделе.</p>
 
@@ -135,7 +169,7 @@ const Verification = () => {
                 <Col sm={12} md={4}>
                     <h6>1. Подтверждение личности</h6>
                     <div>
-                        <SelectPicker onChange={(val) => handleTypeChange(val)} style={{margin: '1rem .5rem'}} searchable={false} defaultValue={type} data={[
+                        <SelectPicker cleanable={false} onChange={(val) => handleTypeChange(val)} style={{margin: '1rem .5rem'}} searchable={false} defaultValue={type} data={[
                             {
                                 label: 'Паспорт',
                                 value: 'passport',
@@ -154,10 +188,7 @@ const Verification = () => {
                             placement="top"
                             trigger="hover"
                             controlId="control-id-hover-enterable"
-                            speaker={(<Popover className='popover' title="Title">
-                                <p>This is a default Popover </p>
-                                <p>Content</p>
-                            </Popover>)}
+                            speaker={(<Popover className='popover' title="Важно">{verificationInfo}</Popover>)}
                             enterable
                         >
                             <span><AiFillQuestionCircle fontSize={20} /></span>
@@ -207,9 +238,8 @@ const Verification = () => {
                         placement="top"
                         trigger="hover"
                         controlId="control-id-hover-enterable"
-                        speaker={(<Popover className='popover' title="Title">
-                            <p>This is a default Popover </p>
-                            <p>Content</p>
+                        speaker={(<Popover className='popover' title="Важно">
+                            Фотография с развернутым документом в руке возле лица
                         </Popover>)}
                         enterable
                     >
@@ -245,9 +275,8 @@ const Verification = () => {
                         placement="top"
                         trigger="hover"
                         controlId="control-id-hover-enterable"
-                        speaker={(<Popover className='popover' title="Title">
-                            <p>This is a default Popover </p>
-                            <p>Content</p>
+                        speaker={(<Popover className='popover' title="Важно">
+                            Сканированное изображение или фото Идентификационного номера налогоплательщика.
                         </Popover>)}
                         enterable
                     >

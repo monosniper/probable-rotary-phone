@@ -1,17 +1,36 @@
-@media screen and(max-width: 500px) {
+@media screen and(max-width: 1190px) {
   .header {
     flex-wrap: wrap;
+
+    &-right {
+      width: 100% !important;
+      justify-content: space-between !important;
+    }
+  }
+}
+
+@media screen and(max-width: 900px) {
+  .game-list-item {
+    width: 180px !important;
+    height: 180px !important;
+  }
+}
+
+@media screen and(max-width: 770px) {
+   .header-right {
+     flex-wrap: wrap !important;
+     justify-content: center !important;
+   }
+}
+
+@media screen and(max-width: 500px) {
+  .header {
     justify-content: center !important;
     gap: 10px;
 
     &-left {
       flex-basis: 100%;
       text-align: center;
-    }
-
-    &-right {
-      flex-wrap: wrap;
-      justify-content: center;
     }
   }
 

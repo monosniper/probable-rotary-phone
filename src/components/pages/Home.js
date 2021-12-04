@@ -9,10 +9,15 @@ import FakeSlider3 from "../fakeSlider3";
 import FakeSlider4 from "../fakeSlider4";
 import Slider from "../Slider";
 import FakeSlider1 from "../fakeSlider1";
+import {Helmet} from "react-helmet";
 
 const Home = () => {
     return (
         <>
+            <Helmet>
+                <title>Онлайн казино Makao777</title>
+            </Helmet>
+
             <Slider />
             <FakeSlider1 />
             <ContentBlock>
@@ -38,10 +43,10 @@ const Home = () => {
                 </Row>
 
                 <Row>
-                    <Col sm={12} md={9}>
+                    <Col sm={12} md={8} lg={9}>
                         <GameList />
                     </Col>
-                    <Col sm={12} md={3}>
+                    <Col sm={12} md={4} lg={3}>
                         <FakeSlider4 />
                         <FakeSlider3 />
                         <FakeSlider2 />

@@ -3,19 +3,17 @@ import AuthService from "../services/AuthService";
 import axios from "axios";
 import {API_URL} from "../http";
 import UserService from "../services/UserService";
+import CassaService from "../services/CassaService";
+import UploadService from "../services/UploadService";
 
 export default class Store {
 
     user = {};
-    isAuth = false;
+    isAuth = true;
     isLoading = false;
 
     constructor() {
         makeAutoObservable(this);
-
-        if (localStorage.getItem('token')) {
-            this.checkAuth();
-        }
     }
 
     setLoading(bool) {
@@ -112,12 +110,103 @@ export default class Store {
         }
     }
 
+    async getAllPulls() {
+        try {
+            const response = await CassaService.fetchPulls();
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async getAllUsers() {
         try {
             const response = await UserService.fetchUsers();
 
             return response.data;
         } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async pushMoney(data) {
+        try {
+            function encodeQuery(data){
+                let query = ""
+                for (let d in data)
+                    query += encodeURIComponent(d) + '=' +
+                        encodeURIComponent(data[d]) + '&'
+                return query.slice(0, -1)
+            }
+
+            const url = 'https://www.free-kassa.ru/merchant/cash.php?'+encodeQuery(data);
+
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async createPull(card, amount, onSuccess, onError) {
+        try {
+            const response = await CassaService.createPull({card, amount, user_id: this.user.id});
+
+            onSuccess && onSuccess(response);
+        } catch (e) {
+            onError && onError(e);
+            console.log(e)
+        }
+    }
+
+    async getTransactions() {
+        try {
+            const response = await CassaService.getTransactions();
+            console.log(response.data);
+            return response.data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async setTransactionStatus(transaction_id, status, onSuccess, onError) {
+        try {
+            const response = await CassaService.updateTransaction(transaction_id, {status});
+
+            onSuccess && onSuccess(response);
+        } catch (e) {
+            onError && onError(e);
+            console.log(e)
+        }
+    }
+
+    async getTransactionStatus(transaction_id) {
+        try {
+            const response = await CassaService.getTransaction(transaction_id);
+
+            return response.data[0].status;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async uploadFiles(data) {
+        try {
+            data.forEach(async (item) => {
+                await UploadService.uploadFile(item.file, item.dir, this.user.id);
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async acceptUserVerification(user_id, onSuccess, onError) {
+        try {
+            const response = await UserService.verifyUser(user_id);
+
+            onSuccess && onSuccess(response);
+        } catch (e) {
+            onError && onError(e);
             console.log(e)
         }
     }

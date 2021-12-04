@@ -1,13 +1,56 @@
-import React from 'react';
-import {Button, Table} from "rsuite";
+import React, {useContext, useEffect, useState} from 'react';
+import {Button, Notification, Table, toaster} from "rsuite";
+import {Helmet} from "react-helmet";
+import {Context} from "../../index";
+import moment from "moment";
 
 const ActionCell = ({ rowData, dataKey, ...props }) => {
-    function handleAction() {
-        alert(`id:${rowData[dataKey]}`);
+
+    function handleSuccess() {
+        props.store.setTransactionStatus(rowData[dataKey], 'success', (rs) => {
+            toaster.push(
+                <Notification type="success" header="Запрос помечен как готовый" />, {placement: 'topEnd'}
+            )
+        }, (e) => {
+            toaster.push(
+                <Notification type="error" header="Ошибка!" >
+                    <p>{e.response.data.message}</p>
+                </Notification>, {placement: 'topEnd'}
+            )
+        });
     }
+
+    function handleReject() {
+        props.store.setTransactionStatus(rowData[dataKey], 'rejected', (rs) => {
+            toaster.push(
+                <Notification type="success" header="Запрос был отклонен" />, {placement: 'topEnd'}
+            )
+        }, (e) => {
+            toaster.push(
+                <Notification type="error" header="Ошибка!" >
+                    <p>{e.response.data.message}</p>
+                </Notification>, {placement: 'topEnd'}
+            )
+        });
+    }
+
+    const lang = {
+        success: 'Успешно',
+        rejected: 'Отклонено',
+    };
+
+    const status = rowData['status'];
+
     return (
         <Table.Cell style={{padding: '7px 10px'}} {...props} className="link-group">
-            <Button onClick={handleAction} size='sm' >Готово</Button>
+            {status === 'pending' ?
+                <>
+                    <Button onClick={handleSuccess} size='sm'>Готово</Button>
+                    <Button onClick={handleReject} size='sm'>Отклонить</Button>
+                </>
+            :
+                <p>{lang[status]}</p>
+            }
         </Table.Cell>
     );
 };
@@ -17,45 +60,18 @@ const PullsMoney = () => {
     const [sortType, setSortType] = React.useState();
     const [loading, setLoading] = React.useState(false);
 
-    const data = [
-        {
-            id: 1,
-            amount: 300,
-            user: 'Gasasd Gasdsad Adasfdsfdf',
-            card: '8874 8888 8888 8888',
-            createdAt: '42:42 42 november 2021'
-        },
-        {
-            id: 2,
-            amount: 300,
-            user: 'Gasasd Gasdsad Adasfdsfdf',
-            card: '8874 8888 8888 8888',
-            createdAt: '42:42 42 november 2021'
-        },
-        {
-            id: 1,
-            amount: 300,
-            user: 'Gasasd Gasdsad Adasfdsfdf',
-            card: '8874 8888 8888 8888',
-            createdAt: '42:42 42 november 2021'
-        },
-        {
-            id: 1,
-            amount: 300,
-            user: 'Gasasd Gasdsad Adasfdsfdf',
-            card: '8874 8888 8888 8888',
-            createdAt: '42:42 42 november 2021'
-        },
-        {
-            id: 1,
-            amount: 300,
-            user: 'Gasasd Gasdsad Adasfdsfdf',
-            card: '8874 8888 8888 8888',
-            createdAt: '42:42 42 november 2021'
-        },
-    ]
+    const {store} = useContext(Context);
 
-    const getData = () => {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        store.getAllPulls().then(pulls => setData(getData(pulls)));
+    }, []);
+
+    const getData = (data) => {
+
+        data.map(item => item.createdAt = moment(item.createdAt).format('DD MMMM yyyy'));
+
         if (sortColumn && sortType) {
             return data.sort((a, b) => {
                 let x = a[sortColumn];
@@ -87,13 +103,16 @@ const PullsMoney = () => {
 
     return (
         <div>
-            <h6 className='cabinet-title'>Все пользователи</h6>
+            <Helmet>
+                <title>Запросы на вывод - Админка | Makao777</title>
+            </Helmet>
+            <h6 className='cabinet-title'>Запросы на вывод</h6>
             <Table
                 style={{fontSize: 12}}
                 affixHeader
                 affixHorizontalScrollbar
-                autoHeight
-                data={getData()}
+                height={600}
+                data={data}
                 sortColumn={sortColumn}
                 sortType={sortType}
                 onSortColumn={handleSortColumn}
@@ -101,7 +120,7 @@ const PullsMoney = () => {
             >
                 <Table.Column width={70} align="center" fixed sortable>
                     <Table.HeaderCell>Id</Table.HeaderCell>
-                    <Table.Cell dataKey="id" />
+                    <Table.Cell dataKey="_id" />
                 </Table.Column>
                 <Table.Column width={150} sortable>
                     <Table.HeaderCell>Сумма</Table.HeaderCell>
@@ -119,9 +138,9 @@ const PullsMoney = () => {
                     <Table.HeaderCell>Дата создания</Table.HeaderCell>
                     <Table.Cell dataKey="createdAt" />
                 </Table.Column>
-                <Table.Column sortable>
-                    <Table.HeaderCell></Table.HeaderCell>
-                    <ActionCell dataKey="id" />
+                <Table.Column>
+                    <Table.HeaderCell />
+                    <ActionCell dataKey="_id" store={store} />
                 </Table.Column>
             </Table>
         </div>

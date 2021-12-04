@@ -3,10 +3,17 @@ import {Container} from "reactstrap";
 import {HOME_ROUTE} from "../../utils/routes";
 import {Link} from "react-router-dom";
 import {Button} from "rsuite";
+import {Helmet} from "react-helmet";
 
 const Game = () => {
+
+    const game = 'Game';
+
     return (
         <Container>
+            <Helmet>
+                <title>{game} | Makao777</title>
+            </Helmet>
             <Link to={HOME_ROUTE}>
                 <Button className="casino-btn" style={{margin: '1rem 0' }}>Назад</Button>
             </Link>

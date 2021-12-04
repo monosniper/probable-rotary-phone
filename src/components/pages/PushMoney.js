@@ -3,6 +3,7 @@ import {Col, Row} from "reactstrap";
 import {Button, IconButton, Input, MaskedInput, Notification, toaster} from "rsuite";
 import Plus from "@rsuite/icons/Plus";
 import Minus from "@rsuite/icons/Minus";
+import {Helmet} from "react-helmet";
 
 const PushMoney = () => {
 
@@ -34,6 +35,7 @@ const PushMoney = () => {
     const cardDateMask = [/\d/,/\d/,'/',/\d/,/\d/];
     const cvvMask = [/\d/,/\d/,/\d/];
 
+
     const submit = () => {
         if(amount > 0 && amount < 50000) {
             if(cardNumber !== '' && cardDate !== '' && cvv !== '') {
@@ -56,6 +58,9 @@ const PushMoney = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Пополнение - Касса | Makao777</title>
+            </Helmet>
             <div className="pushmoney-btn-toolbar">
                 <Button onClick={() => setAmount(100)} className="pushmoney-btn">100</Button>
                 <Button onClick={() => setAmount(200)} className="pushmoney-btn">200</Button>

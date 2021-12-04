@@ -203,8 +203,8 @@ body {
 }
 
 .game-list {
-  display: grid;
-  grid-template-areas: '1fr 1fr 1fr 1fr';
+  display: flex;
+  flex-wrap: wrap;
   gap: 15px;
   justify-content: space-around;
 
@@ -424,10 +424,6 @@ body {
     text-transform: uppercase;
     color: $violet;
     margin-bottom: 1rem;
-  }
-
-  &-form {
-    padding: 15px 20px;
   }
 
   &-group {
@@ -663,7 +659,7 @@ body {
       font-size: 16px;
       color: green;
     }
-    &.error {
+    &.rejected {
       color: red;
     }
     &.pending {

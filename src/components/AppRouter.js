@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {privateRoutes, publicRoutes} from "../routes";
 import {HOME_ROUTE, PROFILE_ROUTE} from "../utils/routes";
@@ -17,7 +17,17 @@ const AppRouter = () => {
         )
     }
 
-    return store.isAuth ?
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            store.checkAuth();
+        } else {
+            store.setAuth(false);
+        }
+    }, []);
+
+    if(store.isLoading) return <h1>Loading...</h1>
+
+    return true ?
         (
             <Routes>
                 {iterateRoutes(privateRoutes)}

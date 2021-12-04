@@ -1,7 +1,7 @@
 import {
     ADMIN_ROUTE,
     CABINET_ROUTE,
-    CASSA_ROUTE, FAQ_ROUTE, GAME_ROUTE,
+    CASSA_ROUTE, FAQ_ROUTE, GAME_DEMO_ROUTE, GAME_ROUTE,
     HOME_ROUTE, PAYHISTORY_ROUTE,
     PROFILE_ROUTE, PULL_MONEY_ROUTE, PULLS_MONEY_ROUTE,
     PUSH_MONEY_ROUTE, SETTINGS_ROUTE, USERS_ROUTE,
@@ -31,6 +31,10 @@ export const publicRoutes = [
     {
         path: FAQ_ROUTE,
         element: <Faq/>,
+    },
+    {
+        path: GAME_DEMO_ROUTE,
+        element: <Game/>,
     },
 ];
 

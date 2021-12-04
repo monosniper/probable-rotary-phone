@@ -59,7 +59,7 @@ const PushMoney = () => {
     return (
         <div>
             <Helmet>
-                <title>Пополнение - Касса | Makao777</title>
+                <title>Пополнение - Касса | {process.env.REACT_APP_NAME}</title>
             </Helmet>
             <div className="pushmoney-btn-toolbar">
                 <Button onClick={() => setAmount(100)} className="pushmoney-btn">100</Button>

@@ -11,6 +11,7 @@ export default class Store {
     user = {};
     isAuth = true;
     isLoading = false;
+    isLoginModalOpen = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -26,6 +27,10 @@ export default class Store {
 
     setUser(user) {
         this.user = user;
+    }
+
+    setLoginModel(bool) {
+        this.isLoginModalOpen = bool;
     }
 
     async login(username, password, onSuccess, onError) {

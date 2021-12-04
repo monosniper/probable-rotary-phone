@@ -10,9 +10,7 @@ const PhotoCell = ({ rowData, dataKey, ...props }) => {
 
     useEffect(() => {
         props.getImages(rowData.id).then(images => {
-            const imagesForSlider = [...images[props.type]].map(image => {url: getPath(image)});
-            console.log(imagesForSlider);
-            // props.type === 'passport' ? setImages(images[props.type].map(image => {url: getPath(image)})) : setImages(images[props.type]);
+            props.type === 'passport' ? setImages(images[props.type].map(image => {return {url: getPath(image)}})) : setImages(images[props.type]);
         });
     }, []);
 
@@ -27,7 +25,9 @@ const PhotoCell = ({ rowData, dataKey, ...props }) => {
                         height={150}
                         images={images}
                         showBullets={false}
-                        showNavs={false}
+                        showNavs={true}
+                        navSize={20}
+                        navMargin={10}
                     />
                 )
                 :
@@ -132,13 +132,13 @@ const Verifications = () => {
     return (
         <div>
             <Helmet>
-                <title>Верификация - Админка | Makao777</title>
+                <title>Верификация - Админка | {process.env.REACT_APP_NAME}</title>
             </Helmet>
             <h6 className='cabinet-title'>Запросы на верификацию</h6>
             <Table
                 style={{fontSize: 12}}
-                height={600}
                 data={data}
+                autoHeight
                 affixHeader
                 affixHorizontalScrollbar
                 sortColumn={sortColumn}
@@ -150,19 +150,19 @@ const Verifications = () => {
                     console.log(data);
                 }}
             >
-                <Table.Column width={300} fixed sortable>
+                <Table.Column width={300}>
                     <Table.HeaderCell>Подтверждение личности</Table.HeaderCell>
                     <PhotoCell type="passport" getImages={store.getVerificationImages}/>
                 </Table.Column>
-                <Table.Column width={300} fixed sortable>
+                <Table.Column width={300}>
                     <Table.HeaderCell>Селфи с документом</Table.HeaderCell>
                     <PhotoCell type="selphie" getImages={store.getVerificationImages}/>
                 </Table.Column>
-                <Table.Column width={300} fixed sortable>
+                <Table.Column width={300}>
                     <Table.HeaderCell>ИНН</Table.HeaderCell>
                     <PhotoCell type="inn" getImages={store.getVerificationImages}/>
                 </Table.Column>
-                <Table.Column width={300} fixed sortable>
+                <Table.Column width={300}>
                     <Table.HeaderCell />
                     <ActionCell/>
                 </Table.Column>

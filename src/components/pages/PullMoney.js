@@ -72,7 +72,7 @@ const PullMoney = () => {
     return verified ? (
         <div>
             <Helmet>
-                <title>Вывод денег - Касса | Makao777</title>
+                <title>Вывод денег - Касса | {process.env.REACT_APP_NAME}</title>
             </Helmet>
             <h6><b>Доступно для вывода: 0.00 ₴</b></h6>
             <div className="pushmoney-btn-toolbar">

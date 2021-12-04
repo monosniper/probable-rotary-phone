@@ -118,7 +118,7 @@ const Profile = () => {
     return (
         <div className="cabinet">
             <Helmet>
-                <title>Профиль | Makao777</title>
+                <title>Профиль | {process.env.REACT_APP_NAME}</title>
             </Helmet>
             <Row>
                 <Col sm={12} md={6}>

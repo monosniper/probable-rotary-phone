@@ -10,7 +10,7 @@ const Settings = () => {
     return (
         <ContentBlock>
             <Helmet>
-                <title>Настройки - Админка | Makao777</title>
+                <title>Настройки - Админка | {process.env.REACT_APP_NAME}</title>
             </Helmet>
 
             <Row>

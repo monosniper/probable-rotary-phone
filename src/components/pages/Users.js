@@ -57,13 +57,13 @@ const Users = () => {
     return (
         <div>
             <Helmet>
-                <title>Пользователи - Админка | Makao777</title>
+                <title>Пользователи - Админка | {process.env.REACT_APP_NAME}</title>
             </Helmet>
            <h6 className='cabinet-title'>Все пользователи</h6>
             <Table
                 style={{fontSize: 12}}
-                height={600}
                 data={data}
+                autoHeight
                 affixHeader
                 affixHorizontalScrollbar
                 sortColumn={sortColumn}
@@ -74,27 +74,27 @@ const Users = () => {
                     console.log(data);
                 }}
             >
-                <Table.Column width={70} align="center" fixed sortable>
+                <Table.Column width={70} align="center" sortable>
                     <Table.HeaderCell>Id</Table.HeaderCell>
                     <Table.Cell dataKey="id" />
                 </Table.Column>
-                <Table.Column width={300} fixed sortable>
+                <Table.Column width={300} sortable>
                     <Table.HeaderCell>ФИО</Table.HeaderCell>
                     <Table.Cell dataKey="fio" />
                 </Table.Column>
-                <Table.Column width={250} fixed sortable>
+                <Table.Column width={250} sortable>
                     <Table.HeaderCell>E-mail</Table.HeaderCell>
                     <Table.Cell dataKey="email" />
                 </Table.Column>
-                <Table.Column width={150} fixed sortable>
+                <Table.Column width={150} sortable>
                     <Table.HeaderCell>Телефон</Table.HeaderCell>
                     <Table.Cell dataKey="phone" />
                 </Table.Column>
-                <Table.Column width={100} fixed sortable>
+                <Table.Column width={100} sortable>
                     <Table.HeaderCell>Баланс</Table.HeaderCell>
                     <Table.Cell dataKey="balance" />
                 </Table.Column>
-                <Table.Column width={150} fixed sortable>
+                <Table.Column width={150} sortable>
                     <Table.HeaderCell>Дата регистрации</Table.HeaderCell>
                     <Table.Cell dataKey="createdAt" />
                 </Table.Column>

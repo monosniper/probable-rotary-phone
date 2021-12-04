@@ -52,7 +52,7 @@ const PayHistory = () => {
     return (
         <div>
             <Helmet>
-                <title>История платежей - Касса | Makao777</title>
+                <title>История платежей - Касса | {process.env.REACT_APP_NAME}</title>
             </Helmet>
             <h6 className="cabinet-title">История транзакций</h6>
             {transactions.map((transaction, index) => (

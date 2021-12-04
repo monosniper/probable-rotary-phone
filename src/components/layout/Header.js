@@ -27,9 +27,8 @@ const Header = () => {
     const handleRegisterOpen = () => setRegisterOpen(true);
     const handleRegisterClose = () => setRegisterOpen(false);
 
-    const [loginOpen, setLoginOpen] = useState(false);
-    const handleLoginOpen = () => setLoginOpen(true);
-    const handleLoginClose = () => setLoginOpen(false);
+    const handleLoginOpen = () => store.setLoginModel(true);
+    const handleLoginClose = () => store.setLoginModel(false);
 
     const handleRegister = () => {
         if(registerPassword === registerPasswordConfirmation) {
@@ -124,7 +123,7 @@ const Header = () => {
                                     <Button className="casino-btn" style={{marginRight: '.5rem'}} onClick={handleRegisterOpen}>Регистрация</Button>
                                     <Button className="casino-btn" onClick={handleLoginOpen}>Вход</Button>
 
-                                    <Modal className="sign-modal" size="xs" open={loginOpen} onClose={handleLoginClose}>
+                                    <Modal className="sign-modal" size="xs" open={store.isLoginModalOpen} onClose={handleLoginClose}>
                                         <Modal.Header>
                                             <Modal.Title>Вход</Modal.Title>
                                         </Modal.Header>

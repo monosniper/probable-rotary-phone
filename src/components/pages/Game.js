@@ -1,24 +1,29 @@
 import React from 'react';
 import {Container} from "reactstrap";
 import {HOME_ROUTE} from "../../utils/routes";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {Button} from "rsuite";
 import {Helmet} from "react-helmet";
 
 const Game = () => {
 
-    const game = 'Game';
+    const params = useParams();
+    const game = params.name;
+
+    // const url = `https://cf-iomeu-cdn.relaxg.com/casino/launcher.html?channel=web&gameid=${game}&lang=ru_RU&moneymode=fun&partner=softswissrelax&partnerid=492`
+    // const url = `https://modelplat.com/gm/index.html?demo=true&gameName=bgaming_relax_${game}&partner=cosmo-pragmatic-prod&lang=ru&platform=desktop`
+    const url = `https://api-prod.infingame.com/bg-launch/cosmo-pragmatic/prod?gameName=bgaming_relax_${game}&key=TEST1000&country=RUS&demo=true&shell=request&language=ru&segment=desktop`
 
     return (
         <Container>
             <Helmet>
-                <title>{game} | Makao777</title>
+                <title>{game} | {process.env.REACT_APP_NAME}</title>
             </Helmet>
             <Link to={HOME_ROUTE}>
                 <Button className="casino-btn" style={{margin: '1rem 0' }}>Назад</Button>
             </Link>
             <iframe
-                src="https://api-prod.infingame.com/op-launch/cosmo-pragmatic/prod?gameName=op_jackpotter&amp;key=TEST1000&amp;country=RUS&amp;demo=true&amp;shell=request&amp;language=ru&amp;segment=desktop"
+                src={url}
                 frameBorder="0" allowFullScreen="" webkitallowfullscreen="" allow="autoplay" style={{width: '100%', height: '80vh'}}></iframe>
         </Container>
     );

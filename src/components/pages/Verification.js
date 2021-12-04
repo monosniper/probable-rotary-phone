@@ -135,7 +135,7 @@ const Verification = () => {
     return (
         <div className="verification">
             <Helmet>
-                <title>Верификация - Профиль | Makao777</title>
+                <title>Верификация - Профиль | {process.env.REACT_APP_NAME}</title>
             </Helmet>
 
             <div className="verification-status-wrapper">

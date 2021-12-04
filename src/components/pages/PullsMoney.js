@@ -104,7 +104,7 @@ const PullsMoney = () => {
     return (
         <div>
             <Helmet>
-                <title>Запросы на вывод - Админка | Makao777</title>
+                <title>Запросы на вывод - Админка | {process.env.REACT_APP_NAME}</title>
             </Helmet>
             <h6 className='cabinet-title'>Запросы на вывод</h6>
             <Table
@@ -118,7 +118,7 @@ const PullsMoney = () => {
                 onSortColumn={handleSortColumn}
                 loading={loading}
             >
-                <Table.Column width={70} align="center" fixed sortable>
+                <Table.Column width={70} align="center" sortable>
                     <Table.HeaderCell>Id</Table.HeaderCell>
                     <Table.Cell dataKey="_id" />
                 </Table.Column>
@@ -126,15 +126,15 @@ const PullsMoney = () => {
                     <Table.HeaderCell>Сумма</Table.HeaderCell>
                     <Table.Cell dataKey="amount" />
                 </Table.Column>
-                <Table.Column width={250} fixed sortable>
+                <Table.Column width={250} sortable>
                     <Table.HeaderCell>Карта</Table.HeaderCell>
                     <Table.Cell dataKey="card" />
                 </Table.Column>
-                <Table.Column width={350} fixed sortable>
+                <Table.Column width={350} sortable>
                     <Table.HeaderCell>Пользователь</Table.HeaderCell>
                     <Table.Cell dataKey="user" />
                 </Table.Column>
-                <Table.Column width={180} fixed sortable>
+                <Table.Column width={180} sortable>
                     <Table.HeaderCell>Дата создания</Table.HeaderCell>
                     <Table.Cell dataKey="createdAt" />
                 </Table.Column>

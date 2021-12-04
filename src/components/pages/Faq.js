@@ -5,7 +5,7 @@ const Faq = () => {
     return (
         <div>
             <Helmet>
-                <title>FAQ | Makao777</title>
+                <title>FAQ | {process.env.REACT_APP_NAME}</title>
             </Helmet>
         </div>
     );

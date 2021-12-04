@@ -15,7 +15,7 @@ const Home = () => {
     return (
         <>
             <Helmet>
-                <title>Онлайн казино Makao777</title>
+                <title>Онлайн казино {process.env.REACT_APP_NAME}</title>
             </Helmet>
 
             <Slider />

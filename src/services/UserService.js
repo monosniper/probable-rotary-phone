@@ -20,4 +20,12 @@ export default class UserService {
     static async getVerificationImages(user_id) {
         return $api.get(`users/${user_id}/verification-images`);
     }
+
+    static async acceptUserVerification(user_id) {
+        return $api.get(`users/${user_id}/verification/accept`);
+    }
+
+    static async rejectUserVerification(user_id) {
+        return $api.get(`users/${user_id}/verification/reject`);
+    }
 }

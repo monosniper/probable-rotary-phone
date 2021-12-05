@@ -1,10 +1,10 @@
 import {
     ADMIN_ROUTE,
     CABINET_ROUTE,
-    CASSA_ROUTE, FAQ_ROUTE, GAME_DEMO_ROUTE, GAME_ROUTE,
+    CASSA_ROUTE, ERROR_PAY_ROUTE, FAQ_ROUTE, GAME_DEMO_ROUTE, GAME_ROUTE,
     HOME_ROUTE, PAYHISTORY_ROUTE,
     PROFILE_ROUTE, PULL_MONEY_ROUTE, PULLS_MONEY_ROUTE,
-    PUSH_MONEY_ROUTE, SETTINGS_ROUTE, USERS_ROUTE,
+    PUSH_MONEY_ROUTE, SETTINGS_ROUTE, SUCCESS_PAY_ROUTE, USERS_ROUTE,
     VERIFICATION_ROUTE, VERIFICATIONS_ROUTE
 } from "./utils/routes";
 import Home from "./components/pages/Home";
@@ -22,6 +22,8 @@ import Faq from "./components/pages/Faq";
 import Game from "./components/pages/Game";
 import Settings from "./components/pages/Settings";
 import Verifications from "./components/pages/Verifications";
+import ErrorPay from "./components/pages/ErrorPay";
+import SuccessPay from "./components/pages/SuccessPay";
 
 export const publicRoutes = [
     {
@@ -35,6 +37,14 @@ export const publicRoutes = [
     {
         path: GAME_DEMO_ROUTE,
         element: <Game/>,
+    },
+    {
+        path: SUCCESS_PAY_ROUTE,
+        element: <SuccessPay/>,
+    },
+    {
+        path: ERROR_PAY_ROUTE,
+        element: <ErrorPay/>,
     },
 ];
 

@@ -32,8 +32,8 @@ const GameList = () => {
         {id: 21, src: Game1, title: 'Spirit of the beast', slug: 'spirit_of_the_beast'},
         {id: 22, src: Game2, title: 'Super boost', slug: 'superboost'},
         {id: 23, src: Game3, title: 'Trolls gold', slug: 'trolls_gold'},
-        {id: 23, src: Game4, title: 'Templar tumble', slug: 'templar_tumble'},
-        {id: 23, src: Game5, title: 'Temple tumble', slug: 'templetumble'},
+        {id: 24, src: Game4, title: 'Templar tumble', slug: 'templar_tumble'},
+        {id: 25, src: Game5, title: 'Temple tumble', slug: 'templetumble'},
     ]
 
     return (

@@ -1,10 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Dropdown, IconButton} from "rsuite";
 import {FaStop, FaPlay, IoPlayBack, IoPlayForward} from "react-icons/all";
 import MoreIcon from '@rsuite/icons/More';
 import {Howl} from 'howler';
+import {Context} from "../index";
 
 const Player = () => {
+
+    const {store} = useContext(Context);
 
     const [index, setIndex] = useState(0);
     const [playlist, setPlaylist] = useState([]);
@@ -16,23 +19,13 @@ const Player = () => {
     const [isPlay, setIsPlay] = useState(false);
 
     useEffect(() => {
-        setPlaylist([
-            {
-                title: 'Rave Digger',
-                file: 'song1',
-                howl: null
-            },
-            {
-                title: '80s Vibe',
-                file: 'song2',
-                howl: null
-            },
-            {
-                title: 'Running Out',
-                file: 'song3',
+        store.getSongs().then(songs => setPlaylist(songs.map(song => {
+            return {
+                title: song,
+                file: song,
                 howl: null
             }
-        ])
+        })))
     }, []);
 
     const play = (playIndex) => {
@@ -48,7 +41,7 @@ const Player = () => {
         } else {
             sound = data.howl = new Howl({
                 // src: ['./player/' + data.file + '.webm', './player/' + data.file + '.mp3'],
-                src: [window.location.origin + '/player/' + data.file + '.mp3'],
+                src: [process.env.REACT_APP_API_URL + '/player/' + data.file],
                 html5: true,
                 onplay: function() {
                     setDuration(formatTime(Math.round(sound.duration())));
@@ -131,7 +124,7 @@ const Player = () => {
         return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
     }
 
-    return !isHidden ? <div className={songLoading ? 'player player-loading' : 'player'}>
+    return playlist.length && (!isHidden ? <div className={songLoading ? 'player player-loading' : 'player'}>
             <div className="player-timer">
                 <span>{timer}:{duration}</span>
             </div>
@@ -150,7 +143,7 @@ const Player = () => {
         :
         <Dropdown renderToggle={(props, ref) => <IconButton {...props} ref={ref} className="casino-btn" circle icon={<MoreIcon />} />}>
             <Dropdown.Item onClick={() => setIsHidden(false)} className="casino-btn">Показать плеер</Dropdown.Item>
-        </Dropdown>;
+        </Dropdown>);
 };
 
 export default Player;

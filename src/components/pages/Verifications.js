@@ -3,6 +3,7 @@ import {Button, Notification, Table, toaster} from "rsuite";
 import {Context} from "../../index";
 import {Helmet} from "react-helmet";
 import SimpleImageSlider from "react-simple-image-slider";
+import {observer} from "mobx-react-lite";
 
 const PhotoCell = ({ rowData, dataKey, ...props }) => {
 
@@ -14,7 +15,7 @@ const PhotoCell = ({ rowData, dataKey, ...props }) => {
         });
     }, []);
 
-    const getPath = (image) => `http://127.0.0.1:5000/${rowData['id']}/verification/${props.type}/${image}`;
+    const getPath = (image) => `${process.env.REACT_APP_API_URL}/${rowData['id']}/verification/${props.type}/${image}`;
 
     return <Table.Cell style={{padding: '7px 10px'}} {...props} className="link-group">
         <>
@@ -41,39 +42,10 @@ const PhotoCell = ({ rowData, dataKey, ...props }) => {
 }
 
 const ActionCell = ({ rowData, dataKey, ...props }) => {
-
-    function handleSuccess() {
-        props.store.acceptUserVerification(rowData['id'], 'success', (rs) => {
-            toaster.push(
-                <Notification type="success" header="Пользователь верифицирован" />, {placement: 'topEnd'}
-            )
-        }, (e) => {
-            toaster.push(
-                <Notification type="error" header="Ошибка!" >
-                    <p>{e.response.data.message}</p>
-                </Notification>, {placement: 'topEnd'}
-            )
-        });
-    }
-
-    function handleReject() {
-        props.store.rejectUserVerification(rowData['id'], 'rejected', (rs) => {
-            toaster.push(
-                <Notification type="success" header="Запрос на верификацию был отклонен" />, {placement: 'topEnd'}
-            )
-        }, (e) => {
-            toaster.push(
-                <Notification type="error" header="Ошибка!" >
-                    <p>{e.response.data.message}</p>
-                </Notification>, {placement: 'topEnd'}
-            )
-        });
-    }
-
     return <Table.Cell style={{padding: '7px 10px'}} {...props} className="link-group">
         <>
-            <Button onClick={handleSuccess} size='sm'>Принять</Button>
-            <Button onClick={handleReject} size='sm'>Отклонить</Button>
+            <Button onClick={() => props.handleAcept(rowData['id'])} size='sm'>Принять</Button>
+            <Button onClick={() => props.handleReject(rowData['id'])} size='sm'>Отклонить</Button>
         </>
     </Table.Cell>;
 };
@@ -92,8 +64,37 @@ const Verifications = () => {
         store.getAllUsers().then(users => setData(getData(users)));
     }, []);
 
+    function handleAcept(id) {
+        store.acceptUserVerification(id, 'success', (rs) => {
+            toaster.push(
+                <Notification type="success" header="Пользователь верифицирован" />, {placement: 'topEnd'}
+            )
+            store.getAllUsers().then(users => setData(getData(users)));
+        }, (e) => {
+            toaster.push(
+                <Notification type="error" header="Ошибка!" >
+                    <p>{e.response.data.message}</p>
+                </Notification>, {placement: 'topEnd'}
+            )
+        });
+    }
+
+    function handleReject(id) {
+        store.rejectUserVerification(id, 'rejected', (rs) => {
+            toaster.push(
+                <Notification type="success" header="Запрос на верификацию был отклонен" />, {placement: 'topEnd'}
+            )
+            store.getAllUsers().then(users => setData(getData(users)));
+        }, (e) => {
+            toaster.push(
+                <Notification type="error" header="Ошибка!" >
+                    <p>{e.response.data.message}</p>
+                </Notification>, {placement: 'topEnd'}
+            )
+        });
+    }
+
     const getData = (users) => {
-        console.log(users);
         users = users.filter(user => !user.isVerified && user.waitingForVerify);
 
         users.map(user => {
@@ -164,11 +165,11 @@ const Verifications = () => {
                 </Table.Column>
                 <Table.Column width={300}>
                     <Table.HeaderCell />
-                    <ActionCell/>
+                    <ActionCell handleAcept={handleAcept} handleReject={handleReject} store={store}/>
                 </Table.Column>
             </Table>
         </div>
     );
 };
 
-export default Verifications;
+export default observer(Verifications);

@@ -195,10 +195,10 @@ export default class Store {
         }
     }
 
-    async uploadFiles(data) {
+    async uploadFiles(data, del) {
         try {
             data.forEach(async (item) => {
-                await UploadService.uploadFile(item.file, item.dir, this.user.id);
+                await UploadService.uploadFile(item.file, item.dir, del);
             })
         } catch (e) {
             console.log(e)
@@ -207,7 +207,18 @@ export default class Store {
 
     async acceptUserVerification(user_id, onSuccess, onError) {
         try {
-            const response = await UserService.verifyUser(user_id);
+            const response = await UserService.acceptUserVerification(user_id);
+
+            onSuccess && onSuccess(response);
+        } catch (e) {
+            onError && onError(e);
+            console.log(e)
+        }
+    }
+
+    async rejectUserVerification(user_id, onSuccess, onError) {
+        try {
+            const response = await UserService.rejectUserVerification(user_id);
 
             onSuccess && onSuccess(response);
         } catch (e) {
@@ -231,6 +242,26 @@ export default class Store {
             const response = await UserService.getVerificationImages(user_id);
 
             return response.data[0];
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async getSongs() {
+        try {
+            const response = await UploadService.getSongs();
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async deleteSong(song) {
+        try {
+            const response = await UploadService.deleteSong(song);
+
+            return response.data;
         } catch (e) {
             console.log(e)
         }

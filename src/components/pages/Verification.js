@@ -101,21 +101,21 @@ const Verification = () => {
         if(verificationImages.length === verificationImagesLimit && selphieImages.length === 1 && innImages.length === 1) {
             const images = [
                 ...verificationImages.map(image => {
-                    image.dir = 'verification/passport'
+                    image.dir = store.user.id + '/verification/passport'
                     return image;
                 }),
                 ...selphieImages.map(image => {
-                    image.dir = 'verification/selphie'
+                    image.dir = store.user.id + '/verification/selphie'
                     return image;
                 }),
                 ...innImages.map(image => {
-                    image.dir = 'verification/inn'
+                    image.dir = store.user.id + '/verification/inn'
                     return image;
                 }),
             ];
 
             setUploadLoading(true)
-            store.uploadFiles(images).then(() => setUploadLoading(false));
+            store.uploadFiles(images, true).then(() => setUploadLoading(false));
             store.pendingUserVerification();
         } else {
             toaster.push(

@@ -16,3 +16,5 @@ export const GAME_ROUTE = '/game/:name';
 export const __GAME_ROUTE = '/game/';
 export const GAME_DEMO_ROUTE = '/game/demo/:name/';
 export const __GAME_DEMO_ROUTE = '/game/demo/';
+export const SUCCESS_PAY_ROUTE = '/success';
+export const ERROR_PAY_ROUTE = '/error';

@@ -724,3 +724,128 @@ body {
     }
   }
 }
+
+//Primary Text colors
+$very-dark-desaturated-blue: hsl(238, 29%, 16%);
+$soft-red: hsl(14, 88%, 65%);
+
+// Background gradient:
+$soft-violet: hsl(273, 75%, 66%);
+$soft-blue: hsl(240, 73%, 65%);
+
+//Neutral Text colors
+$very-dark-grayish-blue: hsl(237, 12%, 33%);
+$dark-grayish-blue: hsl(240, 6%, 50%);
+
+//Dividers
+$light-grayish-blue: hsl(240, 5%, 91%);
+
+.faq {
+  width: 100%;
+
+  &__title {
+    margin: 0;
+    padding-bottom: 25px;
+  }
+
+  &__question {
+    width: 100%;
+    border-bottom: 1px solid $light-grayish-blue;
+  }
+
+  &__question-button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    background-color: transparent;
+    padding: 0px;
+    cursor: pointer;
+
+    padding-top: 18px;
+    padding-bottom: 18px;
+
+    &::after {
+      content: url(../assets/images/icon-arrow-down.svg);
+      margin-right: 17px;
+      transform: rotate(90deg);
+    }
+
+    &:hover {
+      color: $soft-red;
+    }
+  }
+
+  &__desc {
+    padding-right: 17px;
+    margin-top: 0;
+    margin-bottom: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all 200ms ease-out;
+  }
+}
+
+.faq__desc.show-description {
+  height: auto;
+  margin-bottom: 15px;
+}
+
+/* Arrows */
+
+/* closed */
+.faq__question-button::after {
+  transition: transform 300ms ease-out;
+}
+
+/* open */
+.font-weight-bold::after {
+  transform: rotate(720deg);
+}
+
+.faq-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  .faq-block {
+    width: 92px;
+    height: 92px;
+    background: transparent;
+    box-shadow: 0 6px 9px #00000017;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $violet;
+    cursor: pointer;
+    transition: .1s ease-in;
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    &-icon {
+      font-size: 30px;
+    }
+  }
+}
+
+.player-songs {
+  max-height: 400px;
+  overflow-y: scroll;
+
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: .5rem;
+    box-shadow: 0 5px 9px #00000017;
+    border-radius: 30px;
+    align-items: center;
+    padding: 5px 20px;
+  }
+}

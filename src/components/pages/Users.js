@@ -24,7 +24,7 @@ const Users = () => {
             user.createdAt = moment(user.createdAt).format('DD MMMM yyyy');
             return user;
         })
-
+        console.log(sortColumn, sortType);
         if (sortColumn && sortType) {
             return users.sort((a, b) => {
                 let x = a[sortColumn];

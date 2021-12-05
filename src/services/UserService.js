@@ -28,4 +28,8 @@ export default class UserService {
     static async rejectUserVerification(user_id) {
         return $api.get(`users/${user_id}/verification/reject`);
     }
+
+    static async sendPay(params) {
+        return $api.post('pay-event', params);
+    }
 }

@@ -266,4 +266,12 @@ export default class Store {
             console.log(e)
         }
     }
+
+    async sendPay(params) {
+        try {
+            await UserService.sendPay(params);
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }

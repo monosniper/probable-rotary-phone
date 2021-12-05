@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContentBlock = (props) => {
     return (
-        <div className='content-block'>{props.children}</div>
+        <div {...props} className='content-block'>{props.children}</div>
     );
 };
 

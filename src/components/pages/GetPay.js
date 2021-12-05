@@ -5,16 +5,16 @@ import {Context} from "../../index";
 const GetPay = () => {
 
     const {store} = useContext(Context);
-    const [searchParams, setSearchParams] = useParams();
+    const params = useParams();
 
     useEffect(() => {
-        store.sendPay(searchParams);
+        store.sendPay(params);
     }, []);
 
     return (
         <div>
             get pay
-            {JSON.stringify(searchParams)}
+            {JSON.stringify(params)}
         </div>
     );
 };

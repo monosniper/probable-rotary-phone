@@ -208,6 +208,19 @@ body {
   gap: 15px;
   justify-content: space-around;
 
+  &.for-admin {
+    max-height: 400px;
+    overflow-y: scroll;
+    .game-list-item {
+      width: 100px !important;
+      height: 100px !important;
+
+      &-title {
+        font-size: 7px;
+      }
+    }
+  }
+
   &-item {
     width: 200px;
     height: 200px;
@@ -215,7 +228,6 @@ body {
     position: relative;
     border: 2px solid white;
     box-shadow: #00000030 0px 9px 11px;
-
 
     .pink-btn {
       text-transform: uppercase !important;

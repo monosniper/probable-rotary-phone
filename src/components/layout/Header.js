@@ -4,7 +4,15 @@ import {Button, Dropdown, FlexboxGrid, Form, IconButton, Modal, Notification, to
 import {Link} from "react-router-dom";
 import {AiOutlineUser} from "react-icons/all";
 import Player from "../Player";
-import {FAQ_ROUTE, HOME_ROUTE, PROFILE_ROUTE, PUSH_MONEY_ROUTE, USERS_ROUTE} from "../../utils/routes";
+import {
+    BONUSES_ROUTE,
+    FAQ_ROUTE,
+    HOME_ROUTE,
+    PROFILE_ROUTE,
+    PUSH_MONEY_ROUTE,
+    STOCKS_ROUTE, TOURNAMENTS_ROUTE,
+    USERS_ROUTE
+} from "../../utils/routes";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {Container} from "reactstrap";
@@ -78,13 +86,13 @@ const Header = () => {
                 <div className="header-center">
                     <div className="header-menu">
                         <div className="header-menu-item">
-                            <Link to="#">Турниры</Link>
+                            <Link to={TOURNAMENTS_ROUTE}>Турниры</Link>
                         </div>
                         <div className="header-menu-item">
-                            <Link to="#">Акции</Link>
+                            <Link to={STOCKS_ROUTE}>Акции</Link>
                         </div>
                         <div className="header-menu-item">
-                            <Link to="#">Бонусы</Link>
+                            <Link to={BONUSES_ROUTE}>Бонусы</Link>
                         </div>
                         <div className="header-menu-item">
                             <Link to={FAQ_ROUTE}>faq</Link>

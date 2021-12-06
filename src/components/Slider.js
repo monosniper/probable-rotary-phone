@@ -5,13 +5,12 @@ import 'react-awesome-slider/dist/styles.css';
 import bg from "../assets/images/bg.jpg";
 import bg2 from "../assets/images/bg2.jpg";
 import bg3 from "../assets/images/bg3.jpeg";
+import banner from "../assets/images/banner.jpg";
 
 const Slider = () => {
     return (
         <AwesomeSlider>
-            <div data-src={bg} />
-            <div data-src={bg2} />
-            <div data-src={bg3} />
+            <div data-src={banner} />
         </AwesomeSlider>
     );
 };

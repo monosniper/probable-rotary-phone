@@ -1,11 +1,27 @@
 import {
     ADMIN_ROUTE,
+    BONUSES_ROUTE,
     CABINET_ROUTE,
-    CASSA_ROUTE, ERROR_PAY_ROUTE, FAQ_ROUTE, GAME_DEMO_ROUTE, GAME_ROUTE, GET_PAY_ROUTE,
-    HOME_ROUTE, PAYHISTORY_ROUTE,
-    PROFILE_ROUTE, PULL_MONEY_ROUTE, PULLS_MONEY_ROUTE,
-    PUSH_MONEY_ROUTE, SETTINGS_ROUTE, SUCCESS_PAY_ROUTE, USERS_ROUTE,
-    VERIFICATION_ROUTE, VERIFICATIONS_ROUTE
+    CASSA_ROUTE,
+    ERROR_PAY_ROUTE,
+    FAQ_ROUTE,
+    GAME_DEMO_ROUTE,
+    GAME_ROUTE,
+    GET_PAY_ROUTE,
+    HOME_ROUTE,
+    PAYHISTORY_ROUTE,
+    PROFILE_ROUTE,
+    PULL_MONEY_ROUTE,
+    PULLS_MONEY_ROUTE,
+    PUSH_MONEY_ROUTE,
+    PUSHS_MONEY_ROUTE,
+    SETTINGS_ROUTE,
+    STOCKS_ROUTE,
+    SUCCESS_PAY_ROUTE,
+    TOURNAMENTS_ROUTE,
+    USERS_ROUTE,
+    VERIFICATION_ROUTE,
+    VERIFICATIONS_ROUTE
 } from "./utils/routes";
 import Home from "./components/pages/Home";
 import Profile from "./components/pages/Profile";
@@ -25,6 +41,10 @@ import Verifications from "./components/pages/Verifications";
 import ErrorPay from "./components/pages/ErrorPay";
 import SuccessPay from "./components/pages/SuccessPay";
 import GetPay from "./components/pages/GetPay";
+import Tournaments from "./components/pages/Tournaments";
+import Stocks from "./components/pages/Stocks";
+import Bonuses from "./components/pages/Bonuses";
+import PushsMoney from "./components/pages/PushsMoney";
 
 export const publicRoutes = [
     {
@@ -50,6 +70,18 @@ export const publicRoutes = [
     {
         path: GET_PAY_ROUTE,
         element: <GetPay/>,
+    },
+    {
+        path: TOURNAMENTS_ROUTE,
+        element: <Tournaments/>,
+    },
+    {
+        path: STOCKS_ROUTE,
+        element: <Stocks/>,
+    },
+    {
+        path: BONUSES_ROUTE,
+        element: <Bonuses/>,
     },
 ];
 
@@ -109,6 +141,10 @@ export const privateRoutes = [
             {
                 path: VERIFICATIONS_ROUTE,
                 element: <Verifications/>,
+            },
+            {
+                path: PUSHS_MONEY_ROUTE,
+                element: <PushsMoney/>,
             },
         ]
     },

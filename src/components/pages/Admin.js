@@ -1,6 +1,12 @@
 import React from 'react';
 import {Link, Outlet, useMatch, useResolvedPath} from "react-router-dom";
-import {PULLS_MONEY_ROUTE, SETTINGS_ROUTE, USERS_ROUTE, VERIFICATIONS_ROUTE} from "../../utils/routes";
+import {
+    PULLS_MONEY_ROUTE,
+    PUSHS_MONEY_ROUTE,
+    SETTINGS_ROUTE,
+    USERS_ROUTE,
+    VERIFICATIONS_ROUTE
+} from "../../utils/routes";
 import {Container} from "reactstrap";
 import ContentBlock from "../ContentBlock";
 
@@ -10,6 +16,9 @@ const Admin = () => {
 
     let resolvedPullMoneyRoute = useResolvedPath(PULLS_MONEY_ROUTE);
     let matchPullMoneyRoute = useMatch({ path: resolvedPullMoneyRoute.pathname, end: true});
+
+    let resolvedPushsMoneyRoute = useResolvedPath(PUSHS_MONEY_ROUTE);
+    let matchPushsMoneyRoute = useMatch({ path: resolvedPushsMoneyRoute.pathname, end: true});
 
     let resolvedVerificationsRoute = useResolvedPath(VERIFICATIONS_ROUTE);
     let matchVerificationsRoute = useMatch({ path: resolvedVerificationsRoute.pathname, end: true});
@@ -22,6 +31,7 @@ const Admin = () => {
             <div className="profile-menu">
                 <Link className={matchPushMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={USERS_ROUTE}>Пользователи</Link>
                 <Link className={matchPullMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={PULLS_MONEY_ROUTE}>Запросы на вывод</Link>
+                <Link className={matchPushsMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={PUSHS_MONEY_ROUTE}>История пополнений</Link>
                 <Link className={matchVerificationsRoute ? "profile-menu-item active" : "profile-menu-item"} to={VERIFICATIONS_ROUTE}>Верификация</Link>
                 <Link className={matchSettingsRoute ? "profile-menu-item active" : "profile-menu-item"} to={SETTINGS_ROUTE}>Настройки</Link>
             </div>

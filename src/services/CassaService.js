@@ -20,4 +20,8 @@ export default class CassaService {
     static async getTransaction(transaction_id) {
         return $api.get(`cassa/transactions/${transaction_id}`);
     }
+
+    static async fetchFakePushs() {
+        return $api.get('cassa/fake/pushs');
+    }
 }

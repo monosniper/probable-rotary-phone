@@ -5,6 +5,7 @@ import {API_URL} from "../http";
 import UserService from "../services/UserService";
 import CassaService from "../services/CassaService";
 import UploadService from "../services/UploadService";
+import GameService from "../services/GameService";
 
 export default class Store {
 
@@ -205,6 +206,16 @@ export default class Store {
         }
     }
 
+    async getAllFakePushs() {
+        try {
+            const response = await CassaService.fetchFakePushs();
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async acceptUserVerification(user_id, onSuccess, onError) {
         try {
             const response = await UserService.acceptUserVerification(user_id);
@@ -250,6 +261,38 @@ export default class Store {
     async getSongs() {
         try {
             const response = await UploadService.getSongs();
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async getGames() {
+        try {
+            const response = await GameService.getGames();
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async createGame(name, slug, image, onSuccess, onError) {
+        try {
+            const response = await GameService.createGame(name, slug, image);
+
+            onSuccess && onSuccess(response);
+            return response.data;
+        } catch (e) {
+            onError && onError(e);
+            console.log(e)
+        }
+    }
+
+    async deleteGame(slug) {
+        try {
+            const response = await GameService.deleteGame(slug);
 
             return response.data;
         } catch (e) {

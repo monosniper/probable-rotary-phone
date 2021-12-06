@@ -44,7 +44,7 @@ const PhotoCell = ({ rowData, dataKey, ...props }) => {
 const ActionCell = ({ rowData, dataKey, ...props }) => {
     return <Table.Cell style={{padding: '7px 10px'}} {...props} className="link-group">
         <>
-            <Button onClick={() => props.handleAcept(rowData['id'])} size='sm'>Принять</Button>
+            <Button onClick={() => props.handleAccept(rowData['id'])} size='sm'>Принять</Button>
             <Button onClick={() => props.handleReject(rowData['id'])} size='sm'>Отклонить</Button>
         </>
     </Table.Cell>;
@@ -64,7 +64,7 @@ const Verifications = () => {
         store.getAllUsers().then(users => setData(getData(users)));
     }, []);
 
-    function handleAcept(id) {
+    function handleAccept(id) {
         store.acceptUserVerification(id, 'success', (rs) => {
             toaster.push(
                 <Notification type="success" header="Пользователь верифицирован" />, {placement: 'topEnd'}
@@ -95,7 +95,7 @@ const Verifications = () => {
     }
 
     const getData = (users) => {
-        users = users.filter(user => !user.isVerified && user.waitingForVerify);
+        users = users.filter(user => user.waitingForVerify);
 
         users.map(user => {
             store.getVerificationImages(user.id).then(images => user.images = images);
@@ -165,7 +165,7 @@ const Verifications = () => {
                 </Table.Column>
                 <Table.Column width={300}>
                     <Table.HeaderCell />
-                    <ActionCell handleAcept={handleAcept} handleReject={handleReject} store={store}/>
+                    <ActionCell handleAccept={handleAccept} handleReject={handleReject} store={store}/>
                 </Table.Column>
             </Table>
         </div>

@@ -168,7 +168,6 @@ export default class Store {
     async getTransactions() {
         try {
             const response = await CassaService.getTransactions();
-            console.log(response.data);
             return response.data;
         } catch (e) {
             console.log(e)

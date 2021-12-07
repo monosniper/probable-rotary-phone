@@ -1,41 +1,23 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {BsCheckLg, IoCloseSharp, MdOutlinePendingActions} from "react-icons/all";
 import {Helmet} from "react-helmet";
+import {Context} from "../../index";
+import moment from "moment";
+import {observer} from "mobx-react-lite";
 
 const PayHistory = () => {
 
-    const transactions = [
-        {
-            description: 'Пополнение',
-            status: 'success',
-            amount: 300,
-            date: '22:10 24 ноября 2021',
-        },
-        {
-            description: 'Вывод',
-            status: 'success',
-            amount: -450,
-            date: '22:10 24 ноября 2021',
-        },
-        {
-            description: 'Пополнение',
-            status: 'rejected',
-            amount: 300,
-            date: '22:10 24 ноября 2021',
-        },
-        {
-            description: 'Вывод',
-            status: 'pending',
-            amount: -500,
-            date: '22:10 24 ноября 2021',
-        },
-        {
-            description: 'Вывод',
-            status: 'rejected',
-            amount: -200,
-            date: '22:10 24 ноября 2021',
-        },
-    ];
+    const {store} = useContext(Context);
+    const [transactions, setTransactions] = useState([]);
+
+    useEffect(() => {
+        let isMounted = true;
+        store.getTransactions().then(transactions => {
+            isMounted && setTransactions(transactions[0])
+
+        });
+        return () => { isMounted = false };
+    }, []);
 
     const icons = {
         success: <BsCheckLg/>,
@@ -47,6 +29,9 @@ const PayHistory = () => {
         success: 'Успешно',
         rejected: 'Отклонено',
         pending: 'Ожидание',
+
+        pull: 'Вывод',
+        push: 'Пополнение',
     };
 
     return (
@@ -55,19 +40,21 @@ const PayHistory = () => {
                 <title>История платежей - Касса | {process.env.REACT_APP_NAME}</title>
             </Helmet>
             <h6 className="cabinet-title">История транзакций</h6>
-            {transactions.map((transaction, index) => (
-                <div className="transaction" key={index}>
-                    <div className={`transaction-col transaction-status`}>
-                        <span className={`transaction-icon ${transaction.status}`}>{icons[transaction.status]}</span>
-                        <span>{lang[transaction.status]}</span>
+            {transactions.map((transaction, i) => {
+                return (
+                    <div className="transaction" key={i}>
+                        <div className={`transaction-col transaction-status`}>
+                            <span className={`transaction-icon ${transaction.status}`}>{icons[transaction.status]}</span>
+                            <span>{lang[transaction.status]}</span>
+                        </div>
+                        <div className="transaction-col transaction-description">{lang[transaction.type]}</div>
+                        <div className="transaction-col transaction-amount">{transaction.amount > 0 ? '+' : ''}{transaction.amount}</div>
+                        <div className="transaction-col transaction-date">{moment(transaction.createdAt).format('DD MMMM yyyy')}</div>
                     </div>
-                    <div className="transaction-col transaction-description">{transaction.description}</div>
-                    <div className="transaction-col transaction-amount">{transaction.amount > 0 ? '+' : ''}{transaction.amount}</div>
-                    <div className="transaction-col transaction-date">{transaction.date}</div>
-                </div>
-            ))}
+                )
+            })}
         </div>
     );
 };
 
-export default PayHistory;
+export default observer(PayHistory);

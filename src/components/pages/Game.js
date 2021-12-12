@@ -19,7 +19,7 @@ const Game = () => {
     //     'relax': 'bgaming_relax_',
     // ]
 
-    const url = `https://api-prod.infingame.com/bg-launch/cosmo-pragmatic/prod?gameName=${game}&key=TEST1000&country=RUS&demo=true&shell=request&language=ru&segment=desktop`
+    const url = `https://modelplat.com/gm/index.html?demo=true&gameName=${game}&partner=cosmo-pragmatic-prod&lang=ru&platform=desktop`
 
     return (
         <Container>

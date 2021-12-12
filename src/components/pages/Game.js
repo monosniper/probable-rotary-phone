@@ -10,25 +10,16 @@ const Game = () => {
 
     const params = useParams();
     const game = params.name;
-    const [url, setUrl] = useState('');
+    // const [url, setUrl] = useState('');
 
-    const provider_prefixes = [
-        '',
-        'bgaming_relax_',
-        'bgaming_relax_',
-    ]
+    // const provider_prefixes = [
+    //     'booongo': '',
+    //     'playson': 'pls_',
+    //     'champion': 'champion_',
+    //     'relax': 'bgaming_relax_',
+    // ]
 
-    useEffect(() => {
-        provider_prefixes.forEach(prefix => {
-            const src = `https://api-prod.infingame.com/bg-launch/cosmo-pragmatic/prod?gameName=${prefix}${game}&key=TEST1000&country=RUS&demo=true&shell=request&language=ru&segment=desktop`
-            axios.get(src).then(rs => {
-                console.log(rs.statusCode)
-                rs.statusCode === 200 && setUrl(src)
-            });
-        })
-    }, []);
-
-    // const url = `https://api-prod.infingame.com/bg-launch/cosmo-pragmatic/prod?gameName=bgaming_relax_${game}&key=TEST1000&country=RUS&demo=true&shell=request&language=ru&segment=desktop`
+    const url = `https://api-prod.infingame.com/bg-launch/cosmo-pragmatic/prod?gameName=${game}&key=TEST1000&country=RUS&demo=true&shell=request&language=ru&segment=desktop`
 
     return (
         <Container>

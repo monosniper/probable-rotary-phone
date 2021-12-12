@@ -1,18 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Container} from "reactstrap";
 import {HOME_ROUTE} from "../../utils/routes";
 import {Link, useParams} from "react-router-dom";
 import {Button} from "rsuite";
 import {Helmet} from "react-helmet";
+import axios from 'axios';
 
 const Game = () => {
 
     const params = useParams();
     const game = params.name;
+    const [url, setUrl] = useState('');
 
-    // const url = `https://cf-iomeu-cdn.relaxg.com/casino/launcher.html?channel=web&gameid=${game}&lang=ru_RU&moneymode=fun&partner=softswissrelax&partnerid=492`
-    // const url = `https://modelplat.com/gm/index.html?demo=true&gameName=bgaming_relax_${game}&partner=cosmo-pragmatic-prod&lang=ru&platform=desktop`
-    const url = `https://api-prod.infingame.com/bg-launch/cosmo-pragmatic/prod?gameName=bgaming_relax_${game}&key=TEST1000&country=RUS&demo=true&shell=request&language=ru&segment=desktop`
+    const provider_prefixes = [
+        '',
+        'bgaming_relax_',
+        'bgaming_relax_',
+    ]
+
+    useEffect(() => {
+        provider_prefixes.forEach(prefix => {
+            const src = `https://api-prod.infingame.com/bg-launch/cosmo-pragmatic/prod?gameName=${prefix}${game}&key=TEST1000&country=RUS&demo=true&shell=request&language=ru&segment=desktop`
+            axios.get(src).then(rs => {
+                console.log(rs.statusCode)
+                rs.statusCode === 200 && setUrl(src)
+            });
+        })
+    }, []);
+
+    // const url = `https://api-prod.infingame.com/bg-launch/cosmo-pragmatic/prod?gameName=bgaming_relax_${game}&key=TEST1000&country=RUS&demo=true&shell=request&language=ru&segment=desktop`
 
     return (
         <Container>

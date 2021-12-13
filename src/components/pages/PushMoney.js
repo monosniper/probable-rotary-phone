@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {Col, Row} from "reactstrap";
 import {Button, IconButton, Input, MaskedInput, Notification, toaster} from "rsuite";
 import Plus from "@rsuite/icons/Plus";
@@ -7,9 +7,11 @@ import {Helmet} from "react-helmet";
 import {ERROR_PAY_ROUTE, SUCCESS_PAY_ROUTE} from "../../utils/routes";
 import {PayPalButtons} from "@paypal/react-paypal-js";
 import SuccessPay from "./SuccessPay";
+import {Context} from "../../index";
 
 const PushMoney = () => {
 
+    const {store} = useContext(Context);
     const [payButtonsShow, setPayButtonsShow] = useState(false);
     const [payCompleted, setPayCompleted] = useState(false);
     const [amount, setAmount] = useState(200);
@@ -48,7 +50,7 @@ const PushMoney = () => {
                     description: 'Оплата',
                     amount: {
                         currency_code: 'RUB',
-                        value: transaction.amount
+                        value: amount
                     }
                 }
             ]
@@ -58,7 +60,7 @@ const PushMoney = () => {
     const onApprove = async (data, actions) => {
         const order = await actions.order.capture();
         if(order.status === 'COMPLETED') {
-            store.setTransactionCompleted(params.orderId).then((rs) => {
+            store.createPush(amount).then((rs) => {
                 if(rs.data.status === 'success') {
                     setPayCompleted(true);
                 }
@@ -70,40 +72,40 @@ const PushMoney = () => {
         console.log(err)
     }
 
-    const submit = () => {
-        if(amount > 0 && amount < 50000) {
-            $form('https://wl.walletone.com/checkout/checkout/Index', 'POST', [
-                { name: 'WMI_MERCHANT_ID', value: process.env.REACT_APP_WMI_MERCHANT_ID },
-                { name: 'WMI_PAYMENT_AMOUNT', value: amount },
-                { name: 'WMI_CURRENCY_ID', value: 840 },
-                { name: 'WMI_DESCRIPTION', value: 'Пополнение счета' },
-                { name: 'WMI_SUCCESS_URL', value: process.env.REACT_APP_URL + SUCCESS_PAY_ROUTE },
-                { name: 'WMI_FAIL_URL', value: process.env.REACT_APP_URL + ERROR_PAY_ROUTE },
-            ]);
-            // if(cardNumber !== '' && cardDate !== '' && cvv !== '') {
-            //     $form('https://wl.walletone.com/checkout/checkout/Index', 'POST', [
-            //         { name: 'WMI_MERCHANT_ID', value: 189027238209 },
-            //         { name: 'WMI_PAYMENT_AMOUNT', value: amount },
-            //         { name: 'WMI_CURRENCY_ID', value: 840 },
-            //         { name: 'WMI_DESCRIPTION', value: 'test' },
-            //         { name: 'WMI_SUCCESS_URL', value: process.env.REACT_APP_URL + SUCCESS_PAY_ROUTE },
-            //         { name: 'WMI_FAIL_URL', value: process.env.REACT_APP_URL + ERROR_PAY_ROUTE },
-            //     ]);
-            // } else {
-            //     toaster.push(
-            //         <Notification type="error" header="Ошибка">
-            //             <p>Введите данные банковской карты</p>
-            //         </Notification>
-            //     )
-            // }
-        } else {
-            toaster.push(
-                <Notification type="error" header="Ошибка">
-                    <p>Введите сумму</p>
-                </Notification>
-            )
-        }
-    }
+    // const submit = () => {
+    //     if(amount > 0 && amount < 50000) {
+    //         $form('https://wl.walletone.com/checkout/checkout/Index', 'POST', [
+    //             { name: 'WMI_MERCHANT_ID', value: process.env.REACT_APP_WMI_MERCHANT_ID },
+    //             { name: 'WMI_PAYMENT_AMOUNT', value: amount },
+    //             { name: 'WMI_CURRENCY_ID', value: 840 },
+    //             { name: 'WMI_DESCRIPTION', value: 'Пополнение счета' },
+    //             { name: 'WMI_SUCCESS_URL', value: process.env.REACT_APP_URL + SUCCESS_PAY_ROUTE },
+    //             { name: 'WMI_FAIL_URL', value: process.env.REACT_APP_URL + ERROR_PAY_ROUTE },
+    //         ]);
+    //         // if(cardNumber !== '' && cardDate !== '' && cvv !== '') {
+    //         //     $form('https://wl.walletone.com/checkout/checkout/Index', 'POST', [
+    //         //         { name: 'WMI_MERCHANT_ID', value: 189027238209 },
+    //         //         { name: 'WMI_PAYMENT_AMOUNT', value: amount },
+    //         //         { name: 'WMI_CURRENCY_ID', value: 840 },
+    //         //         { name: 'WMI_DESCRIPTION', value: 'test' },
+    //         //         { name: 'WMI_SUCCESS_URL', value: process.env.REACT_APP_URL + SUCCESS_PAY_ROUTE },
+    //         //         { name: 'WMI_FAIL_URL', value: process.env.REACT_APP_URL + ERROR_PAY_ROUTE },
+    //         //     ]);
+    //         // } else {
+    //         //     toaster.push(
+    //         //         <Notification type="error" header="Ошибка">
+    //         //             <p>Введите данные банковской карты</p>
+    //         //         </Notification>
+    //         //     )
+    //         // }
+    //     } else {
+    //         toaster.push(
+    //             <Notification type="error" header="Ошибка">
+    //                 <p>Введите сумму</p>
+    //             </Notification>
+    //         )
+    //     }
+    // }
 
     return !payCompleted ? (
         <div>

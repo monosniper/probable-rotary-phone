@@ -165,6 +165,15 @@ export default class Store {
         }
     }
 
+    async createPush(amount) {
+        try {
+            const response = await CassaService.createPush({amount, user_id: this.user.id});
+            return response;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async getTransactions() {
         try {
             const response = await CassaService.getTransactions();

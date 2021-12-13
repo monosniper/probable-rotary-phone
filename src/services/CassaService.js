@@ -9,6 +9,10 @@ export default class CassaService {
         return $api.post('cassa/pull', data);
     }
 
+    static async createPush(data) {
+        return $api.post('cassa/push', data);
+    }
+
     static async getTransactions() {
         return $api.get('cassa/transactions');
     }

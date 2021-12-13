@@ -5,9 +5,13 @@ import Plus from "@rsuite/icons/Plus";
 import Minus from "@rsuite/icons/Minus";
 import {Helmet} from "react-helmet";
 import {ERROR_PAY_ROUTE, SUCCESS_PAY_ROUTE} from "../../utils/routes";
+import {PayPalButtons} from "@paypal/react-paypal-js";
+import SuccessPay from "./SuccessPay";
 
 const PushMoney = () => {
 
+    const [payButtonsShow, setPayButtonsShow] = useState(false);
+    const [payCompleted, setPayCompleted] = useState(false);
     const [amount, setAmount] = useState(200);
     const [cardNumber, setCardNumber] = useState('');
     const [cardDate, setCardDate] = useState('');
@@ -36,27 +40,34 @@ const PushMoney = () => {
     const cardDateMask = [/\d/,/\d/,'/',/\d/,/\d/];
     const cvvMask = [/\d/,/\d/,/\d/];
 
-    function $forEach(arr, cb) {
-        var arrLen = arr.length;
-        for (var i = 0; i < arrLen; i++) cb(arr[i]);
+    const createOrder = (data, actions, err) => {
+        return actions.order.create({
+            intent: 'CAPTURE',
+            purchase_units: [
+                {
+                    description: 'Оплата',
+                    amount: {
+                        currency_code: 'RUB',
+                        value: transaction.amount
+                    }
+                }
+            ]
+        })
     }
 
-    function $form(action, method, fields) {
-        var form = document.createElement('form');
-        form.setAttribute('hidden', 'true');
-        form.setAttribute('action', action);
-        form.setAttribute('method', method);
+    const onApprove = async (data, actions) => {
+        const order = await actions.order.capture();
+        if(order.status === 'COMPLETED') {
+            store.setTransactionCompleted(params.orderId).then((rs) => {
+                if(rs.data.status === 'success') {
+                    setPayCompleted(true);
+                }
+            })
+        }
+    }
 
-        $forEach(fields, function (field) {
-            var tmp = document.createElement('input');
-            tmp.setAttribute('type', field.type || 'text');
-            tmp.setAttribute('name', field.name || '');
-            tmp.setAttribute('value', field.value || '');
-            form.appendChild(tmp);
-        });
-
-        document.body.appendChild(form);
-        form.submit();
+    const onError = (err) => {
+        console.log(err)
     }
 
     const submit = () => {
@@ -94,7 +105,7 @@ const PushMoney = () => {
         }
     }
 
-    return (
+    return !payCompleted ? (
         <div>
             <Helmet>
                 <title>Пополнение - Касса | {process.env.REACT_APP_NAME}</title>
@@ -159,11 +170,15 @@ const PushMoney = () => {
             {/*</div>*/}
 
             <div style={{textAlign: 'center', marginTop: '2rem'}}>
-                <Button onClick={submit} className="pink-btn btn-lg rounded">Оплатить</Button>
+                {payButtonsShow ? (
+                    <PayPalButtons createOrder={createOrder} onApprove={onApprove} onError={onError} />
+                ) : (
+                    <Button onClick={() => setPayButtonsShow(true)} className="pink-btn btn-lg rounded">Далее</Button>
+                )}
             </div>
 
         </div>
-    );
+    ) : <SuccessPay />;
 };
 
 export default PushMoney;

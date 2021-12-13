@@ -32,7 +32,10 @@ const PushMoney = () => {
                         value: amount
                     }
                 }
-            ]
+            ],
+            application_context: {
+              shipping_preference: 'NO_SHIPPING'
+            }
         })
     }
 

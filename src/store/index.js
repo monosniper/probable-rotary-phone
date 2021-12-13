@@ -84,9 +84,19 @@ export default class Store {
             this.setAuth(true);
             this.setUser(response.data.user);
         } catch (e) {
-            console.log(e);
+            this.setAuth(false);
         } finally {
             this.setLoading(false);
+        }
+    }
+
+    async getClientToken() {
+        try {
+            const response = await CassaService.getClientToken();
+
+            return response.data.client_token;
+        } catch (e) {
+            console.log(e)
         }
     }
 

@@ -21,7 +21,7 @@ const PushsMoney = () => {
 
         data.map(item => {
             item.createdAt = moment(item.createdAt).format('DD MMMM yyyy')
-            item.fio = `${item.user.last_name} ${item.user.first_name} ${item.user.middle_name}`;
+            item.fio = item.user ? `${item.user.last_name} ${item.user.first_name} ${item.user.middle_name}` : '';
 
             return item;
         });

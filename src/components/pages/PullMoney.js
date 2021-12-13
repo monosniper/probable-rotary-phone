@@ -74,7 +74,7 @@ const PullMoney = () => {
             <Helmet>
                 <title>Вывод денег - Касса | {process.env.REACT_APP_NAME}</title>
             </Helmet>
-            <h6><b>Доступно для вывода: 0.00 ₴</b></h6>
+            <h6><b>Доступно для вывода: {store.user.balance} $</b></h6>
             <div className="pushmoney-btn-toolbar">
                 <Button onClick={() => setAmount(100)} className="pushmoney-btn">100</Button>
                 <Button onClick={() => setAmount(200)} className="pushmoney-btn">200</Button>

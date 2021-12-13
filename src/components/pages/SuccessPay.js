@@ -6,7 +6,7 @@ const SuccessPay = () => {
     return (
         <ContentBlock style={{display: 'flex', gap: 20, justifyContent: 'center', alignItems: 'center', fontSize: 20}}>
             <AiFillCheckCircle style={{color: 'lightgreen', fontSize: 30}} />
-            Оплата прошла успешно, скоро на вашем счету появятся спополненные средства.
+            Оплата прошла успешно, скоро на вашем счету появятся пополненные средства.
         </ContentBlock>
     );
 };

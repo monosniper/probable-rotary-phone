@@ -1,13 +1,14 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import {Col, Row} from "reactstrap";
 import {Button, IconButton, Input, MaskedInput, Notification, toaster} from "rsuite";
 import Plus from "@rsuite/icons/Plus";
 import Minus from "@rsuite/icons/Minus";
 import {Helmet} from "react-helmet";
 import {ERROR_PAY_ROUTE, SUCCESS_PAY_ROUTE} from "../../utils/routes";
-import {PayPalButtons} from "@paypal/react-paypal-js";
+import {PayPalButtons, usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import SuccessPay from "./SuccessPay";
 import {Context} from "../../index";
+import {observer} from 'mobx-react-lite';
 
 const PushMoney = () => {
 
@@ -18,29 +19,7 @@ const PushMoney = () => {
     const [cardNumber, setCardNumber] = useState('');
     const [cardDate, setCardDate] = useState('');
     const [cvv, setCvv] = useState('');
-    const cardMask = [
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/,
-        ' ',
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/,
-        ' ',
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/,
-        ' ',
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/
-    ];
-    const cardDateMask = [/\d/,/\d/,'/',/\d/,/\d/];
-    const cvvMask = [/\d/,/\d/,/\d/];
+    const [{ options }, dispatch] = usePayPalScriptReducer();
 
     const createOrder = (data, actions, err) => {
         return actions.order.create({
@@ -61,7 +40,7 @@ const PushMoney = () => {
         const order = await actions.order.capture();
         if(order.status === 'COMPLETED') {
             store.createPush(amount).then((rs) => {
-                if(rs.data.status === 'success') {
+                if(rs.data[0].status === 'success') {
                     setPayCompleted(true);
                 }
             })
@@ -71,6 +50,13 @@ const PushMoney = () => {
     const onError = (err) => {
         console.log(err)
     }
+
+    useEffect(() => {
+        dispatch({
+            type: "resetOptions",
+            value: options,
+        });
+    }, [amount]);
 
     // const submit = () => {
     //     if(amount > 0 && amount < 50000) {
@@ -126,50 +112,49 @@ const PushMoney = () => {
                 <IconButton onClick={() => setAmount(amount + 100)} circle icon={<Plus />} />
             </div>
 
-            {/*<div className='card-group'>*/}
-            {/*    <div>*/}
-            {/*        <div>*/}
-            {/*            <p>Введите номер карты</p>*/}
-            {/*            <MaskedInput*/}
-            {/*                className='field'*/}
-            {/*                value={cardNumber}*/}
-            {/*                mask={cardMask}*/}
-            {/*                keepCharPositions={true}*/}
-            {/*                showMask={false}*/}
-            {/*                style={{ width: 300 }}*/}
-            {/*                onChange={setCardNumber}*/}
-            {/*            />*/}
-            {/*        </div>*/}
-            {/*        <div style={{marginTop: '1rem'}}>*/}
-            {/*            <Row>*/}
-            {/*                <Col sm={12} md={6}>*/}
-            {/*                    <p>Срок действия</p>*/}
-            {/*                    <MaskedInput*/}
-            {/*                        className='field'*/}
-            {/*                        value={cardDate}*/}
-            {/*                        mask={cardDateMask}*/}
-            {/*                        keepCharPositions={true}*/}
-            {/*                        showMask={false}*/}
-            {/*                        style={{ width: 150 }}*/}
-            {/*                        onChange={setCardDate}*/}
-            {/*                    />*/}
-            {/*                </Col>*/}
-            {/*                <Col sm={12} md={6}>*/}
-            {/*                    <p>CVV</p>*/}
-            {/*                    <MaskedInput*/}
-            {/*                        className='field'*/}
-            {/*                        value={cvv}*/}
-            {/*                        mask={cvvMask}*/}
-            {/*                        keepCharPositions={true}*/}
-            {/*                        showMask={false}*/}
-            {/*                        style={{ width: 150 }}*/}
-            {/*                        onChange={setCvv}*/}
-            {/*                    />*/}
-            {/*                </Col>*/}
-            {/*            </Row>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+
+                {/*<label htmlFor="card-number">*/}
+                {/*    Card Number*/}
+                {/*    <span style={INVALID_COLOR}>*</span>*/}
+                {/*</label>*/}
+                {/*<PayPalHostedField*/}
+                {/*    id="card-number"*/}
+                {/*    className="card-field"*/}
+                {/*    style={CUSTOM_FIELD_STYLE}*/}
+                {/*    hostedFieldType="number"*/}
+                {/*    options={{*/}
+                {/*        selector: "#card-number",*/}
+                {/*        placeholder: "4111 1111 1111 1111",*/}
+                {/*    }}*/}
+                {/*/>*/}
+                {/*<label htmlFor="cvv">*/}
+                {/*    CVV<span style={INVALID_COLOR}>*</span>*/}
+                {/*</label>*/}
+                {/*<PayPalHostedField*/}
+                {/*    id="cvv"*/}
+                {/*    className="card-field"*/}
+                {/*    style={CUSTOM_FIELD_STYLE}*/}
+                {/*    hostedFieldType="cvv"*/}
+                {/*    options={{*/}
+                {/*        selector: "#cvv",*/}
+                {/*        placeholder: "123",*/}
+                {/*        maskInput: true,*/}
+                {/*    }}*/}
+                {/*/>*/}
+                {/*<label htmlFor="expiration-date">*/}
+                {/*    Expiration Date*/}
+                {/*    <span style={INVALID_COLOR}>*</span>*/}
+                {/*</label>*/}
+                {/*<PayPalHostedField*/}
+                {/*    id="expiration-date"*/}
+                {/*    className="card-field"*/}
+                {/*    style={CUSTOM_FIELD_STYLE}*/}
+                {/*    hostedFieldType="expirationDate"*/}
+                {/*    options={{*/}
+                {/*        selector: "#expiration-date",*/}
+                {/*        placeholder: "MM/YYYY",*/}
+                {/*    }}*/}
+                {/*/>*/}
 
             <div style={{textAlign: 'center', marginTop: '2rem'}}>
                 {payButtonsShow ? (
@@ -183,4 +168,4 @@ const PushMoney = () => {
     ) : <SuccessPay />;
 };
 
-export default PushMoney;
+export default observer(PushMoney);

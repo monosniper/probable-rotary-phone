@@ -47,9 +47,9 @@ const PushMoney = () => {
             intent: 'CAPTURE',
             purchase_units: [
                 {
-                    description: 'Оплата',
+                    description: 'Пополнение баланса',
                     amount: {
-                        currency_code: 'RUB',
+                        currency_code: 'USD',
                         value: amount
                     }
                 }

@@ -2,22 +2,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import "./responsive.scss";
 
-$violet: rgba(57,4,104,1);
+$violet: rgba(57, 4, 104, 1);
 $dark-violet: #240044;
 $pink: #ef2391;
 
 body {
   color: #fff;
   background: $violet;
-  background: linear-gradient(90deg, $violet 0%, rgba(32,1,59,1) 30%, rgba(32,1,59,1) 70%, $violet 100%);
+  background: linear-gradient(90deg, $violet 0%, rgba(32, 1, 59, 1) 30%, rgba(32, 1, 59, 1) 70%, $violet 100%);
   font-family: 'Montserrat', sans-serif;
 }
 
 .content-block {
   background: white;
   padding: 30px 40px;
-  color:  #181818;
+  color: #181818;
   border-radius: 30px;
+}
+
+.banner {
+  position: relative;
+  border-radius: 30px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  flex-wrap: wrap;
+  align-items: center;
+
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    background: #000;
+    opacity: .3;
+  }
+
+  div {
+    z-index: 2;
+  }
 }
 
 .sign-modal {
@@ -90,7 +120,7 @@ body {
   background: $violet;
 }
 
-.casino-btn,  {
+.casino-btn, {
   background: $violet !important;
   color: white !important;
   transition: .3s ease-in;
@@ -124,26 +154,26 @@ body {
   }
 }
 
-.fake-vertical + .fake-vertical {
+.winner-card-vertical + .winner-card-vertical {
   margin-top: 1rem;
 }
 
 
-.fake {
+.winner-card {
   align-items: center;
   padding: 10px 0;
 
-  &.fake-vertical {
+  &.winner-card-vertical {
     border-radius: 20px;
     padding: 20px;
     background: $violet;
     color: white;
 
-    .fake-winner {
+    .winner-card-winner {
       margin-bottom: .5rem;
     }
 
-    .fake-group {
+    .winner-card-group {
       padding: 5px;
       width: 100%;
 
@@ -189,7 +219,7 @@ body {
     background: #fff;
     color: $violet;
     transition: .1s ease-in;
-    
+
     &:hover {
       background: #f3f3f3;
     }
@@ -211,6 +241,7 @@ body {
   &.for-admin {
     max-height: 400px;
     overflow-y: scroll;
+
     .game-list-item {
       width: 100px !important;
       height: 100px !important;
@@ -340,11 +371,12 @@ body {
 
   &-title {
     max-width: 100px;
-    white-space:nowrap;
-    overflow:hidden;
+    white-space: nowrap;
+    overflow: hidden;
+
     span {
-      display:inline-block;
-      padding-left:100%;
+      display: inline-block;
+      padding-left: 100%;
       -webkit-animation: marquee 10s infinite linear;
       animation: marquee 10s infinite linear;
     }
@@ -353,6 +385,7 @@ body {
   &-control {
     display: flex;
     gap: 10px;
+
     &-btn {
       background: $violet !important;
       color: white !important;
@@ -366,12 +399,21 @@ body {
 }
 
 @-webkit-keyframes marquee {
-  0%{-webkit-transform: translate(0, 0);}
-  100%{-webkit-transform: translate(-100%, 0);}
+  0% {
+    -webkit-transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(-100%, 0);
+  }
 }
-@keyframes marquee{
-  0%{transform: translate(0, 0);}
-  100%{transform: translate(-100%, 0)}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0)
+  }
 }
 
 .footer {
@@ -468,6 +510,7 @@ body {
       flex-basis: 40%;
     }
   }
+
   &-field {
     width: 100% !important;
 
@@ -671,9 +714,11 @@ body {
       font-size: 16px;
       color: green;
     }
+
     &.rejected {
       color: red;
     }
+
     &.pending {
       color: orange;
     }
@@ -682,6 +727,7 @@ body {
   &-col:first-child {
     text-align: start;
   }
+
   &-col:last-child {
     text-align: end;
   }
@@ -819,6 +865,7 @@ $light-grayish-blue: hsl(240, 5%, 91%);
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+
   .faq-block {
     width: 92px;
     height: 92px;

@@ -13,10 +13,10 @@ import moment from "moment";
 import 'moment/locale/ru';
 
 function Winner(props) {
-    return <div className="fake-winner">
-        <Avatar circle src={props.src} />
-        <span className="fake-winner-id">ID: {props.id}</span>
-        <span className="fake-winner-amount">- {props.amount} грн.</span>
+    return <div className="winner-card-winner">
+        <Avatar circle src={props.src}/>
+        <span className="winner-card-winner-id">ID: {props.id}</span>
+        <span className="winner-card-winner-amount">- {props.amount} грн.</span>
     </div>
 }
 
@@ -53,7 +53,7 @@ const FakeSlider1 = () => {
         const amount = getRandomInt(100, 4000);
         const src = games[Math.floor(Math.random() * games.length)];
 
-        return <Winner key={key} src={src} id={id + '****'} amount={amount} />
+        return <Winner key={key} src={src} id={id + '****'} amount={amount}/>
     }
 
     function getWidth() {
@@ -73,7 +73,7 @@ const FakeSlider1 = () => {
     }
 
     return (
-        <Row className='fake'>
+        <Row className='winner-card'>
             <Col sm={12} md={2}>Сейчас выигравают:</Col>
             <Col sm={12} md={8}>
                 <Carousel
@@ -85,7 +85,7 @@ const FakeSlider1 = () => {
                     showArrows={false}
                     enableAutoPlay={true}
                     onChange={(currentItem, pageIndex) => {
-                        if(currentItem.index === items.length - 3) {
+                        if (currentItem.index === items.length - 3) {
                             setItems([...items, generateWinner()]);
                         }
                     }

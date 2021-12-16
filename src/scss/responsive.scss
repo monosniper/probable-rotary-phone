@@ -1,4 +1,13 @@
+@media screen and(min-width: 1190px) {
+  .banner {
+    padding: 0 10rem;
+  }
+}
+
 @media screen and(max-width: 1190px) {
+  .banner {
+    justify-content: center !important;
+  }
   .header {
     flex-wrap: wrap;
 
@@ -7,6 +16,7 @@
       justify-content: space-between !important;
     }
   }
+
 }
 
 @media screen and(max-width: 900px) {
@@ -17,10 +27,10 @@
 }
 
 @media screen and(max-width: 770px) {
-   .header-right {
-     flex-wrap: wrap !important;
-     justify-content: center !important;
-   }
+  .header-right {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
 }
 
 @media screen and(max-width: 500px) {

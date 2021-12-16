@@ -31,7 +31,7 @@ const FakeSlider3 = () => {
         const src = games[Math.floor(Math.random() * games.length)];
         const bonus = getRandomInt(100, 1000);
 
-        return <Award key={id} src={src} id={id} bonus={bonus} />
+        return <Award key={id} src={src} id={id} bonus={bonus}/>
     }
 
     function getRandomInt(min, max) {
@@ -41,11 +41,11 @@ const FakeSlider3 = () => {
     }
 
     function Award(props) {
-        return <div className="fake-winner">
-            <Avatar circle src={props.src} />
-            <div className='fake-winner-right'>
-                <div className="fake-winner-id">ID: {props.id}</div>
-                <div className="fake-winner-title">БОНУС: {props.bonus} грн.</div>
+        return <div className="winner-card-winner">
+            <Avatar circle src={props.src}/>
+            <div className='winner-card-winner-right'>
+                <div className="winner-card-winner-id">ID: {props.id}</div>
+                <div className="winner-card-winner-title">БОНУС: {props.bonus} грн.</div>
             </div>
         </div>
     }
@@ -57,8 +57,8 @@ const FakeSlider3 = () => {
     };
 
     return (
-        <div className="fake fake-vertical">
-            <h5 className="fake-title">Полученные бонусы</h5>
+        <div className="winner-card winner-card-vertical">
+            <h5 className="winner-card-title">Полученные бонусы</h5>
             <Carousel
                 children={items}
                 enableTilt={true}
@@ -69,7 +69,7 @@ const FakeSlider3 = () => {
                 enableAutoPlay={true}
                 verticalMode={true}
                 onChange={(currentItem, pageIndex) => {
-                    if(currentItem.index === items.length - 4) {
+                    if (currentItem.index === items.length - 4) {
                         setItems([...items, generateAward()]);
                     }
                 }}

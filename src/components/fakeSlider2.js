@@ -55,10 +55,10 @@ const FakeSlider2 = () => {
                 const id = getRandomInt(1000, 9999) + '****';
                 const src = games[Math.floor(Math.random() * games.length)];
 
-                return <Award src={src} id={id} title={item} key={key} />
+                return <Award src={src} id={id} title={item} key={key}/>
             })
 
-            return <AwardGroup key={uuid()} children={children} title={award.title} />
+            return <AwardGroup key={uuid()} children={children} title={award.title}/>
         });
     }
 
@@ -69,11 +69,11 @@ const FakeSlider2 = () => {
     }
 
     function Award(props) {
-        return <div className="fake-winner">
-            <Avatar circle src={props.src} />
-            <div className='fake-winner-right'>
-                <div className="fake-winner-id">ID: {props.id}</div>
-                <div className="fake-winner-title">{props.title}</div>
+        return <div className="winner-card-winner">
+            <Avatar circle src={props.src}/>
+            <div className='winner-card-winner-right'>
+                <div className="winner-card-winner-id">ID: {props.id}</div>
+                <div className="winner-card-winner-title">{props.title}</div>
             </div>
         </div>
     }
@@ -85,9 +85,9 @@ const FakeSlider2 = () => {
     };
 
     function AwardGroup(props) {
-        return <div className="fake-group">
-            <div className="fake-group-title">{props.title}</div>
-            <div className="fake-group-items">
+        return <div className="winner-card-group">
+            <div className="winner-card-group-title">{props.title}</div>
+            <div className="winner-card-group-items">
                 {props.children}
             </div>
         </div>
@@ -101,8 +101,8 @@ const FakeSlider2 = () => {
     };
 
     return (
-        <div className="fake fake-vertical">
-            <h5 className="fake-title">Топ призов</h5>
+        <div className="winner-card winner-card-vertical">
+            <h5 className="winner-card-title">Топ призов</h5>
             <Carousel
                 children={items}
                 enableTilt={true}

@@ -6,12 +6,25 @@ import bg from "../assets/images/bg.jpg";
 import bg2 from "../assets/images/bg2.jpg";
 import bg3 from "../assets/images/bg3.jpeg";
 import banner from "../assets/images/banner.jpg";
+import {STOCKS_ROUTE} from "../utils/routes";
+import {Button} from "rsuite";
+import {Link} from "react-router-dom";
 
 const Slider = () => {
     return (
-        <AwesomeSlider>
-            <div data-src={banner} />
-        </AwesomeSlider>
+        <div className="banner" style={{backgroundImage: `url(${banner})`}}>
+            <div>
+                <h3 style={{marginBottom: '1rem'}} className="banner-title">Розыгрыш 1 эфириума</h3>
+                <div className="banner-body">
+                    <Link to={STOCKS_ROUTE}>
+                        <Button className="pink-btn">Подробнее</Button>
+                    </Link>
+                </div>
+            </div>
+        </div>
+        // <AwesomeSlider>
+        //     <div data-src={banner} />
+        // </AwesomeSlider>
     );
 };
 

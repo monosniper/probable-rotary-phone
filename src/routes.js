@@ -45,6 +45,7 @@ import Tournaments from "./components/pages/Tournaments";
 import Stocks from "./components/pages/Stocks";
 import Bonuses from "./components/pages/Bonuses";
 import PushsMoney from "./components/pages/PushsMoney";
+import EphiriumStockPage from "./components/pages/EphiriumStockPage";
 
 export const publicRoutes = [
     {
@@ -78,6 +79,10 @@ export const publicRoutes = [
     {
         path: STOCKS_ROUTE,
         element: <Stocks/>,
+    },
+    {
+        path: '/stocks/ephirium',
+        element: <EphiriumStockPage/>,
     },
     {
         path: BONUSES_ROUTE,

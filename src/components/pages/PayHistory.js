@@ -12,7 +12,7 @@ const PayHistory = () => {
 
     useEffect(() => {
         let isMounted = true;
-        store.getPullsByUser().then(transactions => {
+        store.getPullsByUser(store.user.id).then(transactions => {
             isMounted && setTransactions(transactions[0])
 
         });

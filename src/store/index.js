@@ -136,6 +136,16 @@ export default class Store {
         }
     }
 
+    async getPullsByUser() {
+        try {
+            const response = await CassaService.getPullsByUser(this.user.id);
+
+            return response.data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async getAllUsers() {
         try {
             const response = await UserService.fetchUsers();
@@ -148,7 +158,7 @@ export default class Store {
 
     async pushMoney(data) {
         try {
-            function encodeQuery(data){
+            function encodeQuery(data) {
                 let query = ""
                 for (let d in data)
                     query += encodeURIComponent(d) + '=' +
@@ -156,7 +166,7 @@ export default class Store {
                 return query.slice(0, -1)
             }
 
-            const url = 'https://www.free-kassa.ru/merchant/cash.php?'+encodeQuery(data);
+            const url = 'https://www.free-kassa.ru/merchant/cash.php?' + encodeQuery(data);
 
 
         } catch (e) {

@@ -6,6 +6,10 @@ export default class CassaService {
         return $api.get('cassa/pulls');
     }
 
+    static async getPullsByUser(id) {
+        return $api.get('cassa/pulls/' + id);
+    }
+
     static async createPull(data) {
         return $api.post('cassa/pull', data);
     }

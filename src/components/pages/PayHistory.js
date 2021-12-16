@@ -12,11 +12,13 @@ const PayHistory = () => {
 
     useEffect(() => {
         let isMounted = true;
-        store.getTransactions().then(transactions => {
+        store.getPullsByUser().then(transactions => {
             isMounted && setTransactions(transactions[0])
 
         });
-        return () => { isMounted = false };
+        return () => {
+            isMounted = false
+        };
     }, []);
 
     const icons = {
@@ -44,12 +46,15 @@ const PayHistory = () => {
                 return (
                     <div className="transaction" key={i}>
                         <div className={`transaction-col transaction-status`}>
-                            <span className={`transaction-icon ${transaction.status}`}>{icons[transaction.status]}</span>
+                            <span
+                                className={`transaction-icon ${transaction.status}`}>{icons[transaction.status]}</span>
                             <span>{lang[transaction.status]}</span>
                         </div>
                         <div className="transaction-col transaction-description">{lang[transaction.type]}</div>
-                        <div className="transaction-col transaction-amount">{transaction.amount > 0 ? '+' : ''}{transaction.amount}</div>
-                        <div className="transaction-col transaction-date">{moment(transaction.createdAt).format('DD MMMM yyyy')}</div>
+                        <div
+                            className="transaction-col transaction-amount">{transaction.amount > 0 ? '+' : ''}{transaction.amount}</div>
+                        <div
+                            className="transaction-col transaction-date">{moment(transaction.createdAt).format('DD MMMM yyyy')}</div>
                     </div>
                 )
             })}

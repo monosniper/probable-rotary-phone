@@ -6,8 +6,8 @@ export default class CassaService {
         return $api.get('cassa/pulls');
     }
 
-    static async getPullsByUser(id) {
-        return $api.get('cassa/pulls/' + id);
+    static async getPayHistory() {
+        return $api.get('cassa/pay_history');
     }
 
     static async createPull(data) {

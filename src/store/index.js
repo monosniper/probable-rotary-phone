@@ -136,9 +136,9 @@ export default class Store {
         }
     }
 
-    async getPullsByUser(id) {
+    async getPayHistory() {
         try {
-            const response = await CassaService.getPullsByUser(id);
+            const response = await CassaService.getPayHistory();
 
             return response.data;
         } catch (e) {

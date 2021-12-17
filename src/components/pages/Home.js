@@ -81,7 +81,7 @@ const Home = () => {
                         <p>Для того, чтобы начать играть, вам необходимо пополнить баланс</p>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Link to={PUSH_MONEY_ROUTE} className="calipso-btn pink-btn">К кассе</Link>
+                        <Link to={PUSH_MONEY_ROUTE}><Button className="calipso-btn pink-btn">К кассе</Button></Link>
                         <Button className="calipso-btn pink-btn" onClick={handlePushClose}>Отмена</Button>
                     </Modal.Footer>
                 </Modal>

@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import GameItem from "./GameItem";
 import {Context} from "../index";
+import {Button, Form, Modal} from "rsuite";
 
 const GameList = (props) => {
 
@@ -27,7 +28,8 @@ const GameList = (props) => {
                 games.map((game, i) => <GameItem key={game + '-' + i} {...game} />)
             )}
         </div>
-    );
+    )
+        ;
 };
 
 export default GameList;

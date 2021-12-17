@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import ContentBlock from "../ContentBlock";
 import {Col, Row} from "reactstrap";
 import Search from "@rsuite/icons/Search";
-import {Button, Input, InputGroup} from "rsuite";
+import {Button, Form, Input, InputGroup, Modal} from "rsuite";
 import GameList from "../GameList";
 import FakeSlider2 from "../fakeSlider2";
 import FakeSlider3 from "../fakeSlider3";
@@ -12,10 +12,14 @@ import FakeSlider1 from "../fakeSlider1";
 import {Helmet} from "react-helmet";
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
+import {PUSH_MONEY_ROUTE} from "../../utils/routes";
+import {Link} from "react-router-dom";
 
 const Home = () => {
     const {store} = useContext(Context);
     const [games, setGames] = useState([]);
+
+    const handlePushClose = () => store.setPushModal(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -69,6 +73,18 @@ const Home = () => {
                         )}
                     </Col>
                 </Row>
+                <Modal className="sign-modal" size="xs" open={store.isPushModalOpen} onClose={handlePushClose}>
+                    <Modal.Header>
+                        <Modal.Title>Играть</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Для того, чтобы начать играть, вам необходимо пополнить баланс</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Link to={PUSH_MONEY_ROUTE} className="calipso-btn pink-btn">К кассе</Link>
+                        <Button className="calipso-btn pink-btn" onClick={handlePushClose}>Отмена</Button>
+                    </Modal.Footer>
+                </Modal>
             </ContentBlock>
         </>
     );

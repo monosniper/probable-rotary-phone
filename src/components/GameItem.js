@@ -8,18 +8,21 @@ import {AiTwotoneDelete} from "react-icons/all";
 const GameItem = (props) => {
 
     const {store} = useContext(Context);
+    const handlePushOpen = () => store.setPushModal(true);
 
     return (
         <div className='game-list-item'>
-            <div className="game-list-item-bg" style={{backgroundImage: `url(${process.env.REACT_APP_API_URL}/games/${props.image})`}} />
+            <div className="game-list-item-bg"
+                 style={{backgroundImage: `url(${process.env.REACT_APP_API_URL}/games/${props.image})`}}/>
             <div className="game-list-item-overflow">
                 <span className="game-list-item-title">{props.name}</span>
                 {props.forAdmin ? (
-                    <IconButton circle icon={<AiTwotoneDelete />} onClick={() => props.deleteGame(props.slug)} size='xs' />
+                    <IconButton circle icon={<AiTwotoneDelete/>} onClick={() => props.deleteGame(props.slug)}
+                                size='xs'/>
                 ) : (
                     <>
                         {store.isAuth ? (
-                            <Link to={__GAME_ROUTE + props.slug} className="pink-btn rounded" size='sm'>Играть</Link>
+                            <Button onClick={handlePushOpen} className="pink-btn rounded" size='sm'>Играть</Button>
                         ) : (
                             <Button onClick={() => store.setLoginModel(true)} className="pink-btn rounded"
                                     size='sm'>Играть</Button>

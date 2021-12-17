@@ -13,6 +13,7 @@ export default class Store {
     isAuth = true;
     isLoading = false;
     isLoginModalOpen = false;
+    isPushModalOpen = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -32,6 +33,10 @@ export default class Store {
 
     setLoginModel(bool) {
         this.isLoginModalOpen = bool;
+    }
+
+    setPushModal(bool) {
+        this.isPushModalOpen = bool;
     }
 
     async login(username, password, onSuccess, onError) {

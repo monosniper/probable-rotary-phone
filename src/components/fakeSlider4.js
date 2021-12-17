@@ -1,46 +1,29 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Carousel from 'react-elastic-carousel'
-import Game1 from '../assets/images/games/1.jpg';
-import Game2 from '../assets/images/games/2.jpg';
-import Game3 from '../assets/images/games/3.jpg';
-import Game4 from '../assets/images/games/4.jpg';
-import Game5 from '../assets/images/games/5.jpg';
 import * as PropTypes from "prop-types";
 import {Avatar} from "rsuite";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const FakeSlider4 = () => {
+const FakeSlider4 = (props) => {
 
-    const games = [
-        Game1,
-        Game2,
-        Game3,
-        Game4,
-        Game5,
-    ];
-
-    const gameNames = [
-        'Jack Potter x-mas',
-        'Lucky Clover',
-        'Troll Dice',
-        'Myths of Bastet',
-        'Lucky Tanks',
-    ]
-
-    const [items, setItems] = useState([
+    const [items, setItems] = useState(props.games.length ? [
         generateAward(),
         generateAward(),
         generateAward(),
         generateAward(),
         generateAward(),
-    ]);
+        generateAward(),
+    ] : []);
 
     function generateAward() {
+        const game = props.games[Math.floor(Math.random() * props.games.length)];
         const id = getRandomInt(1000, 9999) + '****';
-        const src = games[Math.floor(Math.random() * games.length)];
+        const src = `${process.env.REACT_APP_API_URL}/games/${game.image}`;
         const amount = getRandomInt(1000, 9999);
-        const game = gameNames[Math.floor(Math.random() * gameNames.length)];
+        const title = game.name.replace(new RegExp('_', 'g'), ' ').substr(0, 20) + '...';
 
-        return <Award key={id} src={src} id={id} amount={amount} game={game}/>
+        return <Award key={id} src={src} id={id} amount={amount} game={title}/>
     }
 
     function getRandomInt(min, max) {
@@ -54,7 +37,7 @@ const FakeSlider4 = () => {
             <Avatar circle src={props.src}/>
             <div className='winner-card-winner-right'>
                 <div className="winner-card-winner-id">ID: {props.id}</div>
-                <div className="winner-card-winner-title">{props.amount} грн. в {props.game}</div>
+                <div className="winner-card-winner-title">{props.amount} $ в {props.game}</div>
             </div>
         </div>
     }

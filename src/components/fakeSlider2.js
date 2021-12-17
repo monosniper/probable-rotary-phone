@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Carousel from 'react-elastic-carousel'
 import Game1 from '../assets/images/games/1.jpg';
 import Game2 from '../assets/images/games/2.jpg';
@@ -8,16 +8,10 @@ import Game5 from '../assets/images/games/5.jpg';
 import * as PropTypes from "prop-types";
 import {Avatar} from "rsuite";
 import {v4 as uuid} from 'uuid';
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const FakeSlider2 = () => {
-
-    const games = [
-        Game1,
-        Game2,
-        Game3,
-        Game4,
-        Game5,
-    ];
+const FakeSlider2 = (props) => {
 
     const awards = [
         {
@@ -53,7 +47,7 @@ const FakeSlider2 = () => {
             const children = award.items.map(item => {
                 const key = uuid();
                 const id = getRandomInt(1000, 9999) + '****';
-                const src = games[Math.floor(Math.random() * games.length)];
+                const src = `${process.env.REACT_APP_API_URL}/games/${props.games[Math.floor(Math.random() * props.games.length)].image}`;
 
                 return <Award src={src} id={id} title={item} key={key}/>
             })
@@ -123,4 +117,4 @@ const FakeSlider2 = () => {
     );
 };
 
-export default FakeSlider2;
+export default observer(FakeSlider2);

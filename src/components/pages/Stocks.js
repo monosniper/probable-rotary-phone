@@ -3,6 +3,7 @@ import ContentBlock from "../ContentBlock";
 import {Helmet} from "react-helmet";
 import {Button, Panel} from "rsuite";
 import {Link} from "react-router-dom";
+import banner from '../../assets/images/stock_1.jpg';
 
 const Stocks = () => {
     return (
@@ -11,9 +12,9 @@ const Stocks = () => {
                 <title>Акции | {process.env.REACT_APP_NAME}</title>
             </Helmet>
 
-            <Panel header="Розыгрыш 1 эфириума">
+            <Panel className="stock" header="Розыгрыш 1 эфириума" style={{backgroundImage: `url(${banner})`}}>
                 Для участия в розыгрыше вам нужно...
-                <div style={{textAlign: 'end', padding: '1rem 0'}}>
+                <div style={{padding: '1rem 0'}}>
                     <Link to="/stocks/ephirium">
                         <Button className="pink-btn">Подробнее</Button>
                     </Link>

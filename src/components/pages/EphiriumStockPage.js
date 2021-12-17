@@ -4,6 +4,7 @@ import {Button, Panel} from "rsuite";
 import {Link} from "react-router-dom";
 import ContentBlock from "../ContentBlock";
 import {STOCKS_ROUTE} from '../../utils/routes'
+import banner from '../../assets/images/stock_1.jpg';
 
 const EphiriumStockPage = () => {
     return (
@@ -20,6 +21,7 @@ const EphiriumStockPage = () => {
 
             <Panel>
                 <h3 style={{marginBottom: '1rem'}}>Акция - Розыгрыш 1 эфириума</h3>
+                {/*<div><img src={banner}/></div>*/}
                 Для участия в розыгрыше вам нужно пополнить свой баланс на любую сумму, вы станете автоматически
                 участвовать в конкурсе на 1 эфир. Результаты будут 31.12.2021
             </Panel>

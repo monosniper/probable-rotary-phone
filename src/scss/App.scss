@@ -158,6 +158,34 @@ body {
   margin-top: 1rem;
 }
 
+.stock {
+  background-size: cover;
+  color: white !important;
+  height: 485px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 3rem;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #000;
+    opacity: .5;
+  }
+
+  .rs-panel-header {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 1;
+  }
+}
+
 
 .winner-card {
   align-items: center;

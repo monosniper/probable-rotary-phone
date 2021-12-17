@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Carousel from 'react-elastic-carousel'
 import Game1 from '../assets/images/games/1.jpg';
 import Game2 from '../assets/images/games/2.jpg';
@@ -7,16 +7,10 @@ import Game4 from '../assets/images/games/4.jpg';
 import Game5 from '../assets/images/games/5.jpg';
 import * as PropTypes from "prop-types";
 import {Avatar} from "rsuite";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const FakeSlider3 = () => {
-
-    const games = [
-        Game1,
-        Game2,
-        Game3,
-        Game4,
-        Game5,
-    ];
+const FakeSlider3 = (props) => {
 
     const [items, setItems] = useState([
         generateAward(),
@@ -28,7 +22,7 @@ const FakeSlider3 = () => {
 
     function generateAward() {
         const id = getRandomInt(1000, 9999) + '****';
-        const src = games[Math.floor(Math.random() * games.length)];
+        const src = `${process.env.REACT_APP_API_URL}/games/${props.games[Math.floor(Math.random() * props.games.length)].image}`;
         const bonus = getRandomInt(100, 1000);
 
         return <Award key={id} src={src} id={id} bonus={bonus}/>
@@ -45,7 +39,7 @@ const FakeSlider3 = () => {
             <Avatar circle src={props.src}/>
             <div className='winner-card-winner-right'>
                 <div className="winner-card-winner-id">ID: {props.id}</div>
-                <div className="winner-card-winner-title">БОНУС: {props.bonus} грн.</div>
+                <div className="winner-card-winner-title">БОНУС: {props.bonus} $</div>
             </div>
         </div>
     }
@@ -78,4 +72,4 @@ const FakeSlider3 = () => {
     );
 };
 
-export default FakeSlider3;
+export default observer(FakeSlider3);

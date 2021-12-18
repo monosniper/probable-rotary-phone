@@ -68,7 +68,7 @@ const FakeSlider1 = (props) => {
 
     return (
         <Row className='winner-card'>
-            <Col sm={12} md={2}>Сейчас выигравают:</Col>
+            <Col sm={12} md={2}>Сейчас выигрывают:</Col>
             <Col sm={12} md={8}>
                 <Carousel
                     children={items}

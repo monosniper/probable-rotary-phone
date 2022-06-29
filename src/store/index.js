@@ -55,7 +55,7 @@ export default class Store {
         }
     }
 
-    async register(username, email, password) {
+    async register(username, email, password, onSuccess, onError) {
         try {
             const response = await AuthService.register(username, email, password);
 
@@ -63,7 +63,10 @@ export default class Store {
 
             this.setAuth(true);
             this.setUser(response.data.user);
+
+            onSuccess && onSuccess(response);
         } catch (e) {
+            onError && onError(e);
             console.log(e);
         }
     }

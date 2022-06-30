@@ -75,6 +75,16 @@ const Profile = () => {
         })
     }
 
+    const handlePasswordForget = () => {
+        store.resetPassword().then(() => {
+            toaster.push(
+                <Notification type="success" header="Новый пароль">
+                    <p>Новый пароль выслан на почту {user.email}</p>
+                </Notification>
+            )
+        })
+    }
+
     const handlePasswordUpdate = () => {
         if(newPassword !== '' && oldPassword !== '' && newPasswordConfirmation !== '') {
             if(newPassword === newPasswordConfirmation) {
@@ -193,7 +203,8 @@ const Profile = () => {
                             <Form.Control className='cabinet-field' name="new_password_confirmation" onChange={setNewPasswordConfirmation} type={newPasswordVisible ? 'text' : 'password'} />
                             <IconButton onClick={toggleNewPasswordVisible} className="cabinet-group-btn" circle>{newPasswordVisible ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}</IconButton>
                         </Form.Group>
-                        <Form.Group style={{textAlign: 'center'}}>
+                        <Form.Group style={{justifyContent: 'center', gap: '1rem', display: 'flex'}}>
+                            <Button onClick={handlePasswordForget} className='pink-btn btn-lg rounded'>Забали пароль?</Button>
                             <Button onClick={handlePasswordUpdate} className='pink-btn btn-lg rounded'>Сохранить</Button>
                         </Form.Group>
                     </Form>

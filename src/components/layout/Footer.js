@@ -8,7 +8,7 @@ const Footer = () => {
         <Container className='footer-container'>
             <div className='footer'>
                 <img style={{margin: '1rem auto', display: 'block', maxWidth: '100%'}} src={Providers} alt="Providers" />
-                @ {new Date().getFullYear()} {process.env.REACT_APP_URL} Все права защищены.
+                @ 2017 - {new Date().getFullYear()} {process.env.REACT_APP_URL} Все права защищены.
             </div>
         </Container>
     );

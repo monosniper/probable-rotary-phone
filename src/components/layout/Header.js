@@ -100,7 +100,10 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="header-right">
-                    <Player />
+
+                    {/*<Player />*/}
+                    <div></div>
+
                     <div className="header-panel">
                         <div className="header-panel-item">
                             <Dropdown renderToggle={(props, ref) => <Button {...props} ref={ref} className="casino-btn">RU</Button>}>

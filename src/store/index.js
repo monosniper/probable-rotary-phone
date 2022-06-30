@@ -121,6 +121,14 @@ export default class Store {
         }
     }
 
+    async resetPassword() {
+        try {
+            return await UserService.resetPassword(this.user.id);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async updatePassword(oldPassword, newPassword, onSuccess, onError) {
         try {
             const response = await UserService.updatePassword({oldPassword, newPassword}, this.user.id);

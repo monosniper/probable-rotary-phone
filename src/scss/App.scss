@@ -20,6 +20,15 @@ body {
   border-radius: 30px;
 }
 
+img {
+  max-width: 100%;
+}
+.transaction-details {
+  width: 300px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
 .banner {
   position: relative;
   border-radius: 30px;
@@ -343,6 +352,49 @@ body {
   }
 }
 
+.crypto-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+  max-width: 100%;
+  width: 500px;
+}
+
+.crypto-btn {
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 5px;
+  background: #fff;
+  box-shadow: #00000030 0px 9px 11px;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  gap: .4rem;
+
+  &.active {
+    border: 2px solid $violet;
+  }
+
+  &__icon {
+    width: 70%;
+  }
+
+  &__name {
+    font-size: 14px;
+    color: $violet;
+  }
+
+  &:hover {
+    background: #efefef;
+  }
+}
+
 .pink-btn {
   background: $pink;
   color: white !important;
@@ -352,6 +404,10 @@ body {
 
   &:hover {
     background: $pink;
+  }
+
+  &[disabled] {
+    background: lightgrey !important;
   }
 }
 
@@ -662,6 +718,15 @@ body {
   border-radius: 30px;
   justify-content: space-between;
   box-shadow: 0 6px 9px #00000017;
+}
+
+.pushmoney-bonus {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  img {
+    width: 240px;
+  }
 }
 
 .pushmoney-btn-toolbar {

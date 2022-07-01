@@ -4,7 +4,7 @@ import moment from "moment";
 import {Helmet} from "react-helmet";
 import {Table} from "rsuite";
 
-const PushsMoney = () => {
+const Transactions = () => {
     const [sortColumn, setSortColumn] = React.useState();
     const [sortType, setSortType] = React.useState();
     const [loading, setLoading] = React.useState(false);
@@ -14,14 +14,14 @@ const PushsMoney = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        store.getAllFakePushs().then(pushs => setData(getData(pushs)));
+        store.getCryptoTransactions().then(transactions => setData(getData(transactions)));
     }, []);
 
     const getData = (data) => {
 
         data.map(item => {
             item.createdAt = moment(item.createdAt).format('DD MMMM yyyy')
-            item.fio = item.user ? item.user.username : '';
+            item.fio = item.user ? `${item.user.username}` : '';
 
             return item;
         });
@@ -58,9 +58,9 @@ const PushsMoney = () => {
     return (
         <div>
             <Helmet>
-                <title>История пополнений - Админка | {process.env.REACT_APP_NAME}</title>
+                <title>Транзакции - Админка | {process.env.REACT_APP_NAME}</title>
             </Helmet>
-            <h6 className='cabinet-title'>История пополнений</h6>
+            <h6 className='cabinet-title'>Транзакции</h6>
             <Table
                 style={{fontSize: 12}}
                 affixHeader
@@ -75,6 +75,10 @@ const PushsMoney = () => {
                 <Table.Column width={70} align="center" sortable>
                     <Table.HeaderCell>Id</Table.HeaderCell>
                     <Table.Cell dataKey="id" />
+                </Table.Column>
+                <Table.Column width={150} sortable>
+                    <Table.HeaderCell>Номер транзакции</Table.HeaderCell>
+                    <Table.Cell dataKey="transaction_number" />
                 </Table.Column>
                 <Table.Column width={150} sortable>
                     <Table.HeaderCell>Сумма</Table.HeaderCell>
@@ -93,4 +97,4 @@ const PushsMoney = () => {
     );
 };
 
-export default PushsMoney;
+export default Transactions;

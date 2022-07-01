@@ -210,10 +210,19 @@ export default class Store {
         }
     }
 
-    async getTransactions() {
+    async createCryptoTransaction(transaction_number, amount) {
         try {
-            const response = await CassaService.getTransactions();
-            return response.data;
+            const response = await CassaService.createCryptoTransaction({transaction_number, amount, user_id: this.user.id});
+            return response;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async getCryptoTransactions() {
+        try {
+            const response = await CassaService.getCryptoTransactions();
+            return response.data[0];
         } catch (e) {
             console.log(e)
         }

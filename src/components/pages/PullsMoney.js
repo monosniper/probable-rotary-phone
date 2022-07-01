@@ -72,7 +72,7 @@ const PullsMoney = () => {
 
         data.map(item => {
             item.createdAt = moment(item.createdAt).format('DD MMMM yyyy')
-            item.fio = `${item.user.last_name} ${item.user.first_name} ${item.user.middle_name}`;
+            item.fio = item.user.username ? item.user.username : item.user.email;
 
             return item;
         });
@@ -125,7 +125,7 @@ const PullsMoney = () => {
             >
                 <Table.Column width={70} align="center" sortable>
                     <Table.HeaderCell>Id</Table.HeaderCell>
-                    <Table.Cell dataKey="_id" />
+                    <Table.Cell dataKey="id" />
                 </Table.Column>
                 <Table.Column width={150} sortable>
                     <Table.HeaderCell>Сумма</Table.HeaderCell>

@@ -3,7 +3,7 @@ import {Link, Outlet, useMatch, useResolvedPath} from "react-router-dom";
 import {
     PULLS_MONEY_ROUTE,
     PUSHS_MONEY_ROUTE,
-    SETTINGS_ROUTE,
+    SETTINGS_ROUTE, TRANSACTIONS_ROUTE,
     USERS_ROUTE,
     VERIFICATIONS_ROUTE
 } from "../../utils/routes";
@@ -16,6 +16,9 @@ const Admin = () => {
 
     let resolvedPullMoneyRoute = useResolvedPath(PULLS_MONEY_ROUTE);
     let matchPullMoneyRoute = useMatch({ path: resolvedPullMoneyRoute.pathname, end: true});
+
+    let transactionsRoute = useResolvedPath(TRANSACTIONS_ROUTE);
+    let matchTransactionsRoute = useMatch({ path: transactionsRoute.pathname, end: true});
 
     let resolvedPushsMoneyRoute = useResolvedPath(PUSHS_MONEY_ROUTE);
     let matchPushsMoneyRoute = useMatch({ path: resolvedPushsMoneyRoute.pathname, end: true});
@@ -31,6 +34,7 @@ const Admin = () => {
             <div className="profile-menu">
                 <Link className={matchPushMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={USERS_ROUTE}>Пользователи</Link>
                 <Link className={matchPullMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={PULLS_MONEY_ROUTE}>Запросы на вывод</Link>
+                <Link className={matchTransactionsRoute ? "profile-menu-item active" : "profile-menu-item"} to={TRANSACTIONS_ROUTE}>Транзакции</Link>
                 <Link className={matchPushsMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={PUSHS_MONEY_ROUTE}>История пополнений</Link>
                 <Link className={matchVerificationsRoute ? "profile-menu-item active" : "profile-menu-item"} to={VERIFICATIONS_ROUTE}>Верификация</Link>
                 <Link className={matchSettingsRoute ? "profile-menu-item active" : "profile-menu-item"} to={SETTINGS_ROUTE}>Настройки</Link>

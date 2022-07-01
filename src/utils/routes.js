@@ -10,6 +10,7 @@ export const ADMIN_ROUTE = '/admin';
 export const USERS_ROUTE = '/admin/users';
 export const PUSHS_MONEY_ROUTE = '/admin/pushs';
 export const PULLS_MONEY_ROUTE = '/admin/pulls';
+export const TRANSACTIONS_ROUTE = '/admin/transactions';
 export const SETTINGS_ROUTE = '/admin/settings';
 export const VERIFICATIONS_ROUTE = '/admin/verifications';
 export const FAQ_ROUTE = '/faq';

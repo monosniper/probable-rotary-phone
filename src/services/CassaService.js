@@ -18,6 +18,14 @@ export default class CassaService {
         return $api.post('cassa/push', data);
     }
 
+    static async createCryptoTransaction(data) {
+        return $api.post('cassa/crypto/transactions', data);
+    }
+
+    static async getCryptoTransactions(data) {
+        return $api.get('cassa/crypto/transactions');
+    }
+
     static async getTransactions() {
         return $api.get('cassa/transactions');
     }

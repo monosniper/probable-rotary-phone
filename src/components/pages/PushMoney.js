@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext, useRef} from 'react';
 import {Col, Row} from "reactstrap";
-import {Button, IconButton, Input, MaskedInput, Notification, toaster} from "rsuite";
+import {Button, Form, IconButton, Input, MaskedInput, Modal, Notification, toaster} from "rsuite";
 import Plus from "@rsuite/icons/Plus";
 import Minus from "@rsuite/icons/Minus";
 import {Helmet} from "react-helmet";
@@ -9,17 +9,76 @@ import {PayPalButtons, usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import SuccessPay from "./SuccessPay";
 import {Context} from "../../index";
 import {observer} from 'mobx-react-lite';
+import BonusImage from '../../assets/images/bonus.png';
+import BTCIcon from '../../assets/images/crypto/BTC.png';
+import BnBIcon from '../../assets/images/crypto/BnB.png';
+import BUSDIcon from '../../assets/images/crypto/BUSD.png';
+import ETHIcon from '../../assets/images/crypto/ETH.png';
+import USDTIcon from '../../assets/images/crypto/USDT.png';
+
+const CryptoButton = ({name, icon, onClick, crypto}) => {
+    const [isActive, setIsActive] = useState(name === crypto)
+
+    useEffect(() => {
+        setIsActive(name === crypto)
+    }, [crypto])
+
+    return <div onClick={() => onClick(name)} className={'crypto-btn ' + (isActive ? 'active' : '')}>
+        <div className={'crypto-btn__icon'}><img
+            src={icon}
+            alt={name}
+        /></div>
+        <div className={'crypto-btn__name'}>{name}</div>
+    </div>
+}
 
 const PushMoney = () => {
 
     const {store} = useContext(Context);
     const [payButtonsShow, setPayButtonsShow] = useState(false);
+    const [transactionDetailsShow, setTransactionDetailsShow] = useState(false);
     const [payCompleted, setPayCompleted] = useState(false);
     const [amount, setAmount] = useState(200);
     const [cardNumber, setCardNumber] = useState('');
     const [cardDate, setCardDate] = useState('');
     const [cvv, setCvv] = useState('');
     const [{ options }, dispatch] = usePayPalScriptReducer();
+    const [transactionNumber, setTransactionNumber] = useState('');
+    const [crypto, setCrypto] = useState('');
+
+    const cryptos = [
+        {
+            name: 'BTC',
+            icon: BTCIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+        {
+            name: 'BnB',
+            icon: BnBIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+        {
+            name: 'BUSD',
+            icon: BUSDIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+        {
+            name: 'ETH',
+            icon: ETHIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+        {
+            name: 'USDT',
+            icon: USDTIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+    ]
+
+    const handleSecondNextClick = () => {
+        store.createCryptoTransaction(transactionNumber, amount).then(() => {
+            setPayCompleted(true);
+        })
+    }
 
     const createOrder = (data, actions, err) => {
         return actions.order.create({
@@ -96,11 +155,28 @@ const PushMoney = () => {
     //     }
     // }
 
+    const handleNextClick = () => {
+        // setPayButtonsShow(true)
+        setTransactionDetailsShow(true)
+    }
+
+    const handleCryptoClick = (name) => {
+        setCrypto(name)
+    }
+
     return !payCompleted ? (
         <div>
             <Helmet>
                 <title>Пополнение - Касса | {process.env.REACT_APP_NAME}</title>
             </Helmet>
+
+            <div className={'pushmoney-bonus'}>
+                <img
+                    src={BonusImage}
+                    alt={'Bonus'}
+                />
+            </div>
+
             <div className="pushmoney-btn-toolbar">
                 <Button onClick={() => setAmount(100)} className="pushmoney-btn">100</Button>
                 <Button onClick={() => setAmount(200)} className="pushmoney-btn">200</Button>
@@ -159,11 +235,35 @@ const PushMoney = () => {
                 {/*    }}*/}
                 {/*/>*/}
 
+
+
             <div style={{textAlign: 'center', marginTop: '2rem'}}>
                 {payButtonsShow ? (
                     <PayPalButtons createOrder={createOrder} onApprove={onApprove} onError={onError} />
+                ) : transactionDetailsShow ? (
+                    <div className={'transaction-details'}>
+                        <p>
+                            Для завершения операции отправьте всю сумму на данный счет:
+                            <br/>
+                            {cryptos.find(i => i.name === crypto).number}
+                            <br/>
+                            <p>
+                                После оплаты вставьте номер транзакции в поле ниже. Примерное время ожидания - 30 минут.
+                            </p>
+                        </p>
+                        <br/>
+                        <Input className='field' placeholder={'Номер транзакции...'} type='text' value={transactionNumber} onChange={setTransactionNumber} />
+                        <br/>
+
+                        <Button disabled={transactionNumber === '' || crypto === ''} onClick={handleSecondNextClick} className="pink-btn btn-lg rounded">Далее</Button>
+                    </div>
                 ) : (
-                    <Button onClick={() => setPayButtonsShow(true)} className="pink-btn btn-lg rounded">Далее</Button>
+                    <>
+                        <div className="crypto-btns">
+                            {cryptos.map(item => <CryptoButton crypto={crypto} {...item} onClick={handleCryptoClick} />)}
+                        </div>
+                        <Button onClick={handleNextClick} className="pink-btn btn-lg rounded">Далее</Button>
+                    </>
                 )}
             </div>
 

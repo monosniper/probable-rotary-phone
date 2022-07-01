@@ -18,7 +18,7 @@ import {
     SETTINGS_ROUTE,
     STOCKS_ROUTE,
     SUCCESS_PAY_ROUTE,
-    TOURNAMENTS_ROUTE,
+    TOURNAMENTS_ROUTE, TRANSACTIONS_ROUTE,
     USERS_ROUTE,
     VERIFICATION_ROUTE,
     VERIFICATIONS_ROUTE
@@ -46,6 +46,7 @@ import Stocks from "./components/pages/Stocks";
 import Bonuses from "./components/pages/Bonuses";
 import PushsMoney from "./components/pages/PushsMoney";
 import EphiriumStockPage from "./components/pages/EphiriumStockPage";
+import Transactions from "./components/pages/Transactions";
 
 export const publicRoutes = [
     {
@@ -138,6 +139,10 @@ export const privateRoutes = [
             {
                 path: PULLS_MONEY_ROUTE,
                 element: <PullsMoney/>,
+            },
+            {
+                path: TRANSACTIONS_ROUTE,
+                element: <Transactions/>,
             },
             {
                 path: SETTINGS_ROUTE,

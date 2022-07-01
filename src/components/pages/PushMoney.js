@@ -157,7 +157,16 @@ const PushMoney = () => {
 
     const handleNextClick = () => {
         // setPayButtonsShow(true)
-        setTransactionDetailsShow(true)
+
+        if(crypto === '') {
+            toaster.push(
+                <Notification type="error" header="Выберите монету" />, {placement: 'topEnd'}
+            )
+        } else {
+            setTransactionDetailsShow(true)
+
+        }
+
     }
 
     const handleCryptoClick = (name) => {

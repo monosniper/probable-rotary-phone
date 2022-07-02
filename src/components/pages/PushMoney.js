@@ -267,7 +267,7 @@ const PushMoney = () => {
                         <p>
                             Для завершения операции отправьте всю сумму на данный счет:
                             <br/>
-                            <b style={{display: 'block', margin: '1rem 0'}}>
+                            <b style={{display: 'block', margin: '1rem 0', overflowWrap: 'break-word'}}>
                                 {cryptos.find(i => i.name === crypto).number}
                             </b>
                             <br/>

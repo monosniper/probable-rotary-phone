@@ -1,10 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Carousel from 'react-elastic-carousel'
-import Game1 from '../assets/images/games/1.jpg';
-import Game2 from '../assets/images/games/2.jpg';
-import Game3 from '../assets/images/games/3.jpg';
-import Game4 from '../assets/images/games/4.jpg';
-import Game5 from '../assets/images/games/5.jpg';
+import SamsungImage from '../assets/images/awards/samsung.png';
+import IphoneImage from '../assets/images/awards/iphone.png';
+import PlayStationImage from '../assets/images/awards/playstation.png';
+import OculusImage from '../assets/images/awards/oculus.png';
+import TeslaImage from '../assets/images/awards/tesla.png';
+import WatchImage from '../assets/images/awards/watch.png';
+import FordImage from '../assets/images/awards/ford.png';
 import * as PropTypes from "prop-types";
 import {Avatar} from "rsuite";
 import {v4 as uuid} from 'uuid';
@@ -40,6 +42,17 @@ const FakeSlider2 = (props) => {
         },
     ]
 
+    const item_images = {
+        'Samsung 55" 4K': SamsungImage,
+        'Samsung Galaxy Tab': SamsungImage,
+        'Iphone 11 64gb': IphoneImage,
+        'Sony PlayStation 4': PlayStationImage,
+        'Oculus Rift (Black)': OculusImage,
+        'Tesla Model 3': TeslaImage,
+        'Apple Watch Series 4': WatchImage,
+        'Ford Mustang': FordImage,
+    }
+
     const [items] = useState(generateAwardGroups());
 
     function generateAwardGroups() {
@@ -47,7 +60,8 @@ const FakeSlider2 = (props) => {
             const children = award.items.map(item => {
                 const key = uuid();
                 const id = getRandomInt(1000, 9999) + '****';
-                const src = `${process.env.REACT_APP_API_URL}/games/${props.games[Math.floor(Math.random() * props.games.length)].image}`;
+                // const src = `${process.env.REACT_APP_API_URL}/games/${props.games[Math.floor(Math.random() * props.games.length)].image}`;
+                const src = item_images[item]
 
                 return <Award src={src} id={id} title={item} key={key}/>
             })

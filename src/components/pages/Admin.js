@@ -35,7 +35,7 @@ const Admin = () => {
                 <Link className={matchPushMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={USERS_ROUTE}>Пользователи</Link>
                 <Link className={matchPullMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={PULLS_MONEY_ROUTE}>Запросы на вывод</Link>
                 <Link className={matchTransactionsRoute ? "profile-menu-item active" : "profile-menu-item"} to={TRANSACTIONS_ROUTE}>Транзакции</Link>
-                <Link className={matchPushsMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={PUSHS_MONEY_ROUTE}>История пополнений</Link>
+                {/*<Link className={matchPushsMoneyRoute ? "profile-menu-item active" : "profile-menu-item"} to={PUSHS_MONEY_ROUTE}>История пополнений</Link>*/}
                 <Link className={matchVerificationsRoute ? "profile-menu-item active" : "profile-menu-item"} to={VERIFICATIONS_ROUTE}>Верификация</Link>
                 <Link className={matchSettingsRoute ? "profile-menu-item active" : "profile-menu-item"} to={SETTINGS_ROUTE}>Настройки</Link>
             </div>

@@ -6,14 +6,22 @@ import Minus from "@rsuite/icons/Minus";
 import Plus from "@rsuite/icons/Plus";
 import {Helmet} from "react-helmet";
 import {Context} from "../../index";
+import BTCIcon from "../../assets/images/crypto/BTC.png";
+import BnBIcon from "../../assets/images/crypto/BnB.png";
+import BUSDIcon from "../../assets/images/crypto/BUSD.png";
+import ETHIcon from "../../assets/images/crypto/ETH.png";
+import USDTIcon from "../../assets/images/crypto/USDT.png";
+import CryptoButton from "../CryptoButton";
 
 const PullMoney = () => {
 
     const {store} = useContext(Context);
 
     const verified = true;
-    const [amount, setAmount] = useState(200);
+    const [amount, setAmount] = useState(10);
     const [cardNumber, setCardNumber] = useState('');
+    const [cryptoNumber, setCryptoNumber] = useState('');
+    const [crypto, setCrypto] = useState('');
     const cardMask = [
         /\d/,
         /\d/,
@@ -36,16 +44,44 @@ const PullMoney = () => {
         /\d/
     ];
 
+    const cryptos = [
+        {
+            name: 'BTC',
+            icon: BTCIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+        {
+            name: 'BnB',
+            icon: BnBIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+        {
+            name: 'BUSD',
+            icon: BUSDIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+        {
+            name: 'ETH',
+            icon: ETHIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+        {
+            name: 'USDT',
+            icon: USDTIcon,
+            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+        },
+    ]
+
     const submit = () => {
-        if(amount > 0 && amount < 50000) {
-            if(cardNumber !== '') {
-                store.createPull(cardNumber, amount, (rs) => {
+        if(amount > 10 && amount < 50000) {
+            if(cryptoNumber !== '') {
+                store.createPull(cryptoNumber, crypto, amount, (rs) => {
                     toaster.push(
                         <Notification type="success" header="Запрос на вывод добавлен успешно" />, {placement: 'topEnd'}
                     )
 
-                    setAmount(200);
-                    setCardNumber('');
+                    setAmount(10);
+                    setCryptoNumber('');
                 }, (e) => {
                     toaster.push(
                         <Notification type="error" header="Ошибка!" >
@@ -56,7 +92,7 @@ const PullMoney = () => {
             } else {
                 toaster.push(
                     <Notification type="error" header="Ошибка">
-                        <p>Введите данные банковской карты</p>
+                        <p>Введите счет кошелька</p>
                     </Notification>
                 )
             }
@@ -69,38 +105,58 @@ const PullMoney = () => {
         }
     }
 
+    const handleCryptoClick = (name) => setCrypto(name)
+
     return verified ? (
         <div>
             <Helmet>
                 <title>Вывод денег - Касса | {process.env.REACT_APP_NAME}</title>
             </Helmet>
             <h6><b>Доступно для вывода: {store.user.balance} $</b></h6>
+
+            <div className="alert">
+                Минимальная сумма для депозита - $10
+            </div>
+
             <div className="pushmoney-btn-toolbar">
+                <Button onClick={() => setAmount(10)} className="pushmoney-btn">10</Button>
+                <Button onClick={() => setAmount(20)} className="pushmoney-btn">20</Button>
+                <Button onClick={() => setAmount(50)} className="pushmoney-btn">50</Button>
                 <Button onClick={() => setAmount(100)} className="pushmoney-btn">100</Button>
                 <Button onClick={() => setAmount(200)} className="pushmoney-btn">200</Button>
-                <Button onClick={() => setAmount(300)} className="pushmoney-btn">300</Button>
-                <Button onClick={() => setAmount(500)} className="pushmoney-btn">500</Button>
-                <Button onClick={() => setAmount(1000)} className="pushmoney-btn">1000</Button>
             </div>
 
             <div className="pushmoney-amount-group">
-                <IconButton onClick={() => setAmount(amount - 100)} circle icon={<Minus />} />
-                <Input className='field' type='number' min="200" max="50000" value={amount} onChange={setAmount} />
-                <IconButton onClick={() => setAmount(amount + 100)} circle icon={<Plus />} />
+                <IconButton onClick={() => setAmount(amount - 1)} circle icon={<Minus />} />
+                <Input className='field' type='number' min="10" max="50000" value={amount} onChange={setAmount} />
+                <IconButton onClick={() => setAmount(amount + 1)} circle icon={<Plus />} />
+            </div>
+
+            <div className="crypto-btns">
+                {cryptos.map(item => <CryptoButton crypto={crypto} {...item} onClick={handleCryptoClick} />)}
             </div>
 
             <div className='card-group'>
                 <div>
-                    <p>Введите номер карты</p>
-                    <MaskedInput
+                    {/*<p>Введите номер карты</p>*/}
+                    {/*<MaskedInput*/}
+                    {/*    className='field'*/}
+                    {/*    value={cardNumber}*/}
+                    {/*    mask={cardMask}*/}
+                    {/*    keepCharPositions={true}*/}
+                    {/*    showMask={false}*/}
+                    {/*    style={{ width: 300 }}*/}
+                    {/*    onChange={setCardNumber}*/}
+                    {/*/>*/}
+                    <br/>
+                    <p style={{textAlign: 'center'}}>Введите номер счета</p>
+                    <br/>
+                    <Input
                         className='field'
-                        value={cardNumber}
-                        mask={cardMask}
-                        keepCharPositions={true}
-                        showMask={false}
-                        style={{ width: 300 }}
-                        onChange={setCardNumber}
-                    />
+                        placeholder={'Номер кошелька...'}
+                        type='text'
+                        value={cryptoNumber}
+                        onChange={setCryptoNumber} />
                 </div>
             </div>
 

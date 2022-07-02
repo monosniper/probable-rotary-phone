@@ -3,7 +3,7 @@ import ContentBlock from "../ContentBlock";
 import {Helmet} from "react-helmet";
 import {Button, Panel} from "rsuite";
 import {Link} from "react-router-dom";
-import banner from '../../assets/images/stock_1.jpg';
+import banner from '../../assets/images/banner.png';
 
 const Stocks = () => {
     return (

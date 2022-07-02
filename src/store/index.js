@@ -190,9 +190,9 @@ export default class Store {
         }
     }
 
-    async createPull(card, amount, onSuccess, onError) {
+    async createPull(cryptoNumber, crypto, amount, onSuccess, onError) {
         try {
-            const response = await CassaService.createPull({card, amount, user_id: this.user.id});
+            const response = await CassaService.createPull({cryptoNumber, crypto,  amount, user_id: this.user.id});
 
             onSuccess && onSuccess(response);
         } catch (e) {
@@ -210,11 +210,59 @@ export default class Store {
         }
     }
 
-    async createCryptoTransaction(transaction_number, amount) {
+    async createCryptoTransaction(crypto, bonus, transaction_number, amount) {
         try {
-            const response = await CassaService.createCryptoTransaction({transaction_number, amount, user_id: this.user.id});
+            const response = await CassaService.createCryptoTransaction({crypto, bonus, transaction_number, amount, user_id: this.user.id});
             return response;
         } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async acceptCryptoTransaction(id, onSuccess, onError) {
+        try {
+            const response = await CassaService.acceptCryptoTransaction(id);
+
+            onSuccess && onSuccess(response);
+            return response;
+        } catch (e) {
+            onError && onError(e);
+            console.log(e)
+        }
+    }
+
+    async rejectCryptoTransaction(id, onSuccess, onError) {
+        try {
+            const response = await CassaService.rejectCryptoTransaction(id);
+            onSuccess && onSuccess(response);
+
+            return response;
+        } catch (e) {
+            onError && onError(e);
+            console.log(e)
+        }
+    }
+
+    async acceptPull(id, onSuccess, onError) {
+        try {
+            const response = await CassaService.acceptPull(id);
+
+            onSuccess && onSuccess(response);
+            return response;
+        } catch (e) {
+            onError && onError(e);
+            console.log(e)
+        }
+    }
+
+    async rejectPull(id, onSuccess, onError) {
+        try {
+            const response = await CassaService.rejectPull(id);
+            onSuccess && onSuccess(response);
+
+            return response;
+        } catch (e) {
+            onError && onError(e);
             console.log(e)
         }
     }

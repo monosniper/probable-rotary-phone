@@ -15,20 +15,20 @@ import BnBIcon from '../../assets/images/crypto/BnB.png';
 import BUSDIcon from '../../assets/images/crypto/BUSD.png';
 import ETHIcon from '../../assets/images/crypto/ETH.png';
 import USDTIcon from '../../assets/images/crypto/USDT.png';
+import CryptoButton from "../CryptoButton";
 
-const CryptoButton = ({name, icon, onClick, crypto}) => {
-    const [isActive, setIsActive] = useState(name === crypto)
+const BonusButton = ({name, img, onClick, bonus}) => {
+    const [isActive, setIsActive] = useState(name === bonus)
 
     useEffect(() => {
-        setIsActive(name === crypto)
-    }, [crypto])
+        setIsActive(name === bonus)
+    }, [bonus])
 
-    return <div onClick={() => onClick(name)} className={'crypto-btn ' + (isActive ? 'active' : '')}>
-        <div className={'crypto-btn__icon'}><img
-            src={icon}
-            alt={name}
-        /></div>
-        <div className={'crypto-btn__name'}>{name}</div>
+    return <div onClick={() => onClick(name)} className={'bonus-btn ' + (isActive ? 'active' : '')}>
+        {img && <div className={'bonus-btn__icon'}>
+            <img src={img} alt={name}/>
+        </div>}
+        {!img && <div className={'bonus-btn__name'}>{name}</div>}
     </div>
 }
 
@@ -38,13 +38,24 @@ const PushMoney = () => {
     const [payButtonsShow, setPayButtonsShow] = useState(false);
     const [transactionDetailsShow, setTransactionDetailsShow] = useState(false);
     const [payCompleted, setPayCompleted] = useState(false);
-    const [amount, setAmount] = useState(200);
+    const [amount, setAmount] = useState(10);
     const [cardNumber, setCardNumber] = useState('');
     const [cardDate, setCardDate] = useState('');
     const [cvv, setCvv] = useState('');
     const [{ options }, dispatch] = usePayPalScriptReducer();
     const [transactionNumber, setTransactionNumber] = useState('');
     const [crypto, setCrypto] = useState('');
+    const [bonus, setBonus] = useState('Бонус выходного дня');
+
+    const bonuses = [
+        {
+            name: 'Бонус выходного дня',
+            img: BonusImage
+        },
+        {
+            name: 'Без бонуса'
+        }
+    ]
 
     const cryptos = [
         {
@@ -75,7 +86,7 @@ const PushMoney = () => {
     ]
 
     const handleSecondNextClick = () => {
-        store.createCryptoTransaction(transactionNumber, amount).then(() => {
+        store.createCryptoTransaction(crypto, bonus, transactionNumber, amount).then(() => {
             setPayCompleted(true);
         })
     }
@@ -162,16 +173,17 @@ const PushMoney = () => {
             toaster.push(
                 <Notification type="error" header="Выберите монету" />, {placement: 'topEnd'}
             )
+        } else if(bonus === '') {
+            toaster.push(
+                <Notification type="error" header="Выберите бонус" />, {placement: 'topEnd'}
+            )
         } else {
             setTransactionDetailsShow(true)
-
         }
-
     }
 
-    const handleCryptoClick = (name) => {
-        setCrypto(name)
-    }
+    const handleCryptoClick = (name) => setCrypto(name)
+    const handleBonusClick = (name) => setBonus(name)
 
     return !payCompleted ? (
         <div>
@@ -179,25 +191,26 @@ const PushMoney = () => {
                 <title>Пополнение - Касса | {process.env.REACT_APP_NAME}</title>
             </Helmet>
 
-            <div className={'pushmoney-bonus'}>
-                <img
-                    src={BonusImage}
-                    alt={'Bonus'}
-                />
+            <div className="bonus-btns">
+                {bonuses.map(item => <BonusButton bonus={bonus} {...item} onClick={handleBonusClick} />)}
+            </div>
+
+            <div className="alert">
+                Минимальная сумма для депозита - $10
             </div>
 
             <div className="pushmoney-btn-toolbar">
-                <Button onClick={() => setAmount(100)} className="pushmoney-btn">100</Button>
-                <Button onClick={() => setAmount(200)} className="pushmoney-btn">200</Button>
-                <Button onClick={() => setAmount(300)} className="pushmoney-btn">300</Button>
-                <Button onClick={() => setAmount(500)} className="pushmoney-btn">500</Button>
-                <Button onClick={() => setAmount(1000)} className="pushmoney-btn">1000</Button>
+                <Button onClick={() => setAmount(10)} className="pushmoney-btn">$10</Button>
+                <Button onClick={() => setAmount(20)} className="pushmoney-btn">$20</Button>
+                <Button onClick={() => setAmount(50)} className="pushmoney-btn">$50</Button>
+                <Button onClick={() => setAmount(100)} className="pushmoney-btn">$100</Button>
+                <Button onClick={() => setAmount(200)} className="pushmoney-btn">$200</Button>
             </div>
 
             <div className="pushmoney-amount-group">
-                <IconButton onClick={() => setAmount(amount - 100)} circle icon={<Minus />} />
-                <Input className='field' type='number' min="200" max="50000" value={amount} onChange={setAmount} />
-                <IconButton onClick={() => setAmount(amount + 100)} circle icon={<Plus />} />
+                <IconButton onClick={() => setAmount(amount - 1)} circle icon={<Minus />} />
+                <Input className='field' type='number' min="10" max="50000" value={amount} onChange={setAmount} />
+                <IconButton onClick={() => setAmount(amount + 1)} circle icon={<Plus />} />
             </div>
 
 
@@ -254,7 +267,9 @@ const PushMoney = () => {
                         <p>
                             Для завершения операции отправьте всю сумму на данный счет:
                             <br/>
-                            {cryptos.find(i => i.name === crypto).number}
+                            <b style={{display: 'block', margin: '1rem 0'}}>
+                                {cryptos.find(i => i.name === crypto).number}
+                            </b>
                             <br/>
                             <p>
                                 После оплаты вставьте номер транзакции в поле ниже. Примерное время ожидания - 30 минут.

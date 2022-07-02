@@ -6,11 +6,16 @@ import moment from "moment";
 
 const ActionCell = ({ rowData, dataKey, ...props }) => {
 
+    let status = rowData['status'];
+
     function handleSuccess() {
-        props.store.setTransactionStatus(rowData[dataKey], 'success', (rs) => {
+        props.store.acceptPull(rowData[dataKey], (rs) => {
             toaster.push(
-                <Notification type="success" header="Запрос помечен как готовый" />, {placement: 'topEnd'}
+                <Notification type="success" header="Транзакция проведена успешно" />, {placement: 'topEnd'}
             )
+
+            status = 'success'
+
         }, (e) => {
             toaster.push(
                 <Notification type="error" header="Ошибка!" >
@@ -21,10 +26,12 @@ const ActionCell = ({ rowData, dataKey, ...props }) => {
     }
 
     function handleReject() {
-        props.store.setTransactionStatus(rowData[dataKey], 'rejected', (rs) => {
+        props.store.rejectPull(rowData[dataKey], (rs) => {
             toaster.push(
                 <Notification type="success" header="Запрос был отклонен" />, {placement: 'topEnd'}
             )
+
+            status = 'reject'
         }, (e) => {
             toaster.push(
                 <Notification type="error" header="Ошибка!" >
@@ -38,8 +45,6 @@ const ActionCell = ({ rowData, dataKey, ...props }) => {
         success: 'Успешно',
         rejected: 'Отклонено',
     };
-
-    const status = rowData['status'];
 
     return (
         <Table.Cell style={{padding: '7px 10px'}} {...props} className="link-group">
@@ -128,12 +133,16 @@ const PullsMoney = () => {
                     <Table.Cell dataKey="id" />
                 </Table.Column>
                 <Table.Column width={150} sortable>
-                    <Table.HeaderCell>Сумма</Table.HeaderCell>
-                    <Table.Cell dataKey="amount" />
+                    <Table.HeaderCell>Монета</Table.HeaderCell>
+                    <Table.Cell dataKey="crypto" />
+                </Table.Column>
+                <Table.Column width={150} sortable>
+                    <Table.HeaderCell>Номер счета</Table.HeaderCell>
+                    <Table.Cell dataKey="cryptoNumber" />
                 </Table.Column>
                 <Table.Column width={250} sortable>
-                    <Table.HeaderCell>Карта</Table.HeaderCell>
-                    <Table.Cell dataKey="card" />
+                    <Table.HeaderCell>Сумма</Table.HeaderCell>
+                    <Table.Cell dataKey="amount" />
                 </Table.Column>
                 <Table.Column width={350} sortable>
                     <Table.HeaderCell>Пользователь</Table.HeaderCell>
@@ -143,10 +152,10 @@ const PullsMoney = () => {
                     <Table.HeaderCell>Дата создания</Table.HeaderCell>
                     <Table.Cell dataKey="createdAt" />
                 </Table.Column>
-                <Table.Column>
-                    <Table.HeaderCell />
-                    <ActionCell dataKey="_id" store={store} />
-                </Table.Column>
+                {/*<Table.Column width={300}>*/}
+                {/*    <Table.HeaderCell />*/}
+                {/*    <ActionCell dataKey="id" store={store} />*/}
+                {/*</Table.Column>*/}
             </Table>
         </div>
     );

@@ -22,6 +22,22 @@ export default class CassaService {
         return $api.post('cassa/crypto/transactions', data);
     }
 
+    static async acceptCryptoTransaction(id) {
+        return $api.get('cassa/crypto/transactions/accept/'+id);
+    }
+
+    static async rejectCryptoTransaction(id) {
+        return $api.get('cassa/crypto/transactions/reject/'+id);
+    }
+
+    static async acceptPull(id) {
+        return $api.get('cassa/pulls/accept/'+id);
+    }
+
+    static async rejectPull(id) {
+        return $api.get('cassa/pulls/reject/'+id);
+    }
+
     static async getCryptoTransactions(data) {
         return $api.get('cassa/crypto/transactions');
     }

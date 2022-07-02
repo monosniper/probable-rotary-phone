@@ -4,7 +4,7 @@ import {Button, Panel} from "rsuite";
 import {Link} from "react-router-dom";
 import ContentBlock from "../ContentBlock";
 import {STOCKS_ROUTE} from '../../utils/routes'
-import banner from '../../assets/images/stock_1.jpg';
+import banner from '../../assets/images/banner.png';
 
 const EphiriumStockPage = () => {
     return (

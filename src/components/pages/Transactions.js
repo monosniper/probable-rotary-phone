@@ -2,7 +2,62 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Context} from "../../index";
 import moment from "moment";
 import {Helmet} from "react-helmet";
-import {Table} from "rsuite";
+import {Button, Notification, Table, toaster} from "rsuite";
+
+const ActionCell = ({ rowData, dataKey, ...props }) => {
+    let status = rowData['status'];
+
+    function handleSuccess() {
+        props.store.acceptCryptoTransaction(rowData[dataKey], (rs) => {
+            toaster.push(
+                <Notification type="success" header="Транзакция завершена успешно" />, {placement: 'topEnd'}
+            )
+
+            status = 'success'
+        }, (e) => {
+            toaster.push(
+                <Notification type="error" header="Ошибка!" >
+                    <p>{e.response.data.message}</p>
+                </Notification>, {placement: 'topEnd'}
+            )
+        });
+    }
+
+    function handleReject() {
+        props.store.rejectCryptoTransaction(rowData[dataKey], (rs) => {
+            toaster.push(
+                <Notification type="success" header="Запрос был отклонен" />, {placement: 'topEnd'}
+            )
+
+            status = 'reject'
+        }, (e) => {
+            toaster.push(
+                <Notification type="error" header="Ошибка!" >
+                    <p>{e.response.data.message}</p>
+                </Notification>, {placement: 'topEnd'}
+            )
+        });
+    }
+
+    const lang = {
+        accept: 'Успешно',
+        reject: 'Отклонено',
+        pending: 'Ожидание',
+    };
+
+    return (
+        <Table.Cell style={{padding: '7px 10px'}} {...props} className="link-group">
+            {status === 'pending' ?
+                <>
+                    <Button onClick={handleSuccess} size='sm'>Готово</Button>
+                    <Button onClick={handleReject} size='sm'>Отклонить</Button>
+                </>
+                :
+                <p>{lang[status]}</p>
+            }
+        </Table.Cell>
+    );
+};
 
 const Transactions = () => {
     const [sortColumn, setSortColumn] = React.useState();
@@ -77,8 +132,16 @@ const Transactions = () => {
                     <Table.Cell dataKey="id" />
                 </Table.Column>
                 <Table.Column width={150} sortable>
+                    <Table.HeaderCell>Монета</Table.HeaderCell>
+                    <Table.Cell dataKey="crypto" />
+                </Table.Column>
+                <Table.Column width={150} sortable>
                     <Table.HeaderCell>Номер транзакции</Table.HeaderCell>
                     <Table.Cell dataKey="transaction_number" />
+                </Table.Column>
+                <Table.Column width={150} sortable>
+                    <Table.HeaderCell>Бонус</Table.HeaderCell>
+                    <Table.Cell dataKey="bonus" />
                 </Table.Column>
                 <Table.Column width={150} sortable>
                     <Table.HeaderCell>Сумма</Table.HeaderCell>
@@ -91,6 +154,10 @@ const Transactions = () => {
                 <Table.Column width={180} sortable>
                     <Table.HeaderCell>Дата пополнения</Table.HeaderCell>
                     <Table.Cell dataKey="createdAt" />
+                </Table.Column>
+                <Table.Column width={300}>
+                    <Table.HeaderCell></Table.HeaderCell>
+                    <ActionCell dataKey="id" store={store} />
                 </Table.Column>
             </Table>
         </div>

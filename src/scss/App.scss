@@ -363,6 +363,46 @@ img {
   width: 500px;
 }
 
+.bonus-btns {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+  max-width: 100%;
+  width: 500px;
+}
+
+.bonus-btn {
+  width: 160px;
+  height: 220px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &.active {
+    border: 2px solid $violet;
+  }
+}
+
+.alert {
+  width: 400px;
+  border-radius: 15px;
+  margin: 1rem auto;
+  text-align: center;
+  background: #c0e5ff;
+  color: #2b6b99;
+  max-width: 100%;
+}
+
 .crypto-btn {
   border-radius: 10px;
   display: flex;

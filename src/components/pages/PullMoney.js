@@ -116,6 +116,7 @@ const PullMoney = () => {
 
             <div className="alert">
                 Минимальная сумма для депозита - $10
+                Сеть BEP20
             </div>
 
             <div className="pushmoney-btn-toolbar">

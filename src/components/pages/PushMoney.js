@@ -9,7 +9,7 @@ import {PayPalButtons, usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import SuccessPay from "./SuccessPay";
 import {Context} from "../../index";
 import {observer} from 'mobx-react-lite';
-import BonusImage from '../../assets/images/bonus.png';
+import BonusImage from '../../assets/images/bonus2.png';
 import BTCIcon from '../../assets/images/crypto/BTC.png';
 import BnBIcon from '../../assets/images/crypto/BnB.png';
 import BUSDIcon from '../../assets/images/crypto/BUSD.png';
@@ -197,6 +197,7 @@ const PushMoney = () => {
 
             <div className="alert">
                 Минимальная сумма для депозита - $10
+                Сеть BEP20
             </div>
 
             <div className="pushmoney-btn-toolbar">

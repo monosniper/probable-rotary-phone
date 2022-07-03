@@ -84,7 +84,7 @@ const Header = () => {
         } else {
             store.forget(loginUsername).then(() => {
                 toaster.push(
-                    <Notification type="success" header={"Письмо с дальнейшей инструкцией было отправлено на почту "+loginUsername} />, {placement: 'topEnd'}
+                    <Notification type="success" header="Восстановление" ><p>{"Письмо с дальнейшей инструкцией было отправлено на почту "+loginUsername}</p></Notification>, {placement: 'topEnd'}
                 )
             })
         }

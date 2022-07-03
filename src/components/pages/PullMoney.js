@@ -115,7 +115,7 @@ const PullMoney = () => {
             <h6><b>Доступно для вывода: {store.user.balance} $</b></h6>
 
             <div className="alert">
-                Минимальная сумма для депозита - $10
+                Минимальная сумма для вывода - $10
                 <br/>
                 Сеть BEP20
             </div>

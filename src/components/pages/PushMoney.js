@@ -197,6 +197,8 @@ const PushMoney = () => {
 
             <div className="alert">
                 Минимальная сумма для депозита - $10
+                <br/>
+
                 Сеть BEP20
             </div>
 

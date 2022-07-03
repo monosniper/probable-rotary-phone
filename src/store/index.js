@@ -129,6 +129,14 @@ export default class Store {
         }
     }
 
+    async forget(email) {
+        try {
+            return await UserService.resetPasswordByEmail(email);
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async updatePassword(oldPassword, newPassword, onSuccess, onError) {
         try {
             const response = await UserService.updatePassword({oldPassword, newPassword}, this.user.id);

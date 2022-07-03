@@ -74,6 +74,22 @@ const Header = () => {
         })
     }
 
+    const handleForget = () => {
+        if(!loginUsername) {
+            toaster.push(
+                <Notification type="info" header="Восстановление" >
+                    <p>Введите почту</p>
+                </Notification>, {placement: 'topEnd'}
+            )
+        } else {
+            store.forget(loginUsername).then(() => {
+                toaster.push(
+                    <Notification type="success" header={"Письмо с дальнейшей инструкцией было отправлено на почту "+loginUsername} />, {placement: 'topEnd'}
+                )
+            })
+        }
+    }
+
     return (
         <div className="header">
                 <div className="header-left">
@@ -141,7 +157,7 @@ const Header = () => {
                                         <Modal.Body>
                                             <Form fluid>
                                                 <Form.Group controlId="login-username">
-                                                    <Form.ControlLabel>Логин</Form.ControlLabel>
+                                                    <Form.ControlLabel>Логин или почта</Form.ControlLabel>
                                                     <Form.Control name="username" value={loginUsername} onChange={setLoginUsername} />
                                                 </Form.Group>
                                                 <Form.Group controlId="login-password">
@@ -151,6 +167,7 @@ const Header = () => {
                                             </Form>
                                         </Modal.Body>
                                         <Modal.Footer>
+                                            <Button className="calipso-btn pink-btn" onClick={handleForget}>Забыли пароль?</Button>
                                             <Button className="calipso-btn pink-btn" onClick={handleLogin}>Войти</Button>
                                             <Button className="calipso-btn pink-btn" onClick={handleLoginClose}>Отмена</Button>
                                         </Modal.Footer>

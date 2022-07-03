@@ -17,6 +17,10 @@ export default class UserService {
         return $api.get(`users/${id}/reset-password`);
     }
 
+    static async resetPasswordByEmail(email) {
+        return $api.get(`forget/?email=${email}`);
+    }
+
     static async setUserToPendingForVerification(user_id) {
         return $api.get(`users/${user_id}/set-pending-for-verification`);
     }

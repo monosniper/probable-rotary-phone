@@ -10,6 +10,7 @@ const Game = () => {
 
     const params = useParams();
     const game = params.name;
+    const name = params.name.replaceAll("_", " ").replace(/\b\w/g, l => l.toUpperCase());
     // const [url, setUrl] = useState('');
 
     // const provider_prefixes = [
@@ -24,7 +25,8 @@ const Game = () => {
     return (
         <Container>
             <Helmet>
-                <title>{game} | {process.env.REACT_APP_NAME}</title>
+                <title>{name} | {process.env.REACT_APP_NAME}</title>
+                <meta name={'description'} content={'Играть в игру "'+name+'" в нашем онлайн-казино Makao777!'} />
             </Helmet>
             <Link to={HOME_ROUTE}>
                 <Button className="casino-btn" style={{margin: '1rem 0' }}>Назад</Button>

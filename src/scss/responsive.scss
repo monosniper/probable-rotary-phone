@@ -1,0 +1,107 @@
+@media screen and (min-width: 1190px) {
+  .banner {
+    padding: 0 10rem;
+  }
+}
+
+@media screen and (max-width: 1190px) {
+  .banner {
+    justify-content: center !important;
+  }
+  .header {
+    flex-wrap: wrap;
+
+    &-right {
+      width: 100% !important;
+      justify-content: space-between !important;
+    }
+  }
+
+}
+
+@media screen and (max-width: 900px) {
+  .game-list-item {
+    width: 180px !important;
+    height: 180px !important;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .header-right {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    justify-content: center !important;
+    gap: 10px;
+
+    &-left {
+      flex-basis: 100%;
+      text-align: center;
+    }
+  }
+
+  .content-block {
+    padding: 30px 20px !important;
+  }
+
+  .profile-menu {
+    flex-wrap: wrap;
+    gap: 50px !important;
+  }
+
+  .filter-bar {
+    flex-wrap: wrap;
+
+    margin-bottom: 1rem;
+  }
+
+  .game-list {
+    margin-bottom: 1rem;
+    grid-template-areas: '1fr 1fr 1fr' !important;
+
+    &-item {
+      width: 110px !important;
+      height: 110px !important;
+    }
+  }
+
+  .transaction {
+    padding: 15px 10px !important;
+
+    &-icon {
+      width: 30px !important;
+      height: 30px !important;
+      font-size: 17px !important;
+
+      &.success {
+        font-size: 11px !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .faq {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__question {
+      max-width: 279px;
+    }
+
+    &__question-button {
+      width: 279px;
+      font-size: 13px;
+      line-height: 13px;
+
+      &::after {
+        padding-right: 0px;
+      }
+    }
+  }
+}

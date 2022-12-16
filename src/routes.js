@@ -2,22 +2,22 @@ import {
     ADMIN_ROUTE,
     BONUSES_ROUTE,
     CABINET_ROUTE,
-    CASSA_ROUTE, COLD_TRANSACTIONS_ROUTE,
+    CASSA_ROUTE, COLD_TRANSACTIONS_ROUTE, CONTACTS_ROUTE,
     ERROR_PAY_ROUTE,
     FAQ_ROUTE,
     GAME_DEMO_ROUTE,
     GAME_ROUTE,
     GET_PAY_ROUTE,
     HOME_ROUTE,
-    PAYHISTORY_ROUTE,
+    PAYHISTORY_ROUTE, POLICY_ROUTE,
     PROFILE_ROUTE,
     PULL_MONEY_ROUTE,
     PULLS_MONEY_ROUTE,
     PUSH_MONEY_ROUTE,
-    PUSHS_MONEY_ROUTE,
+    PUSHS_MONEY_ROUTE, RETURN_POLICY_ROUTE,
     SETTINGS_ROUTE,
     STOCKS_ROUTE,
-    SUCCESS_PAY_ROUTE,
+    SUCCESS_PAY_ROUTE, TERMS_CONDITIONS_ROUTE,
     TOURNAMENTS_ROUTE, TRANSACTIONS_ROUTE,
     USERS_ROUTE,
     VERIFICATION_ROUTE,
@@ -48,6 +48,10 @@ import PushsMoney from "./components/pages/PushsMoney";
 import EphiriumStockPage from "./components/pages/EphiriumStockPage";
 import Transactions from "./components/pages/Transactions";
 import ColdTransactions from "./components/pages/ColdTransactions";
+import Terms from "./components/pages/Terms";
+import Policy from "./components/pages/Policy";
+import ReturnPolicy from "./components/pages/ReturnPolicy";
+import Contacts from "./components/pages/Contacts";
 
 export const publicRoutes = [
     {
@@ -89,6 +93,22 @@ export const publicRoutes = [
     {
         path: BONUSES_ROUTE,
         element: <Bonuses/>,
+    },
+    {
+        path: TERMS_CONDITIONS_ROUTE,
+        element: <Terms/>,
+    },
+    {
+        path: RETURN_POLICY_ROUTE,
+        element: <ReturnPolicy/>,
+    },
+    {
+        path: POLICY_ROUTE,
+        element: <Policy/>,
+    },
+    {
+        path: CONTACTS_ROUTE,
+        element: <Contacts/>,
     },
 ];
 

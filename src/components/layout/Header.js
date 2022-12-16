@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Logo from '../../assets/images/logo.png';
-import {Button, Dropdown, FlexboxGrid, Form, IconButton, Modal, Notification, toaster} from "rsuite";
+import {Button, Checkbox, Dropdown, FlexboxGrid, Form, IconButton, Modal, Notification, toaster} from "rsuite";
 import {Link} from "react-router-dom";
 import {AiOutlineUser} from "react-icons/all";
 import Player from "../Player";
@@ -10,7 +10,7 @@ import {
     HOME_ROUTE,
     PROFILE_ROUTE,
     PUSH_MONEY_ROUTE,
-    STOCKS_ROUTE, TOURNAMENTS_ROUTE,
+    STOCKS_ROUTE, TERMS_CONDITIONS_ROUTE, TOURNAMENTS_ROUTE,
     USERS_ROUTE
 } from "../../utils/routes";
 import {Context} from "../../index";
@@ -204,6 +204,7 @@ const Header = () => {
                                                     <Form.ControlLabel>{t('password_again')}</Form.ControlLabel>
                                                     <Form.Control name="password" type="password" value={registerPasswordConfirmation} onChange={setRegisterPasswordConfirmation} />
                                                 </Form.Group>
+                                                <Checkbox>{t('agree_with')} <Link to={TERMS_CONDITIONS_ROUTE}>{t('terms_conditions')}</Link></Checkbox>
                                             </Form>
                                         </Modal.Body>
                                         <Modal.Footer>

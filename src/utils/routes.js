@@ -25,3 +25,7 @@ export const GET_PAY_ROUTE = '/pay-event';
 export const TOURNAMENTS_ROUTE = '/tournaments';
 export const STOCKS_ROUTE = '/stocks';
 export const BONUSES_ROUTE = '/bonuses';
+export const TERMS_CONDITIONS_ROUTE = '/terms';
+export const RETURN_POLICY_ROUTE = '/return_policy';
+export const POLICY_ROUTE = '/policy';
+export const CONTACTS_ROUTE = '/contacts';

@@ -37,6 +37,176 @@
   color: black;
 }
 
+.slots-slider {
+  &+.slots-slider {
+    margin-top: 40px;
+  }
+  &__wrapper {
+    background: #302825;
+    padding: 20px !important;
+    border-radius: 16px;
+    border-top-left-radius: 0;
+  }
+
+  &__label {
+    background: #302825;
+    padding: 10px 20px !important;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    width: fit-content;
+    font-size: 18px;
+  }
+}
+
+.rs-table-body-row-wrapper {
+  color: black;
+}
+
+.rs-table-row {
+  background: #fff;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: white !important;
+}
+
+.winner-card{
+  margin: 1rem 0;
+}
+
+
+.footer__menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer__item {
+  color: white !important;
+  text-decoration: none;
+}
+
+.footer {
+  background: #302825 !important;
+}
+
+.payments__header {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.payment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #302825;
+  padding: 20px;
+}
+
+.slot {
+  height: 170px;
+  width: 170px;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  margin: 0 auto;
+
+  &__card {
+    opacity: 0;
+    transition: .2s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    height: 100%;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+  }
+
+  &__overflow {
+    content: '';
+    position: absolute;
+    transition: .2s ease-in;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__btn {
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px 0;
+    border: 3px solid rgba(227, 239, 244, 0.1);
+    transition: .2s ease-in;
+    color: white !important;
+    text-decoration: none !important;
+    display: block;
+    text-align: center;
+    background: linear-gradient(317deg, #FF2A00 0%, #FF4E08 100%);
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &.slot__btn_second {
+      background: none !important;
+      &:hover {
+        background: rgba(227, 239, 244, 0.1) !important;
+      }
+    }
+  }
+
+  &:hover {
+    .slot__overflow {
+      opacity: .5;
+    }
+
+    .slot__img {
+      transform: scale(1.2);
+    }
+
+    .slot__card {
+      opacity: 1;
+    }
+  }
+
+  &__img {
+    transition: .2s ease-in;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    z-index: 0;
+  }
+}
+
 .order-card {
   background: #ebebeb;
   border-radius: 5px;

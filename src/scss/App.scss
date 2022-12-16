@@ -3,9 +3,13 @@
 @import "./responsive.scss";
 @import "./new.scss";
 
-$violet: rgba(57, 4, 104, 1);
-$dark-violet: #240044;
-$pink: #ef2391;
+//$violet: rgba(57, 4, 104, 1);
+//$dark-violet: #240044;
+$pink: linear-gradient(317deg, #FF2A00 0%, #FF4E08 100%);
+$bg: #302825;
+
+$violet: linear-gradient(317deg, #FF2A00 0%, #FF4E08 100%);
+$dark-violet: linear-gradient(317deg, #dc2600 0%, #d9400a 100%);
 
 body {
   color: #fff;
@@ -16,9 +20,8 @@ body {
 }
 
 .content-block {
-  background: white;
+  background: $bg;
   padding: 30px 40px;
-  color: #181818;
   border-radius: 30px;
 }
 
@@ -68,7 +71,7 @@ img {
   }
 
   .rs-modal-content {
-    background: $violet;
+    background: $bg;
   }
 
   .rs-modal-header-close {
@@ -133,11 +136,12 @@ img {
 
 .casino-btn, {
   background: $violet !important;
-  color: white !important;
   transition: .3s ease-in;
+  font-weight: bold;
+  color: black !important;
 
   &:hover {
-    background: #6725a1 !important;
+    background: $dark-violet !important;
   }
 }
 
@@ -433,7 +437,7 @@ img {
   align-items: center;
   flex-direction: column;
   padding: 10px 5px;
-  background: #fff;
+  background: #443e3b;
   box-shadow: #00000030 0px 9px 11px;
   cursor: pointer;
   width: 80px;
@@ -454,7 +458,7 @@ img {
   }
 
   &:hover {
-    background: #efefef;
+    opacity: .8;
   }
 }
 

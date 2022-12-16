@@ -46,8 +46,8 @@ const PushsMoney = () => {
 
         data.map(item => {
             item.createdAt = moment(item.createdAt).format('DD MMMM yyyy')
-            // item.fio = item.user ? item.user.fio : '';
-            item.fio = item.user.username;
+            item.fio = item.user ? item.user.username : '';
+            // item.fio = item.user.username;
 
             return item;
         });

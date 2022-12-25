@@ -166,8 +166,8 @@ const CardPay = ({ amount, submit, setCurrent }) => {
         <div className="foot">
             <Button onClick={handleClick} className="pink-btn btn-lg rounded">{loading ? t('loading')+'...' : t('next')}</Button>
             <Button onClick={() => setCurrent('crypto')} className="pink-btn btn-lg rounded">{t('pay_crypto')}</Button>
-            {/*<Button onClick={() => setCurrent('cold')} className="pink-btn btn-lg rounded">{t('pay_cold')}</Button>*/}
-            <a href={"https://pay.fondy.eu/api/checkout?button=4ma3lqg9f5h4wwb251b75z3trdkcu8rs"} className="pink-btn btn-lg rounded">Pay Test</a>
+            <Button onClick={() => setCurrent('cold')} className="pink-btn btn-lg rounded">{t('pay_cold')}</Button>
+            {/*<a href={"https://pay.fondy.eu/api/checkout?button=4ma3lqg9f5h4wwb251b75z3trdkcu8rs"} className="pink-btn btn-lg rounded">Pay Test</a>*/}
         </div>
     </>
 }

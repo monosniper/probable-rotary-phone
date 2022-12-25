@@ -4,11 +4,11 @@ import 'react-awesome-slider/dist/styles.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {useTranslation} from "react-i18next";
 
-import banner1 from '../assets/images/banners/1.png'
-import banner2 from '../assets/images/banners/2.png'
-import banner3 from '../assets/images/banners/3.png'
-import banner4 from '../assets/images/banners/4.png'
-import banner5 from '../assets/images/banners/5.png'
+import banner1 from '../assets/images/banners/1.jpg'
+import banner2 from '../assets/images/banners/2.jpg'
+import banner3 from '../assets/images/banners/3.jpg'
+import banner4 from '../assets/images/banners/4.jpg'
+import banner5 from '../assets/images/banners/5.jpg'
 import {Autoplay} from "swiper";
 
 const Slider = () => {

@@ -4,7 +4,11 @@ import 'react-awesome-slider/dist/styles.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {useTranslation} from "react-i18next";
 
-import banner from '../assets/images/banner.png'
+import banner1 from '../assets/images/banners/1.png'
+import banner2 from '../assets/images/banners/2.png'
+import banner3 from '../assets/images/banners/3.png'
+import banner4 from '../assets/images/banners/4.png'
+import banner5 from '../assets/images/banners/5.png'
 import {Autoplay} from "swiper";
 
 const Slider = () => {
@@ -46,49 +50,49 @@ const Slider = () => {
                 <a
                     href={'#'}
                     className="slide"
-                    style={{backgroundImage: `url('${banner}')`}}
+                    style={{backgroundImage: `url('${banner1}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
                     href={'#'}
                     className="slide"
-                    style={{backgroundImage: `url('${banner}')`}}
+                    style={{backgroundImage: `url('${banner2}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
                     href={'#'}
                     className="slide"
-                    style={{backgroundImage: `url('${banner}')`}}
+                    style={{backgroundImage: `url('${banner3}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
                     href={'#'}
                     className="slide"
-                    style={{backgroundImage: `url('${banner}')`}}
+                    style={{backgroundImage: `url('${banner4}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
                     href={'#'}
                     className="slide"
-                    style={{backgroundImage: `url('${banner}')`}}
+                    style={{backgroundImage: `url('${banner5}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
                     href={'#'}
                     className="slide"
-                    style={{backgroundImage: `url('${banner}')`}}
+                    style={{backgroundImage: `url('${banner1}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
                     href={'#'}
                     className="slide"
-                    style={{backgroundImage: `url('${banner}')`}}
+                    style={{backgroundImage: `url('${banner2}')`}}
                 />
             </SwiperSlide>
         </Swiper>

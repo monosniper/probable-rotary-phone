@@ -2,23 +2,33 @@ import {
     ADMIN_ROUTE,
     BONUSES_ROUTE,
     CABINET_ROUTE,
-    CASSA_ROUTE, COLD_TRANSACTIONS_ROUTE, CONTACTS_ROUTE,
+    CASSA_ROUTE,
+    COLD_TRANSACTIONS_ROUTE,
+    CONTACTS_ROUTE,
+    DRAWING1_ROUTE,
+    DRAWING2_ROUTE,
+    DRAWING3_ROUTE,
+    DRAWING4_ROUTE, DRAWING5_ROUTE,
     ERROR_PAY_ROUTE,
     FAQ_ROUTE,
     GAME_DEMO_ROUTE,
     GAME_ROUTE,
     GET_PAY_ROUTE,
     HOME_ROUTE,
-    PAYHISTORY_ROUTE, POLICY_ROUTE,
+    PAYHISTORY_ROUTE,
+    POLICY_ROUTE,
     PROFILE_ROUTE,
     PULL_MONEY_ROUTE,
     PULLS_MONEY_ROUTE,
     PUSH_MONEY_ROUTE,
-    PUSHS_MONEY_ROUTE, RETURN_POLICY_ROUTE,
+    PUSHS_MONEY_ROUTE,
+    RETURN_POLICY_ROUTE,
     SETTINGS_ROUTE,
     STOCKS_ROUTE,
-    SUCCESS_PAY_ROUTE, TERMS_CONDITIONS_ROUTE,
-    TOURNAMENTS_ROUTE, TRANSACTIONS_ROUTE,
+    SUCCESS_PAY_ROUTE,
+    TERMS_CONDITIONS_ROUTE,
+    TOURNAMENTS_ROUTE,
+    TRANSACTIONS_ROUTE,
     USERS_ROUTE,
     VERIFICATION_ROUTE,
     VERIFICATIONS_ROUTE
@@ -52,6 +62,11 @@ import Terms from "./components/pages/Terms";
 import Policy from "./components/pages/Policy";
 import ReturnPolicy from "./components/pages/ReturnPolicy";
 import Contacts from "./components/pages/Contacts";
+import Drawing1 from "./components/pages/Drawing1";
+import Drawing2 from "./components/pages/Drawing2";
+import Drawing3 from "./components/pages/Drawing3";
+import Drawing4 from "./components/pages/Drawing4";
+import Drawing5 from "./components/pages/Drawing5";
 
 export const publicRoutes = [
     {
@@ -109,6 +124,25 @@ export const publicRoutes = [
     {
         path: CONTACTS_ROUTE,
         element: <Contacts/>,
+    },
+    {
+        path: DRAWING1_ROUTE,
+        element: <Drawing1/>,
+    },
+    {
+        path: DRAWING2_ROUTE,
+        element: <Drawing2/>,
+    },
+    {
+        path: DRAWING3_ROUTE,
+        element: <Drawing3/>,
+    },
+    {
+        path: DRAWING4_ROUTE,
+        element: <Drawing4/>,
+    },{
+        path: DRAWING5_ROUTE,
+        element: <Drawing5/>,
     },
 ];
 

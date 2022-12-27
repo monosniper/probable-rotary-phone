@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {Context} from "../index";
 
-const SlotsSlider = ({ games, label, id }) => {
+const SlotsSlider = ({ games, label, id, active=false }) => {
 
     const {store} = useContext(Context);
     const handlePushOpen = () => store.setPushModal(true);
@@ -27,7 +27,25 @@ const SlotsSlider = ({ games, label, id }) => {
                 {/*    </button>*/}
                 {/*</div>*/}
             </div>
-            <Swiper
+            {active ? (
+                <div className={"slots-slider__wrapper gamess"}>
+                    {games.map(({ slug, name, launcher, image }) => (
+                        <div className="slot" key={'game-'+slug}>
+                            <div className="slot__overflow"></div>
+                            <div className="slot__img"  style={{backgroundImage: `url(${process.env.REACT_APP_API_URL}/games/${image})`}}></div>
+                            <div className="slot__card">
+                                <div className="slot__title">{name}</div>
+                                {store.isAuth ? (
+                                    <button onClick={handlePushOpen} className="slot__btn">{t('play')}</button>
+                                ) : (
+                                    <button onClick={() => store.setLoginModel(true)} className="slot__btn">{t('play')}</button>
+                                )}
+                                <Link to={__GAME_DEMO_ROUTE + slug + '/' + launcher} className="slot__btn slot__btn_second">{t('demo')}</Link>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ) : <Swiper
                 spaceBetween={50}
                 modules={[Autoplay, Navigation]}
                 autoplay={{
@@ -74,7 +92,7 @@ const SlotsSlider = ({ games, label, id }) => {
                         </div>
                     </SwiperSlide>
                 ))}
-            </Swiper>
+            </Swiper>}
         </div>
     );
 };

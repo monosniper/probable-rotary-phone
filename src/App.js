@@ -144,11 +144,85 @@ i18n
                     },
                     'errors': {
                         'password': "Passwords don't match",
+                    },
+                    'categories': {
+                        'slots': "Slots",
+                        'all_casino': "All casino",
+                        'virtual_sport': "Virtual sport",
+                        'drawings': "Drawings",
+                        'sport': "Sport",
+                        'live_casino': "Live casino",
+                    },
+                    'drawings': {
+                        '1': 'Every guest is always precious and welcome on Rajbet, that\'s why we decided to create a special Loyalty program for you. Every deposit ever made on Rajbet is calculated and grants you loyalty level that unlocks certain benefits, such as higher cashback and various bonuses from you personal manager.',
+                        '2': 'How to activate bonus:\n' +
+                            '\n' +
+                            '1. Login to your RajBet account\n' +
+                            '2. Make a deposit in Cryptocurrency\n' +
+                            '3. Contact RajBet chat support or your personal manager to activate bonus\n' +
+                            '4. Receive 7% bonus on your deposit without any wager',
+                        '3': 'Discover a brand-new offer that can\'t be found anywhere else! Become a part of sports betting competition with a prize pool of 500,000 INR exclusively on Rajbet.com!\n' +
+                            '\n' +
+                            'The tournament\'s goal is to score the most points on the leaderboard. During the promotion time, points are rewarded for all calculated bets placed by players, and the points received are proportional to the amount of the bets placed.\n' +
+                            '\n' +
+                            'All kinds and types of bets participate in the tournament.\n' +
+                            '\n' +
+                            'Example: a player made 5 bets of ₹1000 per game day. If a player wins or loses a bet, he or she will get 5000 points at the end of the game day.\n' +
+                            '\n' +
+                            'You can track your progress and the progress of other players on the leaderboard on the sports betting page.',
+                        '4': '1. Click the "Subscribe" button;\n' +
+                            '\n' +
+                            '2. Earn tournament points awarded for win multiplier. The multiplier is calculated as follows: Win / Bet x1 = 100 points;\n' +
+                            '\n' +
+                            '3. Points are awarded automatically in any casino game\n' +
+                            '\n' +
+                            '4. Prizes will be credited within 2 hours after the end of the tournament without wager;\n' +
+                            '\n' +
+                            'Prize pool:\n' +
+                            '\n' +
+                            '1st place - ₹1000\n' +
+                            '\n' +
+                            '2nd place - ₹1000\n' +
+                            '\n' +
+                            '3rd place - ₹1000',
+                        '5': 'How to activate bonus:\n' +
+                            'Login to your RajBet account \n' +
+                            'Press "Subscribe" button under this bonus \n' +
+                            'Make a deposit from 1000 INR \n' +
+                            'Receive 100% bonus on your deposit amount\n' +
+                            '\n' +
+                            'Terms and Conditions\n' +
+                            '\n' +
+                            'This bonus is available once per player only on first deposit.\n' +
+                            '\n' +
+                            'With an active bonus, bets are debited from the real balance.\n' +
+                            '\n' +
+                            'The bonus amount of 100% of your first deposit will be credited to your Bonus Account. \n' +
+                            '\n' +
+                            'Max. bonus amount is ₹10,000  The minimum deposit for this bonus is ₹1000. \n' +
+                            '\n' +
+                            'Time to use the bonus - 10 days.  In case a Bonus is being cancelled - bonus balance burns out.\n' +
+                            '\n' +
+                            'To withdraw funds, the bonus amount must be rolled over 10 (ten) times. \n' +
+                            '\n' +
+                            'Wagering possible only with bets on sport, bet odds must be from 1.75 to 3.5. \n' +
+                            '\n' +
+                            'For wagering, you can use bets of all types (single, combo, system) for events in pre-match and live.\n' +
+                            '\n' +
+                            'The bonus will be credited to the Real Account only after the wager is completed.',
                     }
-                }
+                },
             },
             ru: {
                 translation: {
+                    'categories': {
+                        'slots': "Слоты",
+                        'all_casino': "Все казино",
+                        'virtual_sport': "Виртуальный спорт",
+                        'drawings': "Акции",
+                        'sport': "Спорт",
+                        'live_casino': "Live казино",
+                    },
                     "wait_for_confirm": "Ожидайте подтверждения",
                     "confirm_within_15_mins": "Переведите средства и подтвердите ордер в течение 15 минут",
                     "your_order_search": "Поиск вашего ордера...",
@@ -272,6 +346,63 @@ i18n
                     },
                     'errors': {
                         'password': "Пароли не совпадают",
+                    },
+                    'drawings': {
+                        '1': 'Каждый гость всегда ценен и желанен на Rajbet, именно поэтому мы решили создать для вас специальную программу лояльности. Каждый депозит, когда-либо внесенный на Rajbet, рассчитывается и обеспечивает ваш уровень лояльности, который открывает определенные преимущества, такие как более высокий кэшбэк и различные бонусы от вашего личного менеджера.',
+                        '2': 'Как активировать бонус:\n' +
+                            '\n' +
+                            '1. Войдите в свой аккаунт RajBet\n' +
+                            '2. Внесите депозит в криптовалюте\n' +
+                            '3. Обратитесь в службу поддержки RajBet в чате или к своему персональному менеджеру, чтобы активировать бонус\n' +
+                            '4. Получите 7% бонус на свой депозит без какой-либо ставки',
+                        '3': 'Откройте для себя совершенно новое предложение, которое нельзя найти больше нигде! Станьте участником соревнования по ставкам на спорт с призовым фондом в 500 000 индийских рупий исключительно на Rajbet.com !\n' +
+                        '\n' +
+                            'Цель турнира - набрать наибольшее количество очков в таблице лидеров. Во время проведения акции баллы начисляются за все рассчитанные ставки, сделанные игроками, и полученные баллы пропорциональны сумме сделанных ставок.\n' +
+                        '\n' +
+                            'В турнире участвуют все виды ставок.\n' +
+                        '\n' +
+                                'Пример: игрок сделал 5 ставок по 1000 йен за игровой день. Если игрок выиграет или проиграет ставку, он или она получит 5000 очков в конце игрового дня.\n' +
+                            '\n' +
+                            "Вы можете отслеживать свой прогресс и прогресс других игроков в таблице лидеров на странице ставок на спорт.",
+                        '4': '1. Нажмите кнопку "Подписаться";\n' +
+                            '\n' +
+                            '2. Зарабатывайте турнирные очки, начисляемые за множитель выигрыша. Множитель рассчитывается следующим образом: Выигрыш/ставка х1 = 100 очков;\n' +
+                            '\n' +
+                            '3. Баллы начисляются автоматически в любой игре казино\n' +
+                            '\n' +
+                            '4. Призы будут зачислены в течение 2 часов после окончания турнира без отыгрыша;\n' +
+                            '\n' +
+                            'Призовой фонд:\n' +
+                            '\n' +
+                            '1-е место - 1000 ₹\n' +
+                            '\n' +
+                            '2-е место - 1000 ₹\n' +
+                            '\n' +
+                            '3-е место - 1000 йен',
+                        '5': 'Как активировать бонус:\n' +
+                            "Войдите в свой аккаунт RajBet \n" +
+                            'Нажмите кнопку "Подписаться" под этим бонусом \n' +
+                            "Внесите депозит от 1000 индийских рупий \n" +
+                            "Получите 100% бонус на сумму вашего депозита\n" +
+                            '\n' +
+                            "Правила и условия\n" +
+                            '\n' +
+                            'Этот бонус доступен один раз для каждого игрока только при первом депозите.\n' +
+                        '\n' +
+                            'При активном бонусе ставки списываются с реального баланса.\n' +
+                        '\n' +
+                            'Сумма бонуса в размере 100% от вашего первого депозита будет зачислена на ваш бонусный счет. \n' +
+                        '\n' +
+                                'Максимальная сумма бонуса составляет 10 000 йен. Минимальный депозит для этого бонуса составляет 1000 йен. \n' +
+                            '\n' +
+                            'Время использования бонуса - 10 дней.  В случае отмены бонуса - бонусный баланс сгорает.\n' +
+                        '\n' +
+                            'Чтобы вывести средства, сумма бонуса должна быть увеличена более 10 (десяти) раз. \n' +
+                        '\n' +'Отыгрыш возможен только со ставками на спорт, коэффициенты ставок должны быть от 1,75 до 3,5. \n' +
+                        '\n' +
+                            'Для отыгрыша вы можете использовать ставки всех типов (одиночные, комбинированные, системные) на события в предматчевом режиме и в режиме реального времени.\n' +
+                        '\n' +
+                            'Бонус будет зачислен на реальный счет только после завершения отыгрыша.',
                     }
                 }
             },

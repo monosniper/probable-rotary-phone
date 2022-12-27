@@ -10,6 +10,7 @@ import banner3 from '../assets/images/banners/3.jpg'
 import banner4 from '../assets/images/banners/4.jpg'
 import banner5 from '../assets/images/banners/5.jpg'
 import {Autoplay} from "swiper";
+import {DRAWING1_ROUTE, DRAWING2_ROUTE, DRAWING3_ROUTE, DRAWING4_ROUTE, DRAWING5_ROUTE} from "../utils/routes";
 
 const Slider = () => {
     const { t } = useTranslation();
@@ -48,42 +49,42 @@ const Slider = () => {
         >
             <SwiperSlide>
                 <a
-                    href={'#'}
+                    href={DRAWING1_ROUTE}
                     className="slide"
                     style={{backgroundImage: `url('${banner1}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
-                    href={'#'}
+                    href={DRAWING2_ROUTE}
                     className="slide"
                     style={{backgroundImage: `url('${banner2}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
-                    href={'#'}
+                    href={DRAWING3_ROUTE}
                     className="slide"
                     style={{backgroundImage: `url('${banner3}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
-                    href={'#'}
+                    href={DRAWING4_ROUTE}
                     className="slide"
                     style={{backgroundImage: `url('${banner4}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
-                    href={'#'}
+                    href={DRAWING5_ROUTE}
                     className="slide"
                     style={{backgroundImage: `url('${banner5}')`}}
                 />
             </SwiperSlide>
             <SwiperSlide>
                 <a
-                    href={'#'}
+                    href={DRAWING1_ROUTE}
                     className="slide"
                     style={{backgroundImage: `url('${banner1}')`}}
                 />

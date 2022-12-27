@@ -10,6 +10,7 @@ import GameService from "../services/GameService";
 export default class Store {
 
     user = {};
+    category = null;
     isAuth = true;
     isLoading = false;
     isLoginModalOpen = false;
@@ -26,6 +27,10 @@ export default class Store {
 
     setAuth(bool) {
         this.isAuth = bool;
+    }
+
+    setCategory(name) {
+        this.category = name
     }
 
     setUser(user) {

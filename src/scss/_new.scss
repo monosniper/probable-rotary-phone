@@ -1,3 +1,13 @@
+.gamess {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.category.active {
+  border: 2px solid;
+}
+
 .slide {
   height: 240px;
   background-position: center;

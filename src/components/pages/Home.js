@@ -18,6 +18,7 @@ import {useTranslation} from "react-i18next";
 import Categories from "../Categories";
 import SlotsSlider from "../SlotsSlider";
 import PaymentsSlider from "../PaymentsSlider";
+import {shuffle} from "../../utils/shuffle";
 
 const Home = () => {
     const { t } = useTranslation();
@@ -63,13 +64,20 @@ const Home = () => {
 
             <Slider/>
             <Categories/>
+
             {games.length && <FakeSlider1 games={games}/>}
 
-            <SlotsSlider id={'slots'} games={games.slice(0, 10)} label={'Top Slots'} />
-            <SlotsSlider id={'instant'} games={games.slice(10, 20)} label={'Top Instant games'} />
-            <SlotsSlider id={'live'} games={games.slice(20, 30)} label={'Top Live Casino'} />
-            <SlotsSlider id={'tv'} games={games.slice(30, 40)} label={'Top TV Games'} />
-            <SlotsSlider id={'virtual'} games={games.slice(40, 50)} label={'Top Virtual Sports'} />
+            {store.category ? (
+                <SlotsSlider active games={shuffle(games).slice(0, 20)} label={t('categories.'+store.category)} />
+            ) : (
+                <>
+                    <SlotsSlider id={'slots'} games={games.slice(0, 10)} label={'Top Slots'} />
+                    <SlotsSlider id={'instant'} games={games.slice(10, 20)} label={'Top Instant games'} />
+                    <SlotsSlider id={'live'} games={games.slice(20, 30)} label={'Top Live Casino'} />
+                    <SlotsSlider id={'tv'} games={games.slice(30, 40)} label={'Top TV Games'} />
+                    <SlotsSlider id={'virtual'} games={games.slice(40, 50)} label={'Top Virtual Sports'} />
+                </>
+            )}
 
             <PaymentsSlider />
 

@@ -11,7 +11,9 @@ const Terms = () => {
             <Helmet>
                 <title>{t('terms_conditions_')} | {process.env.REACT_APP_NAME}</title>
             </Helmet>
-
+            <p>
+                {t('terms_and_conditions')}
+            </p>
         </ContentBlock>
     );
 };

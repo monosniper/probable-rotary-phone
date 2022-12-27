@@ -11,7 +11,9 @@ const Policy = () => {
             <Helmet>
                 <title>{t('policy')} | {process.env.REACT_APP_NAME}</title>
             </Helmet>
-
+            <p>
+                {t('privacy')}
+            </p>
         </ContentBlock>
     );
 };

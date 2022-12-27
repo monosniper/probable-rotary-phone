@@ -11,7 +11,10 @@ const Contacts = () => {
             <Helmet>
                 <title>{t('contacts')} | {process.env.REACT_APP_NAME}</title>
             </Helmet>
-
+            <ul>
+               <li>Email: <a href="mailto:support@makao777.com">support@makao777.com</a></li>
+               <li>Telegram: <a href="https://t.me/sherbetld">@sherbetld</a></li>
+            </ul>
         </ContentBlock>
     );
 };

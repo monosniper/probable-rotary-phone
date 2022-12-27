@@ -11,7 +11,9 @@ const ReturnPolicy = () => {
             <Helmet>
                 <title>{t('return_policy')} | {process.env.REACT_APP_NAME}</title>
             </Helmet>
-
+            <p>
+                {t('return_rules')}
+            </p>
         </ContentBlock>
     );
 };

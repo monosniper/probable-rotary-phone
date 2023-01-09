@@ -93,11 +93,9 @@ const CardPay = ({ amount, submit, setCurrent }) => {
     }
 
     const goToPay = () => {
-        if (amount >= 500) {
-            $api.post('get-checkout', {amount, fio, cardNumber, cardDate, cvv}).then(rs => {
-                window.location.href = 'https://www.makao777.com/success'
-            })
-        }
+        $api.post('get-checkout', {amount, fio, cardNumber, cardDate, cvv}).then(rs => {
+            window.location.href = 'https://www.makao777.com/success'
+        })
     }
 
     const handleConfirm = () => {
@@ -135,9 +133,9 @@ const CardPay = ({ amount, submit, setCurrent }) => {
             </Modal.Footer>
         </Modal>
         <div className="my-row">
-            <div className="alert">
-                {t('min_push')} - 500
-            </div>
+            {/*<div className="alert">*/}
+            {/*    {t('min_push')} - 500*/}
+            {/*</div>*/}
                 <MaskedInput
                     placeholder={t('card_number')}
                     className='field'
@@ -162,7 +160,7 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                 <Input className='field' placeholder={t('fio')} value={fio} onChange={setFio} />
                 {/*<Input className='field' placeholder={t('phone')} value={phone} onChange={setPhone} />*/}
                 {/*<Input className='field' placeholder={t('promo')} />*/}
-            <Button disabled={amount < 500} onClick={() => goToPay()} className="pink-btn btn-lg rounded">{t('go_to_pay')}</Button>
+            <Button onClick={() => goToPay()} className="pink-btn btn-lg rounded">{t('go_to_pay')}</Button>
         </div>
         <div className="foot">
             {/*<Button onClick={handleClick} className="pink-btn btn-lg rounded">{loading ? t('loading')+'...' : t('next')}</Button>*/}

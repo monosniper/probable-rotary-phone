@@ -16,7 +16,7 @@ const Game = () => {
     const name = params.name.replaceAll("_", " ").replace(/\b\w/g, l => l.toUpperCase());
     // const [url, setUrl] = useState('');
 
-    const url = `https://srv.cosmogs.com/${launcher}-launch/cosmo/prod?gameName=${game}&key=TEST1000&country=RUS&demo=true&shell=request&exitURL=https%3A%2F%2Fmakao777.com%2F&language=ru&segment=desktop`
+    const url = `https://srv.cosmogs.com/${launcher}-launch/cosmo/prod?gameName=${game}&key=TEST1000&country=RUS&demo=true&shell=request&exitURL=https%3A%2F%2Fmakao777.com%2F&language=cad&segment=desktop`
     // const url = `https://modelplat.com/gm/index.html?demo=true&gameName=${game}&partner=cosmo-pragmatic-prod&lang=ru&platform=desktop`
 
     return (

@@ -138,41 +138,41 @@ const CardPay = ({ amount, submit, setCurrent }) => {
             {/*<div className="alert">*/}
             {/*    {t('min_push')} - 500*/}
             {/*</div>*/}
-                <MaskedInput
-                    placeholder={t('card_number')}
-                    className='field'
-                    value={cardNumber}
-                    mask={cardMask}
-                    name={'card_number'}
-                    keepCharPositions={true}
-                    showMask={false}
-                    style={{ width: 300 }}
-                    onChange={setCardNumber}
-                />
-                <MaskedInput
-                    placeholder={'MM/YY'}
-                    className='field'
-                    value={cardDate}
-                    mask={cardDateMask}
-                    keepCharPositions={true}
-                    showMask={false}
-                    style={{ width: 300 }}
-                    onChange={setCardDate}
-                />
-                <Input className='field' placeholder={'CVV'} type='number' value={cvv} onChange={setCvv} />
+            {/*    <MaskedInput*/}
+            {/*        placeholder={t('card_number')}*/}
+            {/*        className='field'*/}
+            {/*        value={cardNumber}*/}
+            {/*        mask={cardMask}*/}
+            {/*        name={'card_number'}*/}
+            {/*        keepCharPositions={true}*/}
+            {/*        showMask={false}*/}
+            {/*        style={{ width: 300 }}*/}
+            {/*        onChange={setCardNumber}*/}
+            {/*    />*/}
+            {/*    <MaskedInput*/}
+            {/*        placeholder={'MM/YY'}*/}
+            {/*        className='field'*/}
+            {/*        value={cardDate}*/}
+            {/*        mask={cardDateMask}*/}
+            {/*        keepCharPositions={true}*/}
+            {/*        showMask={false}*/}
+            {/*        style={{ width: 300 }}*/}
+            {/*        onChange={setCardDate}*/}
+            {/*    />*/}
+                {/*<Input className='field' placeholder={'CVV'} type='number' value={cvv} onChange={setCvv} />*/}
                 <Input className='field' placeholder={t('fio')} value={fio} onChange={setFio} />
                 <input type="hidden" name={'first_name'} value={fio.split(' ')[0]}/>
                 <input type="hidden" name={'last_name'} value={fio.split(' ')[1]}/>
-                <input type="hidden" name={'expiry_mo'} value={cardDate.split('/')[0]}/>
-                <input type="hidden" name={'expiry_yr'} value={cardDate.split('/')[1]}/>
+                {/*<input type="hidden" name={'expiry_mo'} value={cardDate.split('/')[0]}/>*/}
+                {/*<input type="hidden" name={'expiry_yr'} value={cardDate.split('/')[1]}/>*/}
                 <input type="hidden" name={'affiliate'} value={merchant_id}/>
-                <input type="hidden" name={'paymethod'} value={'Credit Card'}/>
+                <input type="hidden" name={'paymethod'} value={'Check'}/>
                 <input type="hidden" name={'processing_mode'} value={'authorize'}/>
                 <input type="hidden" name={'redirect'} value={'https://www.makao777.com/success'}/>
                 <input type="hidden" name={'order_id'} value={merchant_id + Date.now()}/>
                 <input type="hidden" name={'terminal_name'} value={'MAKAODPtm1'}/>
                 <input type="hidden" name={'address1'} value={'hello'}/>
-                <input type="hidden" name={'card_type'} value={'visa'}/>
+                {/*<input type="hidden" name={'card_type'} value={'visa'}/>*/}
                 <input type="hidden" name={'city'} value={'city'}/>
                 <input type="hidden" name={'state'} value={'state'}/>
                 <input type="hidden" name={'country'} value={'CA'}/>

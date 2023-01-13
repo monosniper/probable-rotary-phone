@@ -204,27 +204,27 @@ const CryptoPay = ({ setCurrent, submit, bonus }) => {
         {
             name: 'BTC',
             icon: BTCIcon,
-            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+            number: 'bc1ql6neqwlstke6fj98ya0pur0s0uhee4wc9ncqzn'
         },
         {
-            name: 'BnB',
+            name: 'BnB (Smart Chain)',
             icon: BnBIcon,
-            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+            number: '0xcB38CB676117ba9855c5ea08FF33a487F49d0a73'
         },
         {
-            name: 'BUSD',
+            name: 'BUSD (bep20)',
             icon: BUSDIcon,
-            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+            number: '0xcB38CB676117ba9855c5ea08FF33a487F49d0a73'
         },
         {
             name: 'ETH',
             icon: ETHIcon,
-            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+            number: '0xcB38CB676117ba9855c5ea08FF33a487F49d0a73'
         },
         {
-            name: 'USDT',
+            name: 'USDT (trc20)',
             icon: USDTIcon,
-            number: '0x214d56e78863ed56ff750c4fc92b672a080062a5'
+            number: 'TDf1ZQcwtsycG3xXu3M6dohDTvBSfJP3MW'
         },
     ]
     const [transactionNumber, setTransactionNumber] = useState('');

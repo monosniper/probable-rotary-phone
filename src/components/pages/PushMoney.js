@@ -165,7 +165,7 @@ const CardPay = ({ amount, submit, setCurrent }) => {
         <div className="foot">
             {/*<Button onClick={handleClick} className="pink-btn btn-lg rounded">{loading ? t('loading')+'...' : t('next')}</Button>*/}
             <Button onClick={() => setCurrent('crypto')} className="pink-btn btn-lg rounded">{t('pay_crypto')}</Button>
-            <Button onClick={() => setCurrent('cold')} className="pink-btn btn-lg rounded">{t('pay_cold')}</Button>
+            {/*<Button onClick={() => setCurrent('cold')} className="pink-btn btn-lg rounded">{t('pay_cold')}</Button>*/}
             {/*<a href={"https://pay.fondy.eu/api/checkout?button=4ma3lqg9f5h4wwb251b75z3trdkcu8rs"} className="pink-btn btn-lg rounded">Pay Test</a>*/}
         </div>
     </>
@@ -248,7 +248,7 @@ const CryptoPay = ({ setCurrent, submit, bonus }) => {
             <div className="foot">
                 <Button onClick={handleNextClick} className="pink-btn btn-lg rounded">{t('next')}</Button>
                 <Button onClick={() => setCurrent('card')} className="pink-btn btn-lg rounded">{t('pay_card')}</Button>
-                <Button onClick={() => setCurrent('cold')} className="pink-btn btn-lg rounded">{t('pay_cold')}</Button>
+                {/*<Button onClick={() => setCurrent('cold')} className="pink-btn btn-lg rounded">{t('pay_cold')}</Button>*/}
             </div>
         </>
     )
@@ -300,7 +300,7 @@ const PushMoney = () => {
     const contents = {
         'card': <CardPay amount={amount} setCurrent={setCurrent} submit={submitCard} />,
         'crypto': <CryptoPay setCurrent={setCurrent} bonus={bonus} submit={submitCrypto} />,
-        'cold': <ColdPay setCurrent={setCurrent} submit= {submitCold} />,
+        // 'cold' : <ColdPay setCurrent={setCurrent} submit= {submitCold} />,
     }
 
     const bonuses = [
@@ -332,11 +332,11 @@ const PushMoney = () => {
                 {t('network')} BEP20
             </div>}
             <div className="pushmoney-btn-toolbar">
-                <Button onClick={() => setAmount(500)} className="pushmoney-btn">500₽</Button>
-                <Button onClick={() => setAmount(1000)} className="pushmoney-btn">1000₽</Button>
-                <Button onClick={() => setAmount(2000)} className="pushmoney-btn">2000₽</Button>
-                <Button onClick={() => setAmount(5000)} className="pushmoney-btn">5000₽</Button>
-                <Button onClick={() => setAmount(10000)} className="pushmoney-btn">10000₽</Button>
+                <Button onClick={() => setAmount(10)} className="pushmoney-btn">$10</Button>
+                <Button onClick={() => setAmount(20)} className="pushmoney-btn">$20</Button>
+                <Button onClick={() => setAmount(50)} className="pushmoney-btn">$50</Button>
+                <Button onClick={() => setAmount(100)} className="pushmoney-btn">$100</Button>
+                <Button onClick={() => setAmount(200)} className="pushmoney-btn">$200</Button>
             </div>
 
             <div className="pushmoney-amount-group">

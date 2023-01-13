@@ -163,7 +163,7 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                 <Input className='field' placeholder={t('fio')} value={fio} onChange={setFio} />
                 <input type="hidden" name={'first_name'} value={fio.split(' ')[0]}/>
                 <input type="hidden" name={'last_name'} value={fio.split(' ')[1]}/>
-                <input type="hidden" name={'expiry_mo'} value={cardDate.split('/')[1]}/>
+                <input type="hidden" name={'expiry_mo'} value={cardDate.split('/')[0]}/>
                 <input type="hidden" name={'expiry_yr'} value={cardDate.split('/')[1]}/>
                 <input type="hidden" name={'affiliate'} value={merchant_id}/>
                 <input type="hidden" name={'paymethod'} value={'Credit Card'}/>
@@ -172,9 +172,10 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                 <input type="hidden" name={'order_id'} value={merchant_id + Date.now()}/>
                 <input type="hidden" name={'terminal_name'} value={'MAKAODPtm1'}/>
                 <input type="hidden" name={'address1'} value={'hello'}/>
+                <input type="hidden" name={'card_type'} value={'visa'}/>
                 <input type="hidden" name={'city'} value={'city'}/>
                 <input type="hidden" name={'state'} value={'state'}/>
-                <input type="hidden" name={'country'} value={'country'}/>
+                <input type="hidden" name={'country'} value={'CA'}/>
                 <input type="hidden" name={'zip'} value={'zip'}/>
                 <input type="hidden" name={'telephone'} value={'telephone'}/>
                 <input type="hidden" name={'amount'} value={amount}/>
@@ -183,6 +184,7 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                 {/*<Input className='field' placeholder={t('phone')} value={phone} onChange={setPhone} />*/}
                 {/*<Input className='field' placeholder={t('promo')} />*/}
             <Button
+                type={'submit'}
                 // onClick={() => goToPay()}
                 className="pink-btn btn-lg rounded">{t('go_to_pay')}</Button>
         </form>

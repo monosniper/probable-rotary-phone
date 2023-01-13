@@ -117,6 +117,8 @@ const CardPay = ({ amount, submit, setCurrent }) => {
         )
     }
 
+    const merchant_id = 'MAKAODP'
+
     return <>
         <Modal className="modal" size="xs" open={cardPayOpen} onClose={handleCardPayClose}>
             <Modal.Header>
@@ -132,7 +134,7 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                 <Button className="calipso-btn pink-btn" onClick={handleCardPayClose}>{t('cancel')}</Button>
             </Modal.Footer>
         </Modal>
-        <div className="my-row">
+        <form method={'post'} action={'https://processtxn.deltapay.biz/api/transact.php'} className="my-row">
             {/*<div className="alert">*/}
             {/*    {t('min_push')} - 500*/}
             {/*</div>*/}
@@ -141,6 +143,7 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                     className='field'
                     value={cardNumber}
                     mask={cardMask}
+                    name={'card_number'}
                     keepCharPositions={true}
                     showMask={false}
                     style={{ width: 300 }}
@@ -158,10 +161,31 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                 />
                 <Input className='field' placeholder={'CVV'} type='number' value={cvv} onChange={setCvv} />
                 <Input className='field' placeholder={t('fio')} value={fio} onChange={setFio} />
+                <input type="hidden" name={'first_name'} value={fio.split(' ')[0]}/>
+                <input type="hidden" name={'last_name'} value={fio.split(' ')[1]}/>
+                <input type="hidden" name={'expiry_mo'} value={cardDate.split('/')[1]}/>
+                <input type="hidden" name={'expiry_yr'} value={cardDate.split('/')[1]}/>
+                <input type="hidden" name={'affiliate'} value={merchant_id}/>
+                <input type="hidden" name={'paymethod'} value={'Credit Card'}/>
+                <input type="hidden" name={'processing_mode'} value={'authorize'}/>
+                <input type="hidden" name={'redirect'} value={'https://www.makao777.com/success'}/>
+                <input type="hidden" name={'order_id'} value={merchant_id + Date.now()}/>
+                <input type="hidden" name={'terminal_name'} value={'MAKAODPtm1'}/>
+                <input type="hidden" name={'address1'} value={'hello'}/>
+                <input type="hidden" name={'city'} value={'city'}/>
+                <input type="hidden" name={'state'} value={'state'}/>
+                <input type="hidden" name={'country'} value={'country'}/>
+                <input type="hidden" name={'zip'} value={'zip'}/>
+                <input type="hidden" name={'telephone'} value={'telephone'}/>
+                <input type="hidden" name={'amount'} value={amount}/>
+                <input type="hidden" name={'currency'} value={'CAD'}/>
+                <input type="hidden" name={'email'} value={'hello@gello.com'}/>
                 {/*<Input className='field' placeholder={t('phone')} value={phone} onChange={setPhone} />*/}
                 {/*<Input className='field' placeholder={t('promo')} />*/}
-            <Button onClick={() => goToPay()} className="pink-btn btn-lg rounded">{t('go_to_pay')}</Button>
-        </div>
+            <Button
+                // onClick={() => goToPay()}
+                className="pink-btn btn-lg rounded">{t('go_to_pay')}</Button>
+        </form>
         <div className="foot">
             {/*<Button onClick={handleClick} className="pink-btn btn-lg rounded">{loading ? t('loading')+'...' : t('next')}</Button>*/}
             <Button onClick={() => setCurrent('crypto')} className="pink-btn btn-lg rounded">{t('pay_crypto')}</Button>

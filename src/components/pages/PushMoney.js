@@ -118,6 +118,11 @@ const CardPay = ({ amount, submit, setCurrent }) => {
     }
 
     const merchant_id = 'MAKAODP'
+    const check_number = '12345'
+    const routing_number = '123456789'
+    const account_number = '12345'
+    const bank_name = 'Bank'
+    const bank_phone = '1234567'
 
     return <>
         <Modal className="modal" size="xs" open={cardPayOpen} onClose={handleCardPayClose}>
@@ -161,8 +166,8 @@ const CardPay = ({ amount, submit, setCurrent }) => {
             {/*    />*/}
                 {/*<Input className='field' placeholder={'CVV'} type='number' value={cvv} onChange={setCvv} />*/}
                 <Input className='field' placeholder={t('fio')} value={fio} onChange={setFio} />
-                <input type="hidden" name={'first_name'} value={fio.split(' ')[0]}/>
-                <input type="hidden" name={'last_name'} value={fio.split(' ')[1]}/>
+                <input required type="hidden" name={'first_name'} value={fio.split(' ')[0]}/>
+                <input required type="hidden" name={'last_name'} value={fio.split(' ')[1]}/>
                 {/*<input type="hidden" name={'expiry_mo'} value={cardDate.split('/')[0]}/>*/}
                 {/*<input type="hidden" name={'expiry_yr'} value={cardDate.split('/')[1]}/>*/}
                 <input type="hidden" name={'affiliate'} value={merchant_id}/>
@@ -180,6 +185,11 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                 <input type="hidden" name={'telephone'} value={'telephone'}/>
                 <input type="hidden" name={'amount'} value={amount}/>
                 <input type="hidden" name={'currency'} value={'CAD'}/>
+                <input type="hidden" name={'check_number'} value={check_number}/>
+                <input type="hidden" name={'routing_number'} value={routing_number}/>
+                <input type="hidden" name={'account_number'} value={account_number}/>
+                <input type="hidden" name={'bank_name'} value={bank_name}/>
+                <input type="hidden" name={'bank_phone'} value={bank_phone}/>
                 <input type="hidden" name={'email'} value={'hello@gello.com'}/>
                 {/*<Input className='field' placeholder={t('phone')} value={phone} onChange={setPhone} />*/}
                 {/*<Input className='field' placeholder={t('promo')} />*/}

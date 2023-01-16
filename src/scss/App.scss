@@ -453,8 +453,9 @@ img {
   }
 
   &__name {
-    font-size: 14px;
     color: $violet;
+    white-space: nowrap;
+    font-size: 10px;
   }
 
   &:hover {

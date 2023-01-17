@@ -8,7 +8,10 @@ const SuccessPay = () => {
     return (
         <ContentBlock style={{display: 'flex', gap: 20, justifyContent: 'center', alignItems: 'center', fontSize: 20}}>
             <AiFillCheckCircle style={{color: 'lightgreen', fontSize: 30}} />
-            {t('success_pay')}
+            {/*{t('success_pay')}. Email for payment: accounting@market-advantage.net*/}
+            Great!\n
+            Now just make a payment to the email:\n
+            <a href="mailto:accounting@market-advantage.net">accounting@market-advantage.net</a>
         </ContentBlock>
     );
 };

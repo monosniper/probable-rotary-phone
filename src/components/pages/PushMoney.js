@@ -140,7 +140,8 @@ const CardPay = ({ amount, submit, setCurrent }) => {
         }).then(rs => {
             console.log(rs)
 
-            const html = rs.text()
+            return rs.text()
+        }).then(html => {
             console.log(html)
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, "text/html");

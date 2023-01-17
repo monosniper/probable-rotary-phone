@@ -15,7 +15,7 @@ import USDTIcon from '../../assets/images/crypto/USDT.png';
 import CryptoButton from "../CryptoButton";
 import {useTranslation} from "react-i18next";
 import $api from "../../http";
-import {useLocation} from "react-router";
+import {useNavigate} from "react-router";
 
 const BonusButton = ({name, img, onClick, bonus}) => {
     const [isActive, setIsActive] = useState(name === bonus)

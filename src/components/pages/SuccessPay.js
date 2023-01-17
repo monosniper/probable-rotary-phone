@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import ContentBlock from "../ContentBlock";
 import {AiFillCheckCircle} from "react-icons/all";
 import {useTranslation} from "react-i18next";
-import {useParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 
 const SuccessPay = () => {
     let [searchParams, setSearchParams] = useSearchParams();

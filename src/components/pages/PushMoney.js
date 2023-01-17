@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useRef} from 'react';
 import {Button, Form, IconButton, Input, MaskedInput, Modal, Notification, toaster} from "rsuite";
 import Plus from "@rsuite/icons/Plus";
 import Minus from "@rsuite/icons/Minus";
@@ -124,6 +124,23 @@ const CardPay = ({ amount, submit, setCurrent }) => {
     const bank_name = 'Bank'
     const bank_phone = '1234567'
 
+    const form = useRef()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const data = new URLSearchParams();
+        for (const pair of new FormData(form.current)) {
+            data.append(pair[0], pair[1]);
+        }
+        fetch('https://processtxn.deltapay.biz/api/transact.php', {
+            method: 'post',
+            // headers: {'Content-Type':'application/json'},
+            body: data
+        }).then(rs => {
+            console.log(rs)
+        });
+    }
+
     return <>
         <Modal className="modal" size="xs" open={cardPayOpen} onClose={handleCardPayClose}>
             <Modal.Header>
@@ -139,7 +156,7 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                 <Button className="calipso-btn pink-btn" onClick={handleCardPayClose}>{t('cancel')}</Button>
             </Modal.Footer>
         </Modal>
-        <form method={'post'} action={'https://processtxn.deltapay.biz/api/transact.php'} className="my-row">
+        <form ref={form} onSubmit={handleSubmit} method={'post'} action={'https://processtxn.deltapay.biz/api/transact.php'} className="my-row">
             {/*<div className="alert">*/}
             {/*    {t('min_push')} - 500*/}
             {/*</div>*/}

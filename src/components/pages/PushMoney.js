@@ -138,7 +138,10 @@ const CardPay = ({ amount, submit, setCurrent }) => {
             // headers: {'Content-Type':'application/json'},
             body: data
         }).then(rs => {
+            console.log(rs)
+
             const html = rs.text()
+            console.log(html)
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, "text/html");
 

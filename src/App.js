@@ -125,7 +125,7 @@ i18n
                     "crypto_desc": "After payment, insert the transaction number in the field below. The approximate waiting time is 30 minutes.",
                     "transaction_number": "Transaction number",
                     "pay_cold": "Cold wallet payment",
-                    "pay_card": "Card payment",
+                    "pay_card": "Interac",
                     "pay_crypto": "Crypto payment",
                     "reset": "Recovery",
                     "payments": "Payments",

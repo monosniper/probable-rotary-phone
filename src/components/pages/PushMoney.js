@@ -302,7 +302,7 @@ const CryptoPay = ({ setCurrent, submit, bonus }) => {
             <Input className='field' placeholder={t('transaction_number')+'...'} type='text' value={transactionNumber} onChange={setTransactionNumber} />
             <br/>
 
-            <Button disabled={transactionNumber === '' || crypto === ''} onClick={() => submit({crypto, transactionNumber})} className="pink-btn btn-lg rounded">{t('next')}</Button>
+            <Button disabled={transactionNumber === '' || crypto === ''} onClick={() => submit({crypto, transactionNumber})} className="pink-btn btn-lg rounded">Crypto Payment</Button>
         </div>
     ) : (
         <>
@@ -310,8 +310,8 @@ const CryptoPay = ({ setCurrent, submit, bonus }) => {
                 {cryptos.map(item => <CryptoButton crypto={crypto} {...item} onClick={handleCryptoClick} />)}
             </div>
             <div className="foot">
-                <Button onClick={handleNextClick} className="pink-btn btn-lg rounded">{t('next')}</Button>
-                <Button onClick={() => setCurrent('card')} className="pink-btn btn-lg rounded">{t('pay_card')}</Button>
+                <Button onClick={handleNextClick} className="pink-btn btn-lg rounded">Crypto Payment</Button>
+                <Button onClick={() => setCurrent('card')} className="pink-btn btn-lg rounded">{t('pay_card')} Payment</Button>
                 {/*<Button onClick={() => setCurrent('cold')} className="pink-btn btn-lg rounded">{t('pay_cold')}</Button>*/}
             </div>
         </>

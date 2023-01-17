@@ -23,7 +23,7 @@ const SuccessPay = () => {
                 Great! <br/>
                 Your Order ID: <div style={{fontWeight: 'bold', color: '#f44336', width: '100%'}}>{query}</div>
             </div><br/>
-            Now you have to include the order ID in the notes/memo field and make you payment to the email: <a href="mailto:accounting@market-advantage.net">accounting@market-advantage.net</a>
+            Use "Interac" and don't forget to include the order ID in the notes/memo field and make you payment to the email: <a href="mailto:accounting@market-advantage.net">accounting@market-advantage.net</a>
         </ContentBlock>
     );
 };

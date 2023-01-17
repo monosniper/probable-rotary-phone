@@ -125,6 +125,7 @@ const CardPay = ({ amount, submit, setCurrent }) => {
     const bank_phone = '1234567'
 
     const form = useRef()
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -137,7 +138,13 @@ const CardPay = ({ amount, submit, setCurrent }) => {
             // headers: {'Content-Type':'application/json'},
             body: data
         }).then(rs => {
-            console.log(rs)
+            const html = rs.text()
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+
+            const order_id = doc.querySelector('[name="order_id"]').value
+
+            navigate('/success?order_id='+order_id)
         });
     }
 

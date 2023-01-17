@@ -21,7 +21,7 @@ const SuccessPay = () => {
             {/*{t('success_pay')}. Email for payment: accounting@market-advantage.net*/}
             <div style={{width: '100%'}}>
                 Great! <br/>
-                Your Order ID: <div style={{fontWeight: 'bold', color: '#f44336', width: '100%'}}></div>{query}
+                Your Order ID: <div style={{fontWeight: 'bold', color: '#f44336', width: '100%'}}>{query}</div>
             </div><br/>
             Now you have to include the order ID in the notes/memo field and make you payment to the email: <a href="mailto:accounting@market-advantage.net">accounting@market-advantage.net</a>
         </ContentBlock>

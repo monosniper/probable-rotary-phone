@@ -178,7 +178,7 @@ export default class Store {
 
     async masterPay(amount) {
         try {
-            return await $api.post('masterpay-payment', {amount: amount*10, user_id: this.user.id})
+            return await $api.post('masterpay-payment', {amount: amount*100, user_id: this.user.id})
         } catch (e) {
             console.log(e)
         }

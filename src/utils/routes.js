@@ -20,6 +20,7 @@ export const __GAME_ROUTE = '/game/';
 export const GAME_DEMO_ROUTE = '/game/demo/:name/:launcher';
 export const __GAME_DEMO_ROUTE = '/game/demo/';
 export const SUCCESS_PAY_ROUTE = '/success';
+export const SUCCESS_PAY2_ROUTE = '/success-pay';
 export const ERROR_PAY_ROUTE = '/error';
 export const GET_PAY_ROUTE = '/pay-event';
 export const TOURNAMENTS_ROUTE = '/tournaments';

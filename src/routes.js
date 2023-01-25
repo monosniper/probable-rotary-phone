@@ -26,6 +26,7 @@ import {
     SETTINGS_ROUTE,
     STOCKS_ROUTE,
     SUCCESS_PAY_ROUTE,
+    SUCCESS_PAY2_ROUTE,
     TERMS_CONDITIONS_ROUTE,
     TOURNAMENTS_ROUTE,
     TRANSACTIONS_ROUTE,
@@ -50,6 +51,7 @@ import Settings from "./components/pages/Settings";
 import Verifications from "./components/pages/Verifications";
 import ErrorPay from "./components/pages/ErrorPay";
 import SuccessPay from "./components/pages/SuccessPay";
+import SuccessPay2 from "./components/pages/SuccessPay2";
 import GetPay from "./components/pages/GetPay";
 import Tournaments from "./components/pages/Tournaments";
 import Stocks from "./components/pages/Stocks";
@@ -84,6 +86,10 @@ export const publicRoutes = [
     {
         path: SUCCESS_PAY_ROUTE,
         element: <SuccessPay/>,
+    },
+    {
+        path: SUCCESS_PAY2_ROUTE,
+        element: <SuccessPay2/>,
     },
     {
         path: ERROR_PAY_ROUTE,

@@ -92,9 +92,11 @@ const CardPay = ({ amount, submit, setCurrent }) => {
         }, 3000)
     }
 
+    const {store} = useContext(Context);
+
     const goToPay = () => {
-        $api.post('get-checkout', {amount, fio, cardNumber, cardDate, cvv}).then(rs => {
-            window.location.href = 'https://www.makao777.com/success'
+        store.masterPay(amount).then(rs => {
+            window.location.href = rs.data.pay_url
         })
     }
 
@@ -193,37 +195,37 @@ const CardPay = ({ amount, submit, setCurrent }) => {
             {/*        onChange={setCardDate}*/}
             {/*    />*/}
                 {/*<Input className='field' placeholder={'CVV'} type='number' value={cvv} onChange={setCvv} />*/}
-                <Input className='field' placeholder={t('fio')} value={fio} onChange={setFio} />
-                <input required type="hidden" name={'first_name'} value={fio.split(' ')[0]}/>
-                <input required type="hidden" name={'last_name'} value={fio.split(' ')[1]}/>
-                {/*<input type="hidden" name={'expiry_mo'} value={cardDate.split('/')[0]}/>*/}
-                {/*<input type="hidden" name={'expiry_yr'} value={cardDate.split('/')[1]}/>*/}
-                <input type="hidden" name={'affiliate'} value={merchant_id}/>
-                <input type="hidden" name={'paymethod'} value={'Check'}/>
-                <input type="hidden" name={'processing_mode'} value={'authorize'}/>
-                <input type="hidden" name={'redirect'} value={'https://www.makao777.com/success'}/>
-                <input type="hidden" name={'order_id'} value={merchant_id + Date.now()}/>
-                <input type="hidden" name={'terminal_name'} value={'MAKAODPtm1'}/>
-                <input type="hidden" name={'address1'} value={'hello'}/>
-                {/*<input type="hidden" name={'card_type'} value={'visa'}/>*/}
-                <input type="hidden" name={'city'} value={'city'}/>
-                <input type="hidden" name={'state'} value={'state'}/>
-                <input type="hidden" name={'country'} value={'CA'}/>
-                <input type="hidden" name={'zip'} value={'zip'}/>
-                <input type="hidden" name={'telephone'} value={'telephone'}/>
-                <input type="hidden" name={'amount'} value={amount}/>
-                <input type="hidden" name={'currency'} value={'CAD'}/>
-                <input type="hidden" name={'check_number'} value={check_number}/>
-                <input type="hidden" name={'routing_number'} value={routing_number}/>
-                <input type="hidden" name={'account_number'} value={account_number}/>
-                <input type="hidden" name={'bank_name'} value={bank_name}/>
-                <input type="hidden" name={'bank_phone'} value={bank_phone}/>
-                <input type="hidden" name={'email'} value={'hello@gello.com'}/>
+                {/*<Input className='field' placeholder={t('fio')} value={fio} onChange={setFio} />*/}
+                {/*<input required type="hidden" name={'first_name'} value={fio.split(' ')[0]}/>*/}
+                {/*<input required type="hidden" name={'last_name'} value={fio.split(' ')[1]}/>*/}
+                {/*/!*<input type="hidden" name={'expiry_mo'} value={cardDate.split('/')[0]}/>*!/*/}
+                {/*/!*<input type="hidden" name={'expiry_yr'} value={cardDate.split('/')[1]}/>*!/*/}
+                {/*<input type="hidden" name={'affiliate'} value={merchant_id}/>*/}
+                {/*<input type="hidden" name={'paymethod'} value={'Check'}/>*/}
+                {/*<input type="hidden" name={'processing_mode'} value={'authorize'}/>*/}
+                {/*<input type="hidden" name={'redirect'} value={'https://www.makao777.com/success'}/>*/}
+                {/*<input type="hidden" name={'order_id'} value={merchant_id + Date.now()}/>*/}
+                {/*<input type="hidden" name={'terminal_name'} value={'MAKAODPtm1'}/>*/}
+                {/*<input type="hidden" name={'address1'} value={'hello'}/>*/}
+                {/*/!*<input type="hidden" name={'card_type'} value={'visa'}/>*!/*/}
+                {/*<input type="hidden" name={'city'} value={'city'}/>*/}
+                {/*<input type="hidden" name={'state'} value={'state'}/>*/}
+                {/*<input type="hidden" name={'country'} value={'CA'}/>*/}
+                {/*<input type="hidden" name={'zip'} value={'zip'}/>*/}
+                {/*<input type="hidden" name={'telephone'} value={'telephone'}/>*/}
+                {/*<input type="hidden" name={'amount'} value={amount}/>*/}
+                {/*<input type="hidden" name={'currency'} value={'CAD'}/>*/}
+                {/*<input type="hidden" name={'check_number'} value={check_number}/>*/}
+                {/*<input type="hidden" name={'routing_number'} value={routing_number}/>*/}
+                {/*<input type="hidden" name={'account_number'} value={account_number}/>*/}
+                {/*<input type="hidden" name={'bank_name'} value={bank_name}/>*/}
+                {/*<input type="hidden" name={'bank_phone'} value={bank_phone}/>*/}
+                {/*<input type="hidden" name={'email'} value={'hello@gello.com'}/>*/}
                 {/*<Input className='field' placeholder={t('phone')} value={phone} onChange={setPhone} />*/}
                 {/*<Input className='field' placeholder={t('promo')} />*/}
             <Button
-                type={'submit'}
-                // onClick={() => goToPay()}
+                // type={'submit'}
+                onClick={() => goToPay()}
                 className="pink-btn btn-lg rounded">{t('go_to_pay')}</Button>
         </form>
         <div className="foot">
@@ -311,7 +313,7 @@ const CryptoPay = ({ setCurrent, submit, bonus }) => {
             </div>
             <div className="foot">
                 <Button onClick={handleNextClick} className="pink-btn btn-lg rounded">Crypto Payment</Button>
-                <Button onClick={() => setCurrent('card')} className="pink-btn btn-lg rounded">{t('pay_card')} Payment</Button>
+                <Button onClick={() => setCurrent('card')} className="pink-btn btn-lg rounded">Card Payment</Button>
                 {/*<Button onClick={() => setCurrent('cold')} className="pink-btn btn-lg rounded">{t('pay_cold')}</Button>*/}
             </div>
         </>

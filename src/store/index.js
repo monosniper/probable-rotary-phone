@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import AuthService from "../services/AuthService";
 import axios from "axios";
-import {API_URL} from "../http";
+import $api, {API_URL} from "../http";
 import UserService from "../services/UserService";
 import CassaService from "../services/CassaService";
 import UploadService from "../services/UploadService";
@@ -171,6 +171,14 @@ export default class Store {
             const response = await CassaService.getPayHistory();
 
             return response.data;
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async masterPay(amount) {
+        try {
+            return await $api.post('masterpay-payment', {amount: amount*10, user_id: this.user.id})
         } catch (e) {
             console.log(e)
         }

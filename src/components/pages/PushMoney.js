@@ -221,7 +221,7 @@ const CardPay = ({ amount, submit, setCurrent }) => {
                 <input type="hidden" name={'bank_name'} value={bank_name}/>
                 <input type="hidden" name={'bank_phone'} value={bank_phone}/>
                 <input type="hidden" name={'email'} value={'hello@gello.com'}/>
-                <Input className='field' placeholder={t('phone')} value={phone} onChange={setPhone} />
+                {/*<Input className='field' placeholder={t('phone')} value={phone} onChange={setPhone} />*/}
                 {/*<Input className='field' placeholder={t('promo')} />*/}
             <Button
                 type={'submit'}

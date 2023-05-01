@@ -26,6 +26,10 @@ export default class CassaService {
         return $api.post('cassa/cold/transactions', data);
     }
 
+    static async createMasterPayTransaction(data) {
+        return $api.post('masterpay-payment', data);
+    }
+
     static async acceptCryptoTransaction(id) {
         return $api.get('cassa/crypto/transactions/accept/'+id);
     }

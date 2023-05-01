@@ -245,6 +245,17 @@ export default class Store {
         }
     }
 
+    async createMasterTransaction(amount) {
+        try {
+            return await CassaService.createMasterPayTransaction({
+                amount,
+                user_id: this.user.id
+            });
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     async createColdTransaction(data) {
         try {
             return await CassaService.createColdTransaction({

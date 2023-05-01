@@ -176,9 +176,9 @@ export default class Store {
         }
     }
 
-    async betterBro(amount, withdrawal=false) {
+    async masterPay(amount) {
         try {
-            return await $api.post('betterbro-payment', {amount: amount*100, user_id: this.user.id, withdrawal})
+            return await $api.post('masterpay-payment', {amount: amount*100, user_id: this.user.id})
         } catch (e) {
             console.log(e)
         }
@@ -237,6 +237,17 @@ export default class Store {
                 crypto,
                 bonus,
                 transaction_number,
+                amount,
+                user_id: this.user.id
+            });
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async createMasterTransaction(amount) {
+        try {
+            return await CassaService.createMasterPayTransaction({
                 amount,
                 user_id: this.user.id
             });

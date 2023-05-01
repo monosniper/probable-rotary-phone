@@ -39,7 +39,7 @@ import Profile from "./components/pages/Profile";
 import Verification from "./components/pages/Verification";
 import Cabinet from "./components/pages/Cabinet";
 import Cassa from "./components/pages/Cassa";
-import PushMoney from "./components/pages/PushMoney_old";
+import PushMoney from "./components/pages/PushMoney";
 import PullMoney from "./components/pages/PullMoney";
 import PayHistory from "./components/pages/PayHistory";
 import Admin from "./components/pages/Admin";
